@@ -1,15 +1,32 @@
 #include <iostream>
+#include <stdexcept>
 
 template <class T>
 class List {
 private:
-    // Classe interna Node
-    struct Node {
+    // Classe interna Node com membros privados
+    class Node {
+    private:
         T data;           // Armazena o valor diretamente
         Node* next;       // Ponteiro para o próximo nó
         Node* prev;       // Ponteiro para o nó anterior
 
-        Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
+    public:
+        explicit Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
+
+        T& getData() { return data; }
+        const T& getData() const { return data; }
+
+        void setData(const T& value) { data = value; }
+
+        Node* getNext() const { return next; }
+        void setNext(Node* node) { next = node; }
+
+        Node* getPrev() const { return prev; }
+        void setPrev(Node* node) { prev = node; }
+
+        friend class List; // Permite que List acesse os membros privados
+        friend class iterator; // Permite que iterator acesse os membros privados
     };
 
     Node* head;  // Início da lista
@@ -26,18 +43,18 @@ public:
 
         // Operador de desreferenciação
         T& operator*() const {
-            return current->data;
+            return current->getData();
         }
 
         // Operador de incremento prefixado
         iterator& operator++() {
-            current = current->next;
+            current = current->getNext();
             return *this;
         }
 
         // Operador de decremento prefixado
         iterator& operator--() {
-            current = current->prev;
+            current = current->getPrev();
             return *this;
         }
 
@@ -51,7 +68,7 @@ public:
             return current != other.current;
         }
 
-        // Acesso ao nó atual (para métodos como getData ou setData)
+        // Acesso ao nó atual
         Node* getNode() const {
             return current;
         }
@@ -72,8 +89,8 @@ public:
             head = tail = newNode;
         }
         else {
-            tail->next = newNode;
-            newNode->prev = tail;
+            tail->setNext(newNode);
+            newNode->setPrev(tail);
             tail = newNode;
         }
         size++;
@@ -83,7 +100,7 @@ public:
     void clear() {
         Node* current = head;
         while (current != nullptr) {
-            Node* next = current->next;
+            Node* next = current->getNext();
             delete current;
             current = next;
         }
@@ -99,14 +116,14 @@ public:
     // Métodos de acesso/modificação de dados no nó
     T getData(iterator it) const {
         if (it.getNode()) {
-            return it.getNode()->data;
+            return it.getNode()->getData();
         }
         throw std::out_of_range("Iterator inválido");
     }
 
     void setData(iterator it, const T& value) {
         if (it.getNode()) {
-            it.getNode()->data = value;
+            it.getNode()->setData(value);
         }
         else {
             throw std::out_of_range("Iterator inválido");

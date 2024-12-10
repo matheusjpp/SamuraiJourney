@@ -13,6 +13,10 @@ Game::~Game() {
 
 void Game::execute() {
 	while (pGraphic->isWindowOpen()) {
+		if (sf::Event::KeyPressed == sf::Keyboard::Escape) {
+			pGraphic->closeWindow();
+		}
+
 		pGraphic->updateDeltaTime();
 		pGraphic->clear();
 		
