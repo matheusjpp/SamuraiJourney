@@ -1,23 +1,26 @@
 #include <iostream>
 #include <stdexcept>
 
+namespace Lists {
+
 template <class T>
 class List {
 private:
-    // Classe interna Node com membros privados
+    // Classe interna Node como template
+    template <class U>
     class Node {
     private:
-        T data;           // Armazena o valor diretamente
+        U data;           // Armazena o valor diretamente
         Node* next;       // Ponteiro para o próximo nó
         Node* prev;       // Ponteiro para o nó anterior
 
     public:
-        explicit Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
+        explicit Node(const U& value) : data(value), next(nullptr), prev(nullptr) {}
 
-        T& getData() { return data; }
-        const T& getData() const { return data; }
+        U& getData() { return data; }
+        const U& getData() const { return data; }
 
-        void setData(const T& value) { data = value; }
+        void setData(const U& value) { data = value; }
 
         Node* getNext() const { return next; }
         void setNext(Node* node) { next = node; }
@@ -26,23 +29,24 @@ private:
         void setPrev(Node* node) { prev = node; }
 
         friend class List; // Permite que List acesse os membros privados
-        friend class iterator; // Permite que iterator acesse os membros privados
     };
 
-    Node* head;  // Início da lista
-    Node* tail;  // Fim da lista
-    int size;    // Tamanho da lista
+    // Ponteiros para o início e fim da lista
+    Node<T>* head;
+    Node<T>* tail;
+    int size;
 
 public:
-    // Classe iteradora
+    // Classe iteradora como template
+    template <class U>
     class iterator {
     private:
-        Node* current;  // Ponteiro para o nó atual
+        Node<U>* current;  // Ponteiro para o nó atual
     public:
-        explicit iterator(Node* node = nullptr) : current(node) {}
+        explicit iterator(Node<U>* node = nullptr) : current(node) {}
 
         // Operador de desreferenciação
-        T& operator*() const {
+        U& operator*() const {
             return current->getData();
         }
 
@@ -68,8 +72,7 @@ public:
             return current != other.current;
         }
 
-        // Acesso ao nó atual
-        Node* getNode() const {
+        Node<U>* getNode() const {
             return current;
         }
     };
@@ -84,7 +87,7 @@ public:
 
     // Adiciona um elemento ao final da lista
     void push_back(const T& value) {
-        Node* newNode = new Node(value);
+        Node<T>* newNode = new Node<T>(value);
         if (tail == nullptr) {
             head = tail = newNode;
         }
@@ -98,9 +101,9 @@ public:
 
     // Limpa todos os elementos da lista
     void clear() {
-        Node* current = head;
+        Node<T>* current = head;
         while (current != nullptr) {
-            Node* next = current->getNext();
+            Node<T>* next = current->getNext();
             delete current;
             current = next;
         }
@@ -114,14 +117,14 @@ public:
     }
 
     // Métodos de acesso/modificação de dados no nó
-    T getData(iterator it) const {
+    T getData(iterator<T> it) const {
         if (it.getNode()) {
             return it.getNode()->getData();
         }
         throw std::out_of_range("Iterator inválido");
     }
 
-    void setData(iterator it, const T& value) {
+    void setData(iterator<T> it, const T& value) {
         if (it.getNode()) {
             it.getNode()->setData(value);
         }
@@ -131,12 +134,14 @@ public:
     }
 
     // Retorna um iterador para o início da lista
-    iterator begin() {
-        return iterator(head);
+    iterator<T> begin() {
+        return iterator<T>(head);
     }
 
     // Retorna um iterador para o final da lista (nullptr)
-    iterator end() {
-        return iterator(nullptr);
+    iterator<T> end() {
+        return iterator<T>(nullptr);
     }
 };
+
+}
