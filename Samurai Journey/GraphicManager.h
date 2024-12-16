@@ -3,8 +3,8 @@
 
 namespace Managers {
 
-	#define SCREEN_WIDTH 1920
-	#define SCREEN_HEIGHT 1080
+	#define SCREEN_WIDTH 1080
+	#define SCREEN_HEIGHT 720
 
 	class GraphicManager {
 	private:
@@ -44,6 +44,8 @@ namespace Managers {
 		void updateDeltaTime();
 
 		float getDeltaTime() const;
+
+		bool pollEvent(sf::Event &e);
 	};
 
 }

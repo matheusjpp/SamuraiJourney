@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() : p1((300.0f, 300.0f), true) {
+Game::Game() : p1((100.0f, 100.0f), true) {
 	pGraphic = Managers::GraphicManager::getInstance();
 	
 	
@@ -12,13 +12,16 @@ Game::~Game() {
 }
 
 void Game::execute() {
+	sf::Event e;
+
 	while (pGraphic->isWindowOpen()) {
 		pGraphic->updateDeltaTime();
 		pGraphic->clear();
-		
+		p1.update(pGraphic->getDeltaTime());
 		p1.render();
-		p1.mudarCor(sf::Color{255, 255, 255});
-
 		pGraphic->display();
+		while (pGraphic->pollEvent(e)) {
+			if (e.key.code == sf::Keyboard::Escape) { pGraphic->closeWindow(); }
+		}
 	}
 }

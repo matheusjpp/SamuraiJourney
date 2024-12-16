@@ -4,7 +4,7 @@ template <class T>
 class List {
 private:
     // Classe interna Node
-    struct Node {
+    class Node {
         T data;           // Armazena o valor diretamente
         Node* next;       // Ponteiro para o próximo nó
         Node* prev;       // Ponteiro para o nó anterior

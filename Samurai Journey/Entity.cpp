@@ -3,7 +3,7 @@
 namespace Entities {
 
 	Entity::Entity(Math::CoordF pos, Math::CoordF size, ID id) : Ente(id), position(pos), size(size) {
-
+		body->setSize(sf::Vector2f(size.x, size.y));
 	}
 
 	Entity::~Entity() {
