@@ -3,7 +3,8 @@
 
 enum ID {
 	empty = 0,
-	player
+	player,
+	obstacle
 };
 
 class Ente {

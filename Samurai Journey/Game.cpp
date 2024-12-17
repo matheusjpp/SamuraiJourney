@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() : p1((100.0f, 100.0f), true) {
+Game::Game() : p1((0.0f, 0.0f), true) {
 	pGraphic = Managers::GraphicManager::getInstance();
 	
 	
@@ -19,6 +19,7 @@ void Game::execute() {
 		pGraphic->clear();
 		p1.update(pGraphic->getDeltaTime());
 		p1.render();
+		p1.getObs()->render();
 		pGraphic->display();
 		while (pGraphic->pollEvent(e)) {
 			if (e.key.code == sf::Keyboard::Escape) { pGraphic->closeWindow(); }
