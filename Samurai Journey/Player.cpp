@@ -25,17 +25,21 @@ namespace Entities {
 		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
 			position.y += PLAYER_SPEED*dt;
 		}*/
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-			position.x += PLAYER_SPEED*dt;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-			position.x -= PLAYER_SPEED*dt;
+		if (isPlayer1) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+				position.x += PLAYER_SPEED * dt;
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+				position.x -= PLAYER_SPEED * dt;
+			}
+			
 		}
 		body->setPosition(sf::Vector2f(position.x, position.y));
 		
 		if (position.y < pObst->getPosition().y - 50.0f) {
 			position.y += PLAYER_SPEED * dt / 2.f;
 		}
+
 	}
 
 	//void Player::initialize() {
