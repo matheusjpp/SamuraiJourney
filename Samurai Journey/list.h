@@ -6,6 +6,10 @@ namespace List {
     template <class T>
     class List {
     private:
+        Node<T>* head;  // Início da lista
+        Node<T>* tail;  // Fim da lista
+        int size;       // Tamanho da lista
+    public:
         // Definição da classe interna Node
         template <class T1>
         class Node {
@@ -15,7 +19,7 @@ namespace List {
             Node<T1>* prev;        // Ponteiro para o nó anterior
         public:
             Node() : data(nullptr), next(nullptr), prev(nullptr) {}
-            ~Node{ data = nullptr; next = nullptr; prev = nullptr; }
+            ~Node() { data = nullptr; next = nullptr; prev = nullptr; }
 
             void setData(T1* d) { data = d; }
             void setNext(Node<T1>* n) { next = n; }
@@ -26,16 +30,13 @@ namespace List {
             Node<T1>* getPrev()  { return prev; }
         };
 
-        Node<T>* head;  // Início da lista
-        Node<T>* tail;  // Fim da lista
-        int size;       // Tamanho da lista
 
         // Classe iteradora
         class iterator {
         private:
             Node<T>* current;  // Ponteiro para o nó atual
         public:
-            explicit iterator(Node* node = nullptr) : current(node) {}
+            explicit iterator(Node<T>* node = nullptr) : current(node) {}
 
             // Operador de desreferenciação
             T* operator*() const {
@@ -87,6 +88,32 @@ namespace List {
             }
             size++;
         }
+        void remove(T1* data) {
+            Node<T1>* aux = head;
+            while (aux != nullptr && aux->getData() != data) {
+                aux = aux->getNext();
+            }
+            if (aux != nullptr) {
+                if (aux == head) {
+                    head = aux->getNext();
+                    if (head != nullptr) {
+                        head->setPrev(nullptr);
+                    }
+                }
+                else if (aux == tail) {
+                    tail = aux->getPrev();
+                    if (tail != nullptr) {
+                        tail->setNext(nullptr);
+                    }
+                }
+                else {
+                    aux->getPrev()->setNext(aux->getNext());
+                    aux->getNext()->setPrev(aux->getPrev());
+                }
+                delete aux;
+                size--;
+            }
+        }
 
         // Limpa todos os elementos da lista
         void clear() {
@@ -104,7 +131,7 @@ namespace List {
         }
    
         // Retorna o tamanho da lista
-        int getSize() const {
+        int getSize() const{
             return size;
         }
 

@@ -9,5 +9,9 @@ namespace List {
 	public:
 		EntitiesList();
 		~EntitiesList();
+		void addEntity(Entities::Entity* pEntity);
+		void removeEntity(Entities::Entity* pEntity);
+		void removeEntity(unsigned int ind);
+		int getSize();
 	};
 }
