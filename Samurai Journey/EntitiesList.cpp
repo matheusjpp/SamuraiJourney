@@ -35,7 +35,7 @@ namespace List {
     }
 
     void EntitiesList::removeEntity(unsigned int ind) {
-        if (ind >= entList.getSize() || ind<0) {
+        if (ind >= entList.getSize() ) {
             std::cerr << "Erro: Índice inválido passado para removeEntity." << std::endl;
             return;
         }
@@ -62,7 +62,8 @@ namespace List {
          while (it != entList.end()) {
              Entities::Entity* entity = *it; // Obtém o ponteiro para a entidade atual
              if (entity) {
-                 entity->update(dt); // Atualiza a entidade passando o tempo delta
+                 entity->update(dt);
+                 entity->render();
              }
              ++it; // Move para o próximo elemento
          }
