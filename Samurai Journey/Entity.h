@@ -17,6 +17,9 @@ namespace Entities {
 		void setPosition(Math::CoordF pos);
 
 		Math::CoordF getPosition() const;
+
+		Math::CoordF getSize() const;
+
 		ID getID() const;
 
 		virtual void render();

@@ -19,6 +19,10 @@ namespace Entities {
 		return position;
 	}
 
+	Math::CoordF Entity::getSize() const {
+		return size;
+	}
+
 	ID Entity::getID() const {
 		return id;
 	}

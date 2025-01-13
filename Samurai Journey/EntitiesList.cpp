@@ -55,5 +55,12 @@ namespace List {
 
      int  EntitiesList :: getSize() {
         return entList.getSize();
-    }
+     }
+
+     List<Entities::Entity>::iterator EntitiesList::begin() {
+         return entList.begin();
+     }
+     List<Entities::Entity>::iterator EntitiesList::end() {
+         return entList.end();
+     }
 }
