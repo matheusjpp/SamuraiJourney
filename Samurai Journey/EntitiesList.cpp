@@ -56,6 +56,17 @@ namespace List {
      int  EntitiesList :: getSize() {
         return entList.getSize();
      }
+     void EntitiesList::execute(float dt) {
+
+         List<Entities::Entity>::iterator it = entList.begin();
+         while (it != entList.end()) {
+             Entities::Entity* entity = *it; // Obtém o ponteiro para a entidade atual
+             if (entity) {
+                 entity->update(dt); // Atualiza a entidade passando o tempo delta
+             }
+             ++it; // Move para o próximo elemento
+         }
+     }
 
      List<Entities::Entity>::iterator EntitiesList::begin() {
          return entList.begin();
