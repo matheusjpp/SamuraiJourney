@@ -17,13 +17,16 @@ namespace Entities {
 		void setPosition(Math::CoordF pos);
 
 		Math::CoordF getPosition() const;
+
+		Math::CoordF getSize() const;
+
 		ID getID() const;
 
 		virtual void render();
 
 		virtual void update(float dt) = 0;
 
-		virtual void initialize() = 0;
+		//virtual void initialize() = 0;
 	};
 
 }

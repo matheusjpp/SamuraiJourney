@@ -1,9 +1,10 @@
 #include "Game.h"
 
-Game::Game() : p1((300.0f, 300.0f), true) {
+Game::Game() : p1((0.0f, 0.0f), true), e1 ((0.0f, 900.0f)) {
 	pGraphic = Managers::GraphicManager::getInstance();
-	
-	
+	e1.setPlayer(&p1);
+	entList.addEntity(&p1);
+	entList.addEntity(&e1);
 	execute();
 }
 
@@ -12,17 +13,19 @@ Game::~Game() {
 }
 
 void Game::execute() {
+	sf::Event e;
 	while (pGraphic->isWindowOpen()) {
 		if (sf::Event::KeyPressed == sf::Keyboard::Escape) {
 			pGraphic->closeWindow();
 		}
 
 		pGraphic->updateDeltaTime();
+		float dt = pGraphic->getDeltaTime();
 		pGraphic->clear();
-		
-		p1.render();
-		p1.mudarCor(sf::Color{255, 255, 255});
-
+		entList.execute(dt);
 		pGraphic->display();
+		while (pGraphic->pollEvent(e)) {
+			if (e.key.code == sf::Keyboard::Escape) { pGraphic->closeWindow(); }
+		}
 	}
 }

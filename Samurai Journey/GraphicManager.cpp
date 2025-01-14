@@ -86,4 +86,8 @@ namespace Managers {
 	float GraphicManager::getDeltaTime() const {
 		return dt;
 	}
+
+	bool GraphicManager::pollEvent(sf::Event &e) {
+		return window->pollEvent(e);
+	}
 }
