@@ -7,22 +7,23 @@
 
 namespace Entities {
 
-	class Player : public Entity {
-	private:
-		const bool isPlayer1;
-		Obstacle* pObst;
+	namespace Characters {
 
-	public:
-		Player(Math::CoordF pos = Math::CoordF(0, 0), bool isPlayer1 = true);
+		class Player : public Character {
+		private:
+			const bool isPlayer1;
 
-		~Player();
+		public:
+			Player(Math::CoordF pos = Math::CoordF(0, 0), bool isPlayer1 = true);
 
-		Obstacle* getObs() const;
+			~Player();
 
-		void update(float dt);
+			void update(float dt);
 
-		//void initialize();
+			//void initialize();
 
-	};
+		};
+
+	}
 
 }

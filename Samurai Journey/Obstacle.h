@@ -1,19 +1,18 @@
 #pragma once
-#include "Entity.h"
+#include "Character.h"
 
 namespace Entities {
 
 	class Obstacle : public Entity {
 	private:
-		Math::CoordF position;
-		Math::CoordF size;
+		bool dangerous;
 
 	public:
-		Obstacle(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::obstacle);
+		Obstacle(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::obstacle, bool dangerous = false);
 
 		~Obstacle();
 
-		void update(float dt);
+		virtual void update(float dt) = 0;
 
 		//void initialize();
 	};

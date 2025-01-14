@@ -2,17 +2,23 @@
 #include "Player.h"
 
 namespace Entities {
-	class Enemy : public Entity {
-	private:
-		Player* pPlayer;
 
-	public:
-		Enemy(Math::CoordF pos = Math::CoordF(0, 0));
+	namespace Characters {
 
-		~Enemy();
+		class Enemy : public Entity {
+		private:
+			Player* pPlayer;
 
-		void setPlayer(Player* p);
+		public:
+			Enemy(Math::CoordF pos = Math::CoordF(0, 0));
 
-		void update(float dt);
-	};
+			~Enemy();
+
+			void setPlayer(Player* p);
+
+			void update(float dt);
+		};
+
+	}
+
 }

@@ -19,7 +19,6 @@ void Game::execute() {
 		float dt = pGraphic->getDeltaTime();
 		pGraphic->clear();
 		entList.execute(dt);
-		p1.getObs()->render();
 		pGraphic->display();
 		while (pGraphic->pollEvent(e)) {
 			if (e.key.code == sf::Keyboard::Escape) { pGraphic->closeWindow(); }

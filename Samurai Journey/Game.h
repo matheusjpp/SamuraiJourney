@@ -4,8 +4,8 @@
 class Game {
 private:
 	Managers::GraphicManager* pGraphic;
-	Entities::Player p1;
-	Entities::Enemy e1;
+	Entities::Characters::Player p1;
+	Entities::Characters::Enemy e1;
 	List::EntitiesList entList;
 public:
 	Game();
