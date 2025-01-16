@@ -1,5 +1,8 @@
 #pragma once
 #include "Platform.h"
+namespace Managers {
+    class InputManager;
+}
 class Observer
 {
 private:
@@ -7,6 +10,7 @@ private:
 public:
     Observer();
     ~Observer();
-    virtual void notifyKeyPressed() = 0;
-    virtual void notifyKeyReleased() = 0;
+    virtual void notifyKeyPressed(sf::Keyboard::Key k) = 0;
+    virtual void notifyKeyReleased(sf::Keyboard::Key k) = 0;
+  
 };
