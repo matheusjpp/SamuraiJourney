@@ -1,5 +1,5 @@
 #pragma once
-#include "CollisionManager.h"
+#include "Obstacle.h"
 
 namespace Entities {
 
@@ -10,7 +10,7 @@ namespace Entities {
 			bool isFake;
 
 		public:
-			Platform(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::platform, bool isFake = false);
+			Platform(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), bool isFake = false);
 
 			~Platform();
 

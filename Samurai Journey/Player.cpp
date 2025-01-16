@@ -14,10 +14,6 @@ namespace Entities {
 		}
 
 		void Player::update(float dt) {
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-				position.y -= 50;
-			}
 		
 			if (isPlayer1) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
@@ -26,7 +22,15 @@ namespace Entities {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 					position.x -= PLAYER_SPEED * dt;
 				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+					position.y -= PLAYER_SPEED * dt;
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+					position.y += PLAYER_SPEED * dt;
+				}
 			}
+
+			pCollision->notifyCollision(this, dt);
 
 			body->setPosition(sf::Vector2f(position.x, position.y));
 

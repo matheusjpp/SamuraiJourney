@@ -1,10 +1,22 @@
 #include "Game.h"
 
-Game::Game() : p1((0.0f, 0.0f), true), e1 ((0.0f, 900.0f)) {
+Game::Game()  {
+
+	Entities::Characters::Player p1(Math::CoordF(500.0f, 700.0f), true);
+	Entities::Characters::Enemy e1(Math::CoordF(100.0f, 700.0f));
+	Entities::Obstacles::Platform plat1(Math::CoordF(270.0f, 800.0f), Math::CoordF(900.0f, 700.0f), false);
+	Entities::Obstacles::Platform plat2(Math::CoordF(1080.0f, 500.0f), Math::CoordF(400.0f, 120.0f), false);
+	plat2.mudarCor(sf::Color(255, 255, 255));
+
 	pGraphic = Managers::GraphicManager::getInstance();
+	pCollision = Managers::Collisions::CollisionManager::getInstance();
+	pCollision->setLists(staticEntities, movingEntities);
 	e1.setPlayer(&p1);
-	entList.addEntity(&p1);
-	entList.addEntity(&e1);
+	movingEntities.addEntity(&p1);
+	movingEntities.addEntity(&e1);
+	staticEntities.addEntity(&plat1);
+	staticEntities.addEntity(&plat2);
+
 	execute();
 }
 
@@ -22,7 +34,8 @@ void Game::execute() {
 		pGraphic->updateDeltaTime();
 		float dt = pGraphic->getDeltaTime();
 		pGraphic->clear();
-		entList.execute(dt);
+		movingEntities.execute(dt);
+		staticEntities.execute(dt);
 		pGraphic->display();
 		while (pGraphic->pollEvent(e)) {
 			if (e.key.code == sf::Keyboard::Escape) { pGraphic->closeWindow(); }

@@ -1,5 +1,5 @@
 #pragma once
-#include "MovingEntity.h"
+#include "CollisionManager.h"
 
 namespace Entities {
 

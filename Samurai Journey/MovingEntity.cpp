@@ -1,8 +1,11 @@
 #include "MovingEntity.h"
+#include "CollisionManager.h"
 
 namespace Entities {
 
-	MovingEntity::MovingEntity(Math::CoordF pos, Math::CoordF size, ID id) : speed(0), isMoving(false), canMove(true), isFacingLeft(false),
+	Managers::Collisions::CollisionManager* MovingEntity::pCollision = Managers::Collisions::CollisionManager::getInstance();
+
+	MovingEntity::MovingEntity(Math::CoordF pos, Math::CoordF size, ID id) : velocity(0), isMoving(false), canMove(true), isFacingLeft(false),
 		Entity (pos, size, id) {
 		
 	}
@@ -13,6 +16,14 @@ namespace Entities {
 
 	void MovingEntity::setCanMove(bool canM) {
 		canMove = canM;
+	}
+
+	void MovingEntity::setVelocityX(float velx) {
+		velocity.x = velx;
+	}
+
+	void MovingEntity::setVelocityY(float vely) {
+		velocity.y = vely;
 	}
 
 	bool MovingEntity::getCanMove() const {

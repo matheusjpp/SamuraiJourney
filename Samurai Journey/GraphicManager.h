@@ -3,8 +3,8 @@
 
 namespace Managers {
 
-	#define SCREEN_WIDTH 1080
-	#define SCREEN_HEIGHT 720
+	#define SCREEN_WIDTH 1920.0f
+	#define SCREEN_HEIGHT 1080.0f
 
 	class GraphicManager {
 	private:

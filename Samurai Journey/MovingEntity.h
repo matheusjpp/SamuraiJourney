@@ -1,11 +1,19 @@
 #pragma once
-#include "Entity.h"
+#include "EntitiesList.h"
+
+namespace Managers {
+	namespace Collisions {
+		class CollisionManager;
+	}
+}
+
 
 namespace Entities {
 
 	class MovingEntity : public Entity {
 	protected:
-		Math::CoordF speed;
+		static Managers::Collisions::CollisionManager* pCollision;
+		Math::CoordF velocity;
 		bool isFacingLeft;
 		bool isMoving;
 		bool canMove;
@@ -16,6 +24,10 @@ namespace Entities {
 		virtual ~MovingEntity();
 
 		void setCanMove(bool canMove);
+
+		void setVelocityX(float velx);
+
+		void setVelocityY(float vely);
 
 		bool getCanMove() const;
 

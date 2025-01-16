@@ -1,5 +1,5 @@
 #pragma once
-#include "Obstacle.h"
+#include "Platform.h"
 
 #define PLAYER_SIZE_X 30.0f // SCREEN_WIDTH / 9.6
 #define PLAYER_SIZE_Y 50.0f // SCREEN_HEIGHT / 5.1

@@ -4,9 +4,9 @@ namespace Entities {
 
 	namespace Obstacles {
 
-		Platform::Platform(Math::CoordF pos, Math::CoordF size, ID id, bool isFake) : isFake(isFake), 
-			Obstacle(Math::CoordF(pos), Math::CoordF(size), ID::platform) {
-
+		Platform::Platform(Math::CoordF pos, Math::CoordF size, bool isFake) : isFake(isFake), 
+			Obstacle(pos, size, ID::platform) {
+			mudarCor(sf::Color(0, 255, 0));
 		}
 
 		Platform::~Platform() {
@@ -14,7 +14,7 @@ namespace Entities {
 		}
 
 		void Platform::update(float dt) {
-
+			body->setPosition(sf::Vector2f(position.x, position.y));
 		}
 
 	}

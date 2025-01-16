@@ -1,119 +1,112 @@
 #pragma once
+#include "Entity.h"
+#include <cstddef> // Para nullptr
 
 namespace List {
 
-    template <class T>
+    template <typename T>
     class List {
     private:
-        class Node {
-        private:
-            T* data;               // Armazena o valor diretamente
-            Node* next;            // Ponteiro para o pr�ximo n�
-            Node* prev;            // Ponteiro para o n� anterior
-        public:
-            Node() : data(nullptr), next(nullptr), prev(nullptr) {}
-            ~Node() { data = nullptr; next = nullptr; prev = nullptr; }
+        // Classe Node privada
+        struct Node {
+            T data;
+            Node* next;
+            Node* prev;
 
-            void setData(T* d) { data = d; }
-            void setNext(Node* n) { next = n; }
-            void setPrev(Node* p) { prev = p; }
-
-            T* getData() const { return data; }
-            Node* getNext() { return next; }
-            Node* getPrev() { return prev; }
+            Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
         };
 
-        Node* head;  // In�cio da lista
-        Node* tail;  // Fim da lista
-        int size;    // Tamanho da lista
+        Node* head; // Início da lista
+        Node* tail; // Fim da lista
+        size_t size; // Tamanho da lista
 
     public:
-        // Classe iteradora
-        class iterator {
+        // Classe Iterator aninhada
+        class Iterator {
         private:
-            Node* current;  // Ponteiro para o n� atual
+            Node* current;
+
         public:
-            explicit iterator(Node* node = nullptr) : current(node) {}
+            explicit Iterator(Node* node = nullptr) : current(node) {}
 
-            T* operator*() const {
-                return current->getData();
-            }
+            T& operator*() const { return current->data; }
 
-            iterator& operator++() {
-                current = current->getNext();
+            Iterator& operator++() {
+                current = current->next;
                 return *this;
             }
 
-            iterator& operator--() {
-                current = current->getPrev();
+            Iterator operator++(int) {
+                Iterator temp = *this;
+                ++(*this);
+                return temp;
+            }
+
+            Iterator& operator--() {
+                current = current->prev;
                 return *this;
             }
 
-            bool operator==(const iterator& other) const {
-                return current == other.current;
+            Iterator operator--(int) {
+                Iterator temp = *this;
+                --(*this);
+                return temp;
             }
 
-            bool operator!=(const iterator& other) const {
-                return current != other.current;
-            }
+            bool operator==(const Iterator& other) const { return current == other.current; }
+            bool operator!=(const Iterator& other) const { return current != other.current; }
         };
 
         // Construtor
         List() : head(nullptr), tail(nullptr), size(0) {}
 
         // Destrutor
-        ~List() {
-            clear();
-        }
+        ~List() { clear(); }
 
-        void push_back(T* data) {
-            Node* aux = new Node();
-            aux->setData(data);
-            if (head == nullptr) {
-                head = tail = aux;
+        // Adiciona ao final da lista
+        void push_back(const T& value) {
+            Node* newNode = new Node(value);
+            if (tail) {
+                tail->next = newNode;
+                newNode->prev = tail;
+                tail = newNode;
             }
             else {
-                tail->setNext(aux);
-                aux->setPrev(tail);
-                tail = aux;
+                head = tail = newNode;
             }
             size++;
         }
 
-        void remove(T* data) {
-            Node* aux = head;
-            while (aux != nullptr && aux->getData() != data) {
-                aux = aux->getNext();
+        // Remove um elemento da lista
+        void remove(const T& value) {
+            Node* current = head;
+            while (current && current->data != value) {
+                current = current->next;
             }
-            if (aux != nullptr) {
-                if (aux == head) {
-                    head = aux->getNext();
-                    if (head != nullptr) {
-                        head->setPrev(nullptr);
-                    }
+
+            if (current) {
+                if (current == head) {
+                    head = head->next;
+                    if (head) head->prev = nullptr;
                 }
-                else if (aux == tail) {
-                    tail = aux->getPrev();
-                    if (tail != nullptr) {
-                        tail->setNext(nullptr);
-                    }
+                else if (current == tail) {
+                    tail = tail->prev;
+                    if (tail) tail->next = nullptr;
                 }
                 else {
-                    aux->getPrev()->setNext(aux->getNext());
-                    aux->getNext()->setPrev(aux->getPrev());
+                    current->prev->next = current->next;
+                    current->next->prev = current->prev;
                 }
-                delete aux;
+                delete current;
                 size--;
             }
         }
 
+        // Limpa a lista
         void clear() {
             Node* current = head;
-            while (current != nullptr) {
-                Node* next = current->getNext();
-                if (current->getData()) {
-                    delete current->getData(); // Deleta o dado do n�
-                }
+            while (current) {
+                Node* next = current->next;
                 delete current;
                 current = next;
             }
@@ -121,16 +114,14 @@ namespace List {
             size = 0;
         }
 
-        int getSize() const {
-            return size;
-        }
+        // Retorna o tamanho da lista
+        size_t getSize() const { return size; }
 
-        iterator begin() {
-            return iterator(head);
-        }
+        // Iteradores
+        Iterator begin() { return Iterator(head); }
+        Iterator end() { return Iterator(nullptr); }
 
-        iterator end() {
-            return iterator(nullptr);
-        }
+        Iterator rbegin() { return Iterator(tail); }
+        Iterator rend() { return Iterator(nullptr); }
     };
 }

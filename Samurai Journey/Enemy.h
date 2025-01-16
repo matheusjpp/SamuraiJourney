@@ -5,7 +5,7 @@ namespace Entities {
 
 	namespace Characters {
 
-		class Enemy : public Entity {
+		class Enemy : public Character {
 		private:
 			Player* pPlayer;
 

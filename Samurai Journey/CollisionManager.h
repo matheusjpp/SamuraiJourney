@@ -10,14 +10,22 @@ namespace Managers {
 			List::EntitiesList* staticEntities;
 			List::EntitiesList* movingEntities;
 
-		public:
+			static Managers::Collisions::CollisionManager* pCollision;
+
 			CollisionManager(List::EntitiesList* movingEntities = nullptr, List::EntitiesList* staticEntities = nullptr);
-			
+
+		public:
 			~CollisionManager();
 
-			void notify(Entities::Entity* sender, float dt);
+			static CollisionManager* getInstance();
 
-			void manageCollisions(Entities::Entity* sender, Entities::Entity* otherEntity, Math::CoordF intersection, float dt);
+			void setLists(List::EntitiesList& stEnt, List::EntitiesList& movEnt);
+
+			void notifyCollision(Entities::MovingEntity* sender, float dt);
+
+			void manageCollision(Entities::MovingEntity* sender, Entities::Entity* otherEntity, Math::CoordF intersection, float dt);
+
+			void moveOnCollision(Entities::MovingEntity* sender, Entities::Entity* otherEntity, Math::CoordF intersection, float dt);
 		};
 
 	}

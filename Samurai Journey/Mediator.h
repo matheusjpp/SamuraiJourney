@@ -1,5 +1,5 @@
 #pragma once
-#include "EntitiesList.h"
+#include "MovingEntity.h"
 
 namespace Managers {
 
@@ -7,7 +7,7 @@ namespace Managers {
 
 		class Mediator	{
 		public:
-			virtual void notify(Entities::Entity* sender) = 0;
+			virtual void notifyCollision(Entities::MovingEntity* sender, float dt) = 0;
 			virtual ~Mediator() = default;
 		};
 

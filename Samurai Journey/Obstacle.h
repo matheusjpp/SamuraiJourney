@@ -3,18 +3,22 @@
 
 namespace Entities {
 
-	class Obstacle : public Entity {
-	private:
-		bool dangerous;
+	namespace Obstacles {
 
-	public:
-		Obstacle(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::obstacle, bool dangerous = false);
+		class Obstacle : public Entity {
+		private:
+			bool dangerous;
 
-		~Obstacle();
+		public:
+			Obstacle(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::empty, bool dangerous = false);
 
-		virtual void update(float dt) = 0;
+			~Obstacle();
 
-		//void initialize();
-	};
+			virtual void update(float dt) = 0;
+
+			//void initialize();
+		};
+
+	}
 
 }
