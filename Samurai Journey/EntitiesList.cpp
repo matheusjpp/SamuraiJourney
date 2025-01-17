@@ -61,8 +61,7 @@ namespace List {
         for (auto it = entList.begin(); it != entList.end(); ++it) {
             Entities::Entity* entity = *it;
             if (entity) {
-                entity->update(dt);  // Chama o método update da entidade
-                entity->render();   // Chama o método render da entidade
+                entity->execute();
             }
         }
     }

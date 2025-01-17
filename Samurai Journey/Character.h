@@ -26,6 +26,8 @@ namespace Entities {
 
 			virtual void update(float dt) = 0;
 
+			virtual void execute() = 0;
+
 			virtual void attack() = 0;
 		};
 

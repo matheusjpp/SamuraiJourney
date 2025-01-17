@@ -14,7 +14,12 @@ namespace Entities {
 		}
 
 		void Platform::update(float dt) {
+			
+		}
+
+		void Platform::execute() {
 			body->setPosition(sf::Vector2f(position.x, position.y));
+			render();
 		}
 
 	}

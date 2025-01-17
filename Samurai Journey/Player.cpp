@@ -44,6 +44,10 @@ namespace Entities {
             body->setPosition(sf::Vector2f(position.x, position.y));
         }
 		
+		void Player::execute() {
+			update(pGraphic->getDeltaTime());
+			render();
+		}
    
 		void Player::run() {
 

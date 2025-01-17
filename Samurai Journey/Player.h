@@ -31,6 +31,8 @@ namespace Entities {
 
 			void update(float dt);
 
+			void execute();
+
 			void run();
 
 			void stopRunning();
@@ -40,8 +42,6 @@ namespace Entities {
 			void defend();
 
 			void usePotion();
-
-			//void initialize();
 
 		};
 

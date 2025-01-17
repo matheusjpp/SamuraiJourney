@@ -18,6 +18,8 @@ namespace Entities {
 
 			void update(float dt);
 
+			void execute();
+
 			void attack();
 		};
 

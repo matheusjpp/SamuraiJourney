@@ -15,6 +15,8 @@ namespace Entities {
 			~Platform();
 
 			void update(float dt);
+
+			void execute();
 		};
 
 

@@ -36,6 +36,11 @@ namespace Entities {
 		
 		}
 
+		void Enemy::execute() {
+			update(pGraphic->getDeltaTime());
+			render();
+		}
+
 		void Enemy::attack() {
 
 		}

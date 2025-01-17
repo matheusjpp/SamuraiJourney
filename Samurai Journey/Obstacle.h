@@ -16,7 +16,7 @@ namespace Entities {
 
 			virtual void update(float dt) = 0;
 
-			//void initialize();
+			virtual void execute() = 0;
 		};
 
 	}
