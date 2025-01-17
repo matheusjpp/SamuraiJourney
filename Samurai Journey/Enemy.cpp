@@ -36,6 +36,10 @@ namespace Entities {
 		
 		}
 
+		void Enemy::attack() {
+
+		}
+
 	}
 
 }

@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "PlayerController.h"
 
 namespace Entities {
 	
@@ -7,32 +8,42 @@ namespace Entities {
 		Player::Player(Math::CoordF pos, bool isPlayer1) :
 		Character(pos, Math::CoordF(PLAYER_SIZE_X, PLAYER_SIZE_Y), ID::player), isPlayer1(isPlayer1) {
 			mudarCor(sf::Color(255, 0, 0));
+			pControl = new Managers::KeyManagement::PlayerController(this);
 		}
 
 		Player::~Player() {
 		
 		}
 
+		bool Player::getIsPlayer1() {
+			return isPlayer1;
+		}
+
 		void Player::update(float dt) {
 		
-			if (isPlayer1) {
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-					position.x += PLAYER_SPEED * dt;
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-					position.x -= PLAYER_SPEED * dt;
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-					position.y -= PLAYER_SPEED * dt;
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-					position.y += PLAYER_SPEED * dt;
-				}
-			}
-
 			pCollision->notifyCollision(this, dt);
 
 			body->setPosition(sf::Vector2f(position.x, position.y));
+
+		}
+
+		void Player::run() {
+
+		}
+
+		void Player::stopRunning() {
+
+		}
+
+		void Player::attack() {
+
+		}
+
+		void Player::defend() {
+
+		}
+
+		void Player::usePotion() {
 
 		}
 

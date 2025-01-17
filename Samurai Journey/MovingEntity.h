@@ -35,6 +35,8 @@ namespace Entities {
 
 		void move(bool left);
 
+		void stopMoving();
+
 		void stop();
 
 		virtual void update(float dt) = 0;

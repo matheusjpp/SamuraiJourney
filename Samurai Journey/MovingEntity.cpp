@@ -48,7 +48,8 @@ namespace Entities {
 		}
 	}
 
-	void MovingEntity::stop() {
+	void MovingEntity::stopMoving() {
+		cout << "stopmove sendo chamada" << endl;
 		isMoving = false;
 	}
 

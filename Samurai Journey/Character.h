@@ -27,6 +27,8 @@ namespace Entities {
 			bool getIsJumping() const;
 
 			virtual void update(float dt) = 0;
+
+			virtual void attack() = 0;
 		};
 
 

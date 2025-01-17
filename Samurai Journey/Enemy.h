@@ -17,6 +17,8 @@ namespace Entities {
 			void setPlayer(Player* p);
 
 			void update(float dt);
+
+			void attack();
 		};
 
 	}

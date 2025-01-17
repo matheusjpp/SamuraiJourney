@@ -1,19 +1,25 @@
 #pragma once
-#include "InputManager.h"
+#include "PlayerController.h"
+
 namespace Managers {
-    class EventsManager
-    {
-    private:
-        GraphicManager* pGraphic;
-        KeyManagement::InputManager* pInput;
-        static EventsManager* pEvent;
-        EventsManager();
 
-    public:
-        ~EventsManager();
+    namespace KeyManagement {
 
-        static EventsManager* getInstance();
+        class EventsManager {
+        private:
+            GraphicManager* pGraphic;
+            InputManager* pInput;
+            static EventsManager* pEvent;
+            EventsManager();
 
-        void pollEvents();
-    };
+        public:
+            ~EventsManager();
+
+            static EventsManager* getInstance();
+
+            void pollEvents();
+        };
+
+    }
+
 }
