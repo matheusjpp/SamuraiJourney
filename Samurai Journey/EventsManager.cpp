@@ -29,7 +29,7 @@ namespace Managers {
             while (pGraphic->pollEvent(e)) {
                 if (e.type == sf::Event::Closed) { pGraphic->closeWindow(); }
                 if (e.type == sf::Event::KeyPressed) { pInput->notifyKeyPressed(e.key.code); }
-                if (e.type == sf::Event::KeyReleased) { pInput->notifyKeyPressed(e.key.code); }
+                if (e.type == sf::Event::KeyReleased) { pInput->notifyKeyReleased(e.key.code); }
             }
         }
 

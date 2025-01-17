@@ -1,5 +1,6 @@
 #pragma once
 #include "CollisionManager.h"
+#define JUMP 500.0f
 
 namespace Entities {
 

@@ -4,7 +4,7 @@ namespace Entities {
 
 	namespace Characters {
 
-		Character::Character(Math::CoordF pos, Math::CoordF size, ID id, float hp) : hp(hp), canJump(false), isJumping(false),
+		Character::Character(Math::CoordF pos, Math::CoordF size, ID id, float hp) : hp(hp), canJump(true), isJumping(false),
 			MovingEntity(pos, size, id) {
 
 		}
@@ -19,7 +19,8 @@ namespace Entities {
 
 		void Character::jump() {
 			if (canJump) {
-				// to do
+				canJump = false;
+				velocity.y-=JUMP;
 			}
 		}
 

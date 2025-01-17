@@ -19,14 +19,36 @@ namespace Entities {
 			return isPlayer1;
 		}
 
-		void Player::update(float dt) {
+        void Player::update(float dt) {
+            // Controle de movimento horizontal
+            if (isMoving) {
+                if (isFacingLeft) {
+                    setVelocityX(PLAYER_SPEED); 
+                }
+                else {
+                    setVelocityX(-PLAYER_SPEED); 
+                }
+            }
+            else {
+                setVelocityX(0);
+            }
+
+            
+            if (!canJump) {
+             velocity.y += GRAVITY * dt; // Incrementa velocidade vertical
+            }
+
+            position.x += velocity.x * dt;
+            position.y += velocity.y * dt;
+
+          
+            pCollision->notifyCollision(this, dt);
+
+           
+            body->setPosition(sf::Vector2f(position.x, position.y));
+        }
 		
-			pCollision->notifyCollision(this, dt);
-
-			body->setPosition(sf::Vector2f(position.x, position.y));
-
-		}
-
+   
 		void Player::run() {
 
 		}

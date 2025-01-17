@@ -4,6 +4,8 @@
 #define PLAYER_SIZE_X 30.0f 
 #define PLAYER_SIZE_Y 50.0f
 #define PLAYER_SPEED  200.0f // Player Velocity
+#define GRAVITY 500.0f 
+#define JUMP 500.0f
 
 namespace Managers {
 	namespace KeyManagement {
