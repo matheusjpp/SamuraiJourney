@@ -33,18 +33,14 @@ namespace Entities {
                 setVelocityX(0);
             }
 
-            
-            if (!canJump) {
-             velocity.y += GRAVITY * dt; // Incrementa velocidade vertical
-            }
+			velocity.y += GRAVITY * dt; // Incrementa velocidade vertical
 
             position.x += velocity.x * dt;
             position.y += velocity.y * dt;
 
-          
+			setCanJump(false);
             pCollision->notifyCollision(this, dt);
 
-           
             body->setPosition(sf::Vector2f(position.x, position.y));
         }
 		

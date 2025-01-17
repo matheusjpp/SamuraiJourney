@@ -1,6 +1,12 @@
 #pragma once
 #include "Mediator.h"
 
+namespace Entities {
+	namespace Characters {
+		class Character;
+	}
+}
+
 namespace Managers {
 
 	namespace Collisions {

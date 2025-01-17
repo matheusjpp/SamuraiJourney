@@ -1,4 +1,5 @@
 #include "CollisionManager.h"
+#include "Character.h"
 
 namespace Managers {
 	
@@ -38,14 +39,16 @@ namespace Managers {
 			for (auto itS = staticEntities->begin(); itS != staticEntities->end(); ++itS) {
 				otherEntity = (*itS);
 				
-				centerDistance.x = sender->getPosition().x - otherEntity->getPosition().x;
-				centerDistance.y = sender->getPosition().y - otherEntity->getPosition().y;
+				if (sender && otherEntity) {
+					centerDistance.x = sender->getPosition().x - otherEntity->getPosition().x;
+					centerDistance.y = sender->getPosition().y - otherEntity->getPosition().y;
 
-				intersect.x = fabs(centerDistance.x) - (sender->getSize().x / 2.0f + otherEntity->getSize().x / 2.0f);
-				intersect.y = fabs(centerDistance.y) - (sender->getSize().y / 2.0f + otherEntity->getSize().y / 2.0f);
+					intersect.x = fabs(centerDistance.x) - (sender->getSize().x / 2.0f + otherEntity->getSize().x / 2.0f);
+					intersect.y = fabs(centerDistance.y) - (sender->getSize().y / 2.0f + otherEntity->getSize().y / 2.0f);
 
-				if (intersect.x < 0.0f && intersect.y < 0.0f) {
-					manageCollision(sender, otherEntity, intersect, dt);
+					if (intersect.x < 0.0f && intersect.y < 0.0f) {
+						manageCollision(sender, otherEntity, intersect, dt);
+					}
 				}
 			}
 
@@ -54,14 +57,16 @@ namespace Managers {
 				if (*itM != sender) {
 					otherEntity = (*itM);
 
-					centerDistance.x = sender->getPosition().x - otherEntity->getPosition().x;
-					centerDistance.y = sender->getPosition().y - otherEntity->getPosition().y;
-				
-					intersect.x = fabs(centerDistance.x) - (sender->getSize().x / 2.0f + otherEntity->getSize().x / 2.0f);
-					intersect.y = fabs(centerDistance.y) - (sender->getSize().y / 2.0f + otherEntity->getSize().y / 2.0f);
+					if (sender && otherEntity) {
+						centerDistance.x = sender->getPosition().x - otherEntity->getPosition().x;
+						centerDistance.y = sender->getPosition().y - otherEntity->getPosition().y;
 
-					if (intersect.x < 0.0f && intersect.y < 0.0f) {
-						manageCollision(sender, otherEntity, intersect, dt);
+						intersect.x = fabs(centerDistance.x) - (sender->getSize().x / 2.0f + otherEntity->getSize().x / 2.0f);
+						intersect.y = fabs(centerDistance.y) - (sender->getSize().y / 2.0f + otherEntity->getSize().y / 2.0f);
+
+						if (intersect.x < 0.0f && intersect.y < 0.0f) {
+							manageCollision(sender, otherEntity, intersect, dt);
+						}
 					}
 				}
 			}
@@ -105,11 +110,17 @@ namespace Managers {
 
 			/* Collision on y direction */
 			else {
-				if (senderPos.y < otherPos.y)
+				if (senderPos.y < otherPos.y) {
 					senderPos.y += intersection.y;
-				else
+					if (auto* character = dynamic_cast<Entities::Characters::Character*>(sender)) {
+						character->setCanJump(true);
+					}
+				}
+					
+				else {
 					senderPos.y -= intersection.y;
-
+				}
+					
 				sender->setPosition(senderPos);
 				sender->setVelocityY(0.0f);
 			}

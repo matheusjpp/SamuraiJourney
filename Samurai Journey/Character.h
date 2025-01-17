@@ -10,7 +10,6 @@ namespace Entities {
 		protected:
 			float hp;
 			bool canJump;
-			bool isJumping;
 
 		public:
 			Character(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::empty, float hp = 0);
@@ -24,8 +23,6 @@ namespace Entities {
 			void setCanJump(bool canJ);
 
 			bool getCanJump() const;
-
-			bool getIsJumping() const;
 
 			virtual void update(float dt) = 0;
 
