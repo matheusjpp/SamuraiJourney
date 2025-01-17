@@ -1,7 +1,19 @@
 #include "Observer.h"
 #include "InputManager.h"
 
-Observer::Observer() {
-	pIm = Managers::InputManager::getInstance();
+namespace Managers {
+
+	namespace KeyManagement {
+
+		Observer::Observer() {
+			pInput = Managers::KeyManagement::InputManager::getInstance();
+			pInput->attachObserver(this);
+		}
+
+		Observer::~Observer() {
+
+		}
+
+	}
+
 }
-Observer::~Observer() {}

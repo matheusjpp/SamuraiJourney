@@ -1,16 +1,27 @@
 #pragma once
-#include "Platform.h"
+#include "Enemy.h"
+
 namespace Managers {
-    class InputManager;
+
+    namespace KeyManagement {
+    
+        class InputManager;
+
+        class Observer {
+        private:
+            Managers::KeyManagement::InputManager* pInput;
+
+        public:
+            Observer();
+
+            ~Observer();
+
+            virtual void notifyKeyPressed(sf::Keyboard::Key key) = 0;
+
+            virtual void notifyKeyReleased(sf::Keyboard::Key key) = 0;
+
+        };
+
+    }
+
 }
-class Observer
-{
-private:
-    Managers::InputManager* pIm;
-public:
-    Observer();
-    ~Observer();
-    virtual void notifyKeyPressed(sf::Keyboard::Key k) = 0;
-    virtual void notifyKeyReleased(sf::Keyboard::Key k) = 0;
-  
-};

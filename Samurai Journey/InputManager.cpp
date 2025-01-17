@@ -1,63 +1,56 @@
 #include "InputManager.h"
 
-
 namespace Managers {
 
-    // Inicializa o ponteiro estático
-    InputManager* InputManager::pInput = nullptr;
+    namespace KeyManagement {
 
-    // Construtor privado
-    InputManager::InputManager() :observer() {}
+        // Inicializa o ponteiro estático
+        InputManager* InputManager::pInput = nullptr;
 
-    // Destrutor
-    InputManager::~InputManager() {
-        observer.clear();
-    }
-
-    // Método para obter a instância única da classe
-    InputManager* InputManager::getInstance() {
-        if (pInput == nullptr) {
-            pInput = new InputManager();
+        // Construtor privado
+        InputManager::InputManager() {
+    
         }
-        return pInput;
-    }
 
-    // Método para adicionar um Observer
-    void InputManager::Attach(Observer* pObserver) {
-        if (pObserver != nullptr) {
-            observer.push_back(pObserver);
+        // Destrutor
+        InputManager::~InputManager() {
+            observers.clear();
         }
-    }
 
-    // Método para remover um Observer
-    void InputManager::Detach(Observer* pObserver) {
-        if (pObserver != nullptr) {
-            observer.remove(pObserver);
+        // Método para obter a instância única da classe
+        InputManager* InputManager::getInstance() {
+            if (pInput == nullptr) {
+                pInput = new InputManager();
+            }
+            return pInput;
         }
-    }
 
-    void InputManager::handleKeyPressed(sf::Keyboard::Key key) {
-        if (!observer.empty()) {
-            std::list<Observer*>::iterator it = observer.begin();
-            while (it != observer.end()) {
-                if (*it != nullptr) {
-                    (*it)->notifyKeyPressed(key);
-                }
-                ++it;
+        void InputManager::attachObserver(Observer* observer) {
+            if (observer) {
+                observers.push_back(observer);
             }
         }
-    }
 
-
-    void InputManager::handleKeyReleased(sf::Keyboard::Key key) {
-        if (!observer.empty()) {
-            std::list<Observer*>::iterator it = observer.begin();
-            while (it != observer.end()) {
-                if (*it != nullptr) {
-                    (*it)->notifyKeyReleased(key);
-                }
-                ++it;
+        void InputManager::detachObserver(Observer* observer) {
+            if (observer) {
+                observers.remove(observer);
             }
         }
+
+        void InputManager::notifyKeyPressed(sf::Keyboard::Key key) {
+            for (auto& observer : observers) {
+                if (observer)
+                    observer->notifyKeyPressed(key);
+            }
+        }
+
+        void InputManager::notifyKeyReleased(sf::Keyboard::Key key) {
+            for (auto& observer : observers) {
+                if (observer)
+                    observer->notifyKeyReleased(key);
+            }
+        }
+
     }
+
 }

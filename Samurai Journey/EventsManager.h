@@ -5,12 +5,15 @@ namespace Managers {
     {
     private:
         GraphicManager* pGraphic;
-        InputManager* pInput;
-        static EventsManager* pEv;
+        KeyManagement::InputManager* pInput;
+        static EventsManager* pEvent;
         EventsManager();
+
     public:
         ~EventsManager();
+
         static EventsManager* getInstance();
+
         void pollEvents();
     };
 }

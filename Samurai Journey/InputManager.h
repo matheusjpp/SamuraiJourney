@@ -1,18 +1,29 @@
 #pragma once
-#include "Observer.h"
+#include "Subject.h"
+
 namespace Managers {
-    class InputManager
-    {
-    private:
-        std::list<Observer*> observer;
-        static InputManager* pInput;
-        InputManager();
-    public:
-        static InputManager* getInstance();
-        ~InputManager();
-        void Attach(Observer* pObserver);//add observer
-        void Detach(Observer* pObserver);//remove observer
-        void handleKeyPressed(sf::Keyboard::Key key);
-        void handleKeyReleased(sf::Keyboard::Key key);
-    };
+
+    namespace KeyManagement {
+
+        class InputManager : public Subject { // ConcreteSubject
+        private:
+            static InputManager* pInput;
+            InputManager();
+
+        public:
+            ~InputManager();
+
+            static InputManager* getInstance();
+
+            void attachObserver(Observer* observer);
+
+            void detachObserver(Observer* observer);
+
+            void notifyKeyPressed(sf::Keyboard::Key key);
+
+            void notifyKeyReleased(sf::Keyboard::Key key);
+        };
+
+    }
+
 }
