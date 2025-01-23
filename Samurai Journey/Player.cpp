@@ -36,7 +36,7 @@ namespace Entities {
 
 			if (isAttacking) {
 				attackCooldown += dt;
-				if (attackCooldown >= 1.0f) {
+				if (attackCooldown >= 0.8f) {
 					isAttacking = false;
 				}
 			}
@@ -72,14 +72,14 @@ namespace Entities {
 			sprite = new GraphicalElements::Animation(body, Math::CoordF(2, 2));
 
 			if (isPlayer1) {
-				sprite->addNewAnimation(GraphicalElements::Animation_ID::idle, "p1_idle.png", 10);
-				sprite->addNewAnimation(GraphicalElements::Animation_ID::walk, "p1_walk.png", 16);
-				sprite->addNewAnimation(GraphicalElements::Animation_ID::attack, "p1_attack.png", 6);
-				sprite->addNewAnimation(GraphicalElements::Animation_ID::airattack, "p1_airattack.png", 6);
-				sprite->addNewAnimation(GraphicalElements::Animation_ID::jump, "p1_jump.png", 3);
-				sprite->addNewAnimation(GraphicalElements::Animation_ID::fall, "p1_fall.png", 3);
-				sprite->addNewAnimation(GraphicalElements::Animation_ID::defend, "p1_defend.png", 6);
-				sprite->addNewAnimation(GraphicalElements::Animation_ID::heal, "p1_heal.png", 15);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::idle, "p2_idle.png", 10);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::walk, "p2_walk.png", 16);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::attack, "p2_attack.png", 6);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::airattack, "p2_airattack.png", 6);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::jump, "p2_jump.png", 3);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::fall, "p2_fall.png", 3);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::defend, "p2_defend.png", 6);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::heal, "p2_heal.png", 15);
 				
 			}
 

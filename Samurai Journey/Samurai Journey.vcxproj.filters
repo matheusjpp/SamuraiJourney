@@ -184,5 +184,41 @@
     <Image Include="p1_heal.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
+    <Image Include="p2_airattack.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p2_attack.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p2_idle.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p2_defend.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p2_fall.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p2_heal.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p2_jump.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p2_walk.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="wolf_jump.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="ATTACK 1.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="ATTACK 3.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="DASH ATTACK.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
   </ItemGroup>
 </Project>

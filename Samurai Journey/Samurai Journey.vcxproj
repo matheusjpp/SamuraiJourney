@@ -184,6 +184,9 @@
     <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="ATTACK 1.png" />
+    <Image Include="ATTACK 3.png" />
+    <Image Include="DASH ATTACK.png" />
     <Image Include="p1_attack.png" />
     <Image Include="p1_airattack.png" />
     <Image Include="p1_defend.png" />
@@ -192,7 +195,16 @@
     <Image Include="p1_idle.png" />
     <Image Include="p1_jump.png" />
     <Image Include="p1_walk.png" />
+    <Image Include="p2_airattack.png" />
+    <Image Include="p2_attack.png" />
+    <Image Include="p2_defend.png" />
+    <Image Include="p2_fall.png" />
+    <Image Include="p2_heal.png" />
+    <Image Include="p2_idle.png" />
+    <Image Include="p2_jump.png" />
+    <Image Include="p2_walk.png" />
     <Image Include="wolf_idle.png" />
+    <Image Include="wolf_jump.png" />
     <Image Include="wolf_run.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

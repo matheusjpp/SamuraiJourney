@@ -7,7 +7,7 @@ Game::Game()  {
 	pEvent = Managers::KeyManagement::EventsManager::getInstance();
 
 	Entities::Characters::Player p1(Math::CoordF(400.0f, 300.0f), true);
-	//Entities::Characters::Wolf w1(Math::CoordF(250.0f, 300.0f));
+	Entities::Characters::Wolf w1(Math::CoordF(250.0f, 300.0f));
 	Entities::Obstacles::Platform plat1(Math::CoordF(270.0f, 800.0f), Math::CoordF(900.0f, 700.0f), false);
 	Entities::Obstacles::Platform plat2(Math::CoordF(920.0f, 500.0f), Math::CoordF(400.0f, 300.0f), false);
 	Entities::Obstacles::Platform plat3(Math::CoordF(100.0f, 300.0f), Math::CoordF(40.0f, 300.0f), false);
@@ -16,10 +16,10 @@ Game::Game()  {
 
 	pCollision->setLists(staticEntities, movingEntities);
 
-	//w1.setPlayer(&p1);
+	w1.setPlayer(&p1);
 
 	movingEntities.addEntity(&p1);
-	//movingEntities.addEntity(&w1);
+	movingEntities.addEntity(&w1);
 	staticEntities.addEntity(&plat1);
 	staticEntities.addEntity(&plat2);
 	staticEntities.addEntity(&plat3);
