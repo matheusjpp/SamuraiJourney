@@ -4,6 +4,8 @@
 #define WOLF_SIZE_X 64.0f
 #define WOLF_SIZE_Y 42.0f
 
+#define WOLF_SPEED 300.0f
+
 namespace Entities {
 
 	namespace Characters {

@@ -15,17 +15,22 @@ namespace Entities {
 		}
 
 		void Wolf::update(float dt) {
-			/*
+			
 			position.y += PLAYER_SPEED * dt;
+			isMoving = false;
 
 			if (position.x > pPlayer->getPosition().x) {
-				position.x -= PLAYER_SPEED * dt / 3.0f;
+				position.x -= WOLF_SPEED * dt / 3.0f;
+				isFacingLeft = false;
+				isMoving = true;
 			}
 
 			if (position.x < pPlayer->getPosition().x) {
-				position.x += PLAYER_SPEED * dt / 3.0f;
+				position.x += WOLF_SPEED * dt / 3.0f;
+				isFacingLeft = true;
+				isMoving = true;
 			}
-			*/
+			
 
 			velocity.y += GRAVITY * dt; // Incrementa velocidade vertical
 			position.x += velocity.x * dt;
@@ -35,6 +40,8 @@ namespace Entities {
 			pCollision->notifyCollision(this, dt);
 			updateSprite(dt);
 			body->setPosition(sf::Vector2f(position.x, position.y));
+
+			
 
 			/*
 			body->setOutlineColor(sf::Color(0, 0, 255));
@@ -56,14 +63,20 @@ namespace Entities {
 
 			sprite->addNewAnimation(GraphicalElements::Animation_ID::idle, "wolf_idle.png", 6);
 			sprite->addNewAnimation(GraphicalElements::Animation_ID::run, "wolf_run.png", 6);
+			sprite->addNewAnimation(GraphicalElements::Animation_ID::jump, "wolf_jump.png", 3);
+			sprite->addNewAnimation(GraphicalElements::Animation_ID::attack, "ATTACK 3.png", 5);
 
 			body->setSize(sf::Vector2f(64.0f, 42.0f));
 			body->setOrigin(size.x / 2, size.y / 2 + 9);
 		}
 
 		void Wolf::updateSprite(float dt) {
-			if (isMoving) {
-				sprite->update(GraphicalElements::Animation_ID::run, isFacingLeft, position, dt);
+			if (!canJump) {
+				sprite->update(GraphicalElements::Animation_ID::jump, isFacingLeft, position, dt);
+			}
+
+			else if (isMoving) {
+				sprite->update(GraphicalElements::Animation_ID::attack, isFacingLeft, position, dt);
 			}
 
 			else {
