@@ -17,6 +17,10 @@ namespace Entities {
 			void update(float dt);
 
 			void execute();
+
+			void setTextures();
+
+			void updateSprite(float dt);
 		};
 
 

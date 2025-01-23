@@ -10,7 +10,6 @@ namespace Managers {
 			moveLeft = sf::Keyboard::Unknown;
 			attack = sf::Keyboard::Unknown;
 			jump = sf::Keyboard::Unknown;
-			run = sf::Keyboard::Unknown;
 			defend = sf::Keyboard::Unknown;
 			usePotion = sf::Keyboard::Unknown;
 
@@ -19,7 +18,6 @@ namespace Managers {
 					moveRight = sf::Keyboard::A;
 					moveLeft = sf::Keyboard::D;
 					jump = sf::Keyboard::W;
-					run = sf::Keyboard::LShift;
 					attack = sf::Keyboard::Q;
 					defend = sf::Keyboard::E;
 					usePotion = sf::Keyboard::Z;
@@ -29,7 +27,6 @@ namespace Managers {
 					moveRight = sf::Keyboard::L;
 					moveLeft = sf::Keyboard::J;
 					jump = sf::Keyboard::I;
-					run = sf::Keyboard::B;
 					attack = sf::Keyboard::U;
 					defend = sf::Keyboard::O;
 					usePotion = sf::Keyboard::N;
@@ -60,10 +57,6 @@ namespace Managers {
 				}
 			}
 
-			if (key == run) {
-				pPlayer->run();
-			}
-
 			if (key == attack) {
 				pPlayer->attack();
 			}
@@ -88,8 +81,9 @@ namespace Managers {
 					pPlayer->stopMoving();
 				}
 			}
-			if (key == run) {
-				pPlayer->stopRunning();
+
+			if (key == defend) {
+				pPlayer->stopDefending();
 			}
 		}
 
