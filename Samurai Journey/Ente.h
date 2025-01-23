@@ -4,7 +4,7 @@
 enum ID {
 	empty = 0,
 	player,
-	enemy,
+	wolf,
 	platform
 };
 

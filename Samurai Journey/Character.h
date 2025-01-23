@@ -29,6 +29,10 @@ namespace Entities {
 			virtual void execute() = 0;
 
 			virtual void attack() = 0;
+
+			virtual void setTextures() = 0;
+
+			virtual void updateSprite(float dt) = 0;
 		};
 
 

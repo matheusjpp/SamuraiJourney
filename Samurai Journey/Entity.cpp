@@ -2,14 +2,16 @@
 
 namespace Entities {
 
-	Entity::Entity(Math::CoordF pos, Math::CoordF size, ID id) : Ente(id), position(pos), size(size) {
+	Entity::Entity(Math::CoordF pos, Math::CoordF size, ID id) : Ente(id), position(pos), size(size), sprite(nullptr) {
 		body->setOrigin(sf::Vector2f(size.x / 2, size.y / 2));
 		body->setSize(sf::Vector2f(size.x, size.y));
-		body->setPosition(sf::Vector2f(position.x, position.y));
+		body->setPosition(sf::Vector2f(pos.x, pos.y));
 	}
 
 	Entity::~Entity() {
-
+		if (sprite) {
+			delete sprite;
+		}
 	}
 
 	void Entity::setPosition(Math::CoordF pos) {
@@ -22,10 +24,6 @@ namespace Entities {
 
 	Math::CoordF Entity::getSize() const {
 		return size;
-	}
-
-	ID Entity::getID() const {
-		return id;
 	}
 
 	void Entity::render() {

@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Coord.h" />
@@ -153,8 +154,10 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Subject.h" />
+    <ClInclude Include="Wolf.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Coord.cpp" />
@@ -175,9 +178,22 @@
     <ClCompile Include="Samurai Journey.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Subject.cpp" />
+    <ClCompile Include="Wolf.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="p1_attack.png" />
+    <Image Include="p1_airattack.png" />
+    <Image Include="p1_defend.png" />
+    <Image Include="p1_fall.png" />
+    <Image Include="p1_heal.png" />
+    <Image Include="p1_idle.png" />
+    <Image Include="p1_jump.png" />
+    <Image Include="p1_walk.png" />
+    <Image Include="wolf_idle.png" />
+    <Image Include="wolf_run.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

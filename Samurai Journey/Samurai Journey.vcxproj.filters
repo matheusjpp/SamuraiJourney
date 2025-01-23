@@ -75,6 +75,12 @@
     <ClInclude Include="PlayerController.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Wolf.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Coord.cpp">
@@ -137,8 +143,46 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Wolf.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="p1_idle.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="wolf_idle.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="wolf_run.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p1_attack.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p1_airattack.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p1_fall.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p1_jump.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p1_walk.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p1_defend.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p1_heal.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
 
 namespace Entities {
 	namespace Characters {
-		class Character;
+		class Player;
 	}
 }
 

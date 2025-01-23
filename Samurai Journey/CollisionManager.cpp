@@ -1,5 +1,5 @@
 #include "CollisionManager.h"
-#include "Character.h"
+#include "Player.h"
 
 namespace Managers {
 	
@@ -75,7 +75,7 @@ namespace Managers {
 		void CollisionManager::manageCollision(Entities::MovingEntity* sender, Entities::Entity* otherEntity, Math::CoordF intersection, float dt) {
 			/* Collision notified by a player */
 			if (sender->getID() == ID::player) {
-				if (otherEntity->getID() == ID::enemy) { // Collision with meelee enemy 
+				if (otherEntity->getID() == ID::wolf) { // Collision with meelee enemy 
 					//take damage (dependendo de como for feito o ataque do inimigo)
 					moveOnCollision(sender, otherEntity, intersection, dt);
 				}
@@ -88,7 +88,7 @@ namespace Managers {
 			}
 
 			/* Collision notified by an enemy */ //tem que fazer de cada um especificamente pq o id é sobrescrito nas classes especializadas, mas sempre vai ser isso
-			else if (sender->getID() == ID::enemy) {
+			else if (sender->getID() == ID::wolf) {
 				moveOnCollision(sender, otherEntity, intersection, dt);
 			}
 		}
@@ -114,6 +114,10 @@ namespace Managers {
 					senderPos.y += intersection.y;
 					if (auto* character = dynamic_cast<Entities::Characters::Character*>(sender)) {
 						character->setCanJump(true);
+						if (auto* player = dynamic_cast<Entities::Characters::Player*>(sender)) {
+							if (player->getIsDefending())
+								player->setCanJump(false);
+						}
 					}
 				}
 					
