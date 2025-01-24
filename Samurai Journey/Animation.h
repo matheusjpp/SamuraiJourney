@@ -13,7 +13,11 @@ namespace GraphicalElements {
 		attack = 5,
 		airattack = 6,
 		defend = 7,
-		heal = 8
+		heal = 8,
+		idle2 = 9,
+		run2 = 10,
+		attack2 = 11,
+		arrow = 12
 	};
 
 	class Animation : public Ente {

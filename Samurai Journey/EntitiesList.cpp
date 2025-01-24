@@ -61,7 +61,8 @@ namespace List {
         for (auto it = entList.begin(); it != entList.end(); ++it) {
             Entities::Entity* entity = *it;
             if (entity) {
-                entity->execute();
+                if (entity->getIsActive())
+                    entity->execute();
             }
         }
     }

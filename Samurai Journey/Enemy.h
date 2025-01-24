@@ -12,7 +12,7 @@ namespace Entities {
 		public:
 			Enemy(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::empty);
 
-			~Enemy();
+			virtual ~Enemy();
 
 			void setPlayer(Player* p);
 

@@ -31,7 +31,6 @@ namespace Managers {
 
 		void CollisionManager::notifyCollision(Entities::MovingEntity* sender, float dt) {
 			Entities::Entity* otherEntity = nullptr;
-			
 			Math::CoordF intersect;
 			Math::CoordF centerDistance;
 
@@ -80,7 +79,17 @@ namespace Managers {
 					moveOnCollision(sender, otherEntity, intersection, dt);
 				}
 
-				else if (otherEntity->getID() == ID::platform) { // Collision with platform
+				if (otherEntity->getID() == ID::demonsamurai) { // Collision with meelee enemy 
+					//take damage (dependendo de como for feito o ataque do inimigo)
+					moveOnCollision(sender, otherEntity, intersection, dt);
+				}
+
+				if (otherEntity->getID() == ID::archer) { // Collision with meelee enemy 
+					//take damage (dependendo de como for feito o ataque do inimigo)
+					moveOnCollision(sender, otherEntity, intersection, dt);
+				}
+
+				if (otherEntity->getID() == ID::platform) { // Collision with platform
 					moveOnCollision(sender, otherEntity, intersection, dt);
 				}
 
@@ -90,6 +99,19 @@ namespace Managers {
 			/* Collision notified by an enemy */ //tem que fazer de cada um especificamente pq o id é sobrescrito nas classes especializadas, mas sempre vai ser isso
 			else if (sender->getID() == ID::wolf) {
 				moveOnCollision(sender, otherEntity, intersection, dt);
+			}
+
+			else if (sender->getID() == ID::demonsamurai) {
+				moveOnCollision(sender, otherEntity, intersection, dt);
+			}
+
+			else if (sender->getID() == ID::archer) {
+				moveOnCollision(sender, otherEntity, intersection, dt);
+			}
+
+			else if (sender->getID() == ID::arrow) {
+				if (otherEntity->getID() == ID::player || otherEntity->getID() == ID::platform)
+				sender->setIsActive(false);
 			}
 		}
 

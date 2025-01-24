@@ -8,6 +8,7 @@ namespace Entities {
 		Math::CoordF position;
 		Math::CoordF size;
 		GraphicalElements::Animation* sprite;
+		bool isActive;
 
 	public:
 		Entity (Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::empty);
@@ -19,6 +20,10 @@ namespace Entities {
 		Math::CoordF getPosition() const;
 
 		Math::CoordF getSize() const;
+
+		bool getIsActive() const;
+
+		void setIsActive(bool isA);
 
 		virtual void render();
 

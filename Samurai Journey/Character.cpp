@@ -4,13 +4,18 @@ namespace Entities {
 
 	namespace Characters {
 
-		Character::Character(Math::CoordF pos, Math::CoordF size, ID id, float hp) : hp(hp), canJump(false),
+		Character::Character(Math::CoordF pos, Math::CoordF size, ID id, float hp) : hp(1), canJump(false), isAttacking(false), attackCooldown(0), attackingTime(0),
+			attackTimer(0), cooldownTimer(0),
 			MovingEntity(pos, size, id) {
 
 		}
 
 		Character::~Character() {
 
+		}
+
+		float Character::getHP() const {
+			return hp;
 		}
 
 		void Character::setHP(float HP) {
@@ -30,6 +35,27 @@ namespace Entities {
 
 		bool Character::getCanJump() const {
 			return canJump;
+		}
+
+		bool Character::canAttack() const {
+			return cooldownTimer > attackCooldown ? true : false;
+		}
+
+		void Character::incrementAttackTime(const float dt) {
+			if (isAttacking) {
+				cooldownTimer = 0;
+				attackTimer += dt;
+				if (attackTimer > attackingTime)
+					isAttacking = false;
+			} 
+			else {
+				cooldownTimer += dt;
+				attackTimer = 0;
+			}
+		}
+
+		bool Character::getIsAttacking() const {
+			return isAttacking;
 		}
 
 	}

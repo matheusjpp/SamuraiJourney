@@ -5,9 +5,13 @@ namespace Entities {
 
 	namespace Characters {
 
-		Player::Player(Math::CoordF pos, bool isPlayer1) : isAttacking(false), attackCooldown(0), isDefending(false), isHealing(false), healCooldown(0),
+		Player::Player(Math::CoordF pos, bool isPlayer1) : isDefending(false), isHealing(false), healCooldown(0),
 			Character(pos, Math::CoordF(PLAYER_SIZE_X, PLAYER_SIZE_Y), ID::player), isPlayer1(isPlayer1) {
 			
+			setHP(PLAYER_HP);
+			attackCooldown = PLAYER_ATTACK_CD;
+			attackingTime = PLAYER_ATTACK_TIME;
+
 			pControl = new Managers::KeyManagement::PlayerController(this);
 			setTextures();
 		}
@@ -21,23 +25,19 @@ namespace Entities {
 		}
 
 		void Player::update(float dt) {
-			// Controle de movimento horizontal
-			if (isMoving) {
-				if (isFacingLeft) {
-					setVelocityX(PLAYER_SPEED);
+			incrementAttackTime(dt);
+
+			if (!isDefending) {
+				if (isMoving) {
+					if (isFacingLeft) {
+						setVelocityX(PLAYER_SPEED);
+					}
+					else {
+						setVelocityX(-PLAYER_SPEED);
+					}
 				}
 				else {
-					setVelocityX(-PLAYER_SPEED);
-				}
-			}
-			else {
-				setVelocityX(0);
-			}
-
-			if (isAttacking) {
-				attackCooldown += dt;
-				if (attackCooldown >= 0.8f) {
-					isAttacking = false;
+					setVelocityX(0);
 				}
 			}
 
@@ -48,7 +48,7 @@ namespace Entities {
 				}
 			}
 
-			velocity.y += GRAVITY * dt; // Incrementa velocidade vertical
+			velocity.y += GRAVITY * dt;
 			position.x += velocity.x * dt;
 			position.y += velocity.y * dt;
 
@@ -56,11 +56,6 @@ namespace Entities {
 			pCollision->notifyCollision(this, dt);
 			updateSprite(dt);
 			body->setPosition(sf::Vector2f(position.x, position.y));
-
-			/*
-			body->setOutlineColor(sf::Color(0, 0, 255));
-			body->setOutlineThickness(1);
-			*/
 		}
 
 		void Player::execute() {
@@ -69,9 +64,21 @@ namespace Entities {
 		}
 
 		void Player::setTextures() {
-			sprite = new GraphicalElements::Animation(body, Math::CoordF(2, 2));
+			sprite = new GraphicalElements::Animation(body, Math::CoordF(2.5, 2.5));	
 
 			if (isPlayer1) {
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::idle, "p1_idle.png", 10);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::walk, "p1_walk.png", 16);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::attack, "p1_attack.png", 6); 
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::airattack, "p1_airattack.png", 6);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::jump, "p1_jump.png", 3);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::fall, "p1_fall.png", 3);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::defend, "p1_defend.png", 6);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::heal, "p1_heal.png", 15);
+			
+			}
+
+			else {
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::idle, "p2_idle.png", 10);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::walk, "p2_walk.png", 16);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::attack, "p2_attack.png", 6);
@@ -80,10 +87,9 @@ namespace Entities {
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::fall, "p2_fall.png", 3);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::defend, "p2_defend.png", 6);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::heal, "p2_heal.png", 15);
-				
 			}
 
-			body->setOrigin(size.x / 2 + 17, size.y / 2 + 50);
+			body->setOrigin(size.x / 2 + 15, size.y / 2 + 52);
 		}
 
 		void Player::updateSprite(float dt) {
@@ -119,15 +125,14 @@ namespace Entities {
 		}
 
 		void Player::attack() {
-			if (!isAttacking) {
+			if (canAttack()) {
 				isAttacking = true;
-				attackCooldown = 0.0f;
 			}
 			
 		}
 
 		void Player::defend() {
-			if (canJump)
+			if (canJump && !isMoving)
 				isDefending = true;
 		}
 

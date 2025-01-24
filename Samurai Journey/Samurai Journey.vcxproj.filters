@@ -81,6 +81,15 @@
     <ClInclude Include="Wolf.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="DemonSamurai.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Archer.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Coord.cpp">
@@ -149,6 +158,15 @@
     <ClCompile Include="Wolf.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="DemonSamurai.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Archer.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrow.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -211,13 +229,46 @@
     <Image Include="wolf_jump.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
-    <Image Include="ATTACK 1.png">
+    <Image Include="wolf_attack.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
-    <Image Include="ATTACK 3.png">
+    <Image Include="wolf_attack2.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
-    <Image Include="DASH ATTACK.png">
+    <Image Include="demon_idle.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="demon_run.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="demon_attack.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="demon_attack2.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="demon_idle2.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="demon_airattack2.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="demon_airattack.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="demon_run2.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="archer_attack.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="archer_idle.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="archer_walk.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="arrow.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
   </ItemGroup>

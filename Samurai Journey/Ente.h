@@ -5,6 +5,9 @@ enum ID {
 	empty = 0,
 	player,
 	wolf,
+	archer,
+	demonsamurai,
+	arrow,
 	platform
 };
 
