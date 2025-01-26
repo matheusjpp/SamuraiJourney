@@ -1,5 +1,5 @@
 #pragma once
-#include "EventsManager.h"
+#include "MainMenu.h"
 
 class Game {
 private:

@@ -31,6 +31,10 @@ namespace Managers {
 		window->draw(*body);
 	}
 
+	void GraphicManager::render(sf::Text text) {
+		window->draw(text);
+	}
+
 	void GraphicManager::display() {
 		if (isWindowOpen()) {
 			window->display();
@@ -89,5 +93,13 @@ namespace Managers {
 
 	bool GraphicManager::pollEvent(sf::Event &e) {
 		return window->pollEvent(e);
+	}
+
+	sf::Font GraphicManager::loadFont(const char* fontPath) {
+		sf::Font font;
+		if (!font.loadFromFile(fontPath)) {
+			std::cout << "ERROR:Managers::GraphicManager:: not possible to find font path" << std::endl;
+		}
+		return font;
 	}
 }

@@ -7,7 +7,10 @@ Ente::Ente(ID id) : id(id) {
 }
 
 Ente::~Ente() {
-	if (body) delete body;
+	if (body) {
+		delete body;
+		body = nullptr;
+	}
 }
 
 void Ente::setID(ID id) {

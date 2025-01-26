@@ -24,6 +24,8 @@ namespace Managers {
 		static GraphicManager* getInstance();
 
 		void render(sf::RectangleShape* body);
+		
+		void render(sf::Text text);
 
 		void display();
 
@@ -46,6 +48,8 @@ namespace Managers {
 		float getDeltaTime() const;
 
 		bool pollEvent(sf::Event &e);
+
+		sf::Font loadFont(const char* fontPath);
 	};
 
 }

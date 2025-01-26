@@ -49,10 +49,6 @@ namespace GraphicalElements {
 
 	}
 
-	void Animation::render() {
-		//pGraphic->render(body);
-	}
-
 	Math::CoordF Animation::getSize() const {
 		return Math::CoordF(body->getSize().x, body->getSize().y);
 	}

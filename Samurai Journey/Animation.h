@@ -17,10 +17,11 @@ namespace GraphicalElements {
 		idle2 = 9,
 		run2 = 10,
 		attack2 = 11,
-		arrow = 12
+		arrow = 12,
+		menubg = 13
 	};
 
-	class Animation : public Ente {
+	class Animation {
 	private:
 		class SingleAnimation {
 		private:
@@ -95,7 +96,6 @@ namespace GraphicalElements {
 
 		void addNewAnimation(Animation_ID, const char* path, unsigned int imageCount);
 		void update(Animation_ID id, bool isFacingLeft, Math::CoordF position, float dt);
-		void render();
 		Math::CoordF getSize() const;
 	};
 
