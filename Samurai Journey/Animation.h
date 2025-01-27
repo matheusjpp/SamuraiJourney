@@ -18,7 +18,8 @@ namespace GraphicalElements {
 		run2 = 10,
 		attack2 = 11,
 		arrow = 12,
-		menubg = 13
+		menubg = 13,
+		map1 = 14
 	};
 
 	class Animation {

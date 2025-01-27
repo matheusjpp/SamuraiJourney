@@ -21,7 +21,7 @@ namespace Entities {
 
 		Math::CoordF getSize() const;
 
-		bool getIsActive() const;
+		bool getIsActive();
 
 		void setIsActive(bool isA);
 

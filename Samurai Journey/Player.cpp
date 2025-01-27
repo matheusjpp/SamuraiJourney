@@ -148,6 +148,27 @@ namespace Entities {
 			isHealing = true;
 		}
 
+		void Player::centerCamera() {
+			if (isPlayer1) {
+				pGraphic->centerView(Math::CoordF(position.x, pGraphic->getWindowSize().y / 2));
+				/*if (pPlayer2) {
+					if (fabs(pPlayer2->getPosition().x - position.x) > 960) {
+						pPlayer2->setPosition(Math::CoordF((position.x + 50.0f), position.y));
+					}
+				}
+			}
+			else {
+				if (pPlayer2) {
+					if (!pPlayer2->getIsActive()) {
+						pGraphic->centerView(Math::CoordF(position.x, pGraphic->getWindowSize().y / 2));
+					}
+				}
+				else {
+					pGraphic->centerView(Math::CoordF(position.x, pGraphic->getWindowSize().y / 2));
+				}
+			}*/
+			}
+		}
 	}
 
 }

@@ -55,6 +55,7 @@ namespace Entities {
 
 			void usePotion();
 
+			void centerCamera();
 		};
 
 	}

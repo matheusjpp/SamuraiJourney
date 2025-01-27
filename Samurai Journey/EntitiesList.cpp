@@ -60,9 +60,14 @@ namespace List {
     void EntitiesList::execute(float dt) {
         for (auto it = entList.begin(); it != entList.end(); ++it) {
             Entities::Entity* entity = *it;
-            if (entity) {
-                if (entity->getIsActive())
-                    entity->execute();
+
+            if (!entity) {
+                std::cerr << "nullptr found" << std::endl;
+                continue; 
+            }
+
+            if (entity && entity->getIsActive()) {
+                entity->execute();
             }
         }
     }

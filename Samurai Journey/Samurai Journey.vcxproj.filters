@@ -105,6 +105,9 @@
     <ClInclude Include="MainMenu.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Coord.cpp">
@@ -197,9 +200,15 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="mapa1.tmj">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="p1_idle.png">
@@ -305,6 +314,12 @@
       <Filter>Arquivos de Recurso</Filter>
     </Image>
     <Image Include="menubg2.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="map_makeup.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="level2_map.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
   </ItemGroup>

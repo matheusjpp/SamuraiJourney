@@ -12,7 +12,7 @@ namespace Entities {
 		public:
 			Obstacle(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::empty, bool dangerous = false);
 
-			~Obstacle();
+			virtual ~Obstacle();
 
 			virtual void update(float dt) = 0;
 

@@ -30,7 +30,7 @@ namespace Entities {
 		pGraphic->render(body);
 	}
 
-	bool Entity::getIsActive() const {
+	bool Entity::getIsActive() {
 		return isActive;
 	}
 
