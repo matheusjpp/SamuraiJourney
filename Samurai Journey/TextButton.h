@@ -21,6 +21,8 @@ namespace Menu {
 
 			void setSelected(bool selected);
 
+			void setSelectedColor(sf::Color color);
+
 			const bool getSelected() const;
 
 			void render();

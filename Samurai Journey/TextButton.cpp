@@ -36,6 +36,10 @@ namespace Menu {
 			}
 		}
 
+		void TextButton::setSelectedColor(sf::Color color) {
+			selectedColor = color;
+		}
+
 		const bool TextButton::getSelected() const {
 			return selected;
 		}

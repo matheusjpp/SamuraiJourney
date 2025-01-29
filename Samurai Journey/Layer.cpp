@@ -22,9 +22,9 @@ namespace GraphicalElements {
 			background.setPosition(0.0f, 0.0f);
 		
 
-			auxBackground.setSize(backgroundSize);
-			auxBackground.setTexture(texture);
-			auxBackground.setPosition(backgroundSize.x, 0.0f);
+			//auxBackground.setSize(backgroundSize);
+			////auxBackground.setTexture(texture);
+			//auxBackground.setPosition(backgroundSize.x, 0.0f);
 		}
 
 		Layer::~Layer() {
@@ -34,13 +34,13 @@ namespace GraphicalElements {
 		void Layer::switchTexture() {
 			sf::RectangleShape aux = background;
 			background = auxBackground;
-			auxBackground = aux;
+			//auxBackground = aux;
 		}
 
 		void Layer::renderLayer() {
 			pGraphic->render(&background);
 			if (speed != 0.0f) {
-				pGraphic->render(&auxBackground);
+				//pGraphic->render(&auxBackground);
 			}
 		}
 
@@ -60,14 +60,14 @@ namespace GraphicalElements {
 						if ((backgroundPosition.x + backgroundSize.x) < leftPos) {
 							switchTexture();
 							background.setPosition(leftPos, backgroundPosition.y);
-							auxBackground.setPosition(rightPos, auxBackgroundPosition.y);
+							//auxBackground.setPosition(rightPos, auxBackgroundPosition.y);
 						}
 					}
 					else {
 						if (backgroundPosition.x > leftPos) {
 							switchTexture();
 							background.setPosition(leftPos - backgroundSize.x, backgroundPosition.y);
-							auxBackground.setPosition(leftPos, auxBackgroundPosition.y);
+							//auxBackground.setPosition(leftPos, auxBackgroundPosition.y);
 						}
 					}
 				}

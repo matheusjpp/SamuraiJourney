@@ -16,7 +16,10 @@ namespace Menu {
 			archersingle,
 			archermulti,
 			bosssingle,
-			bossmulti
+			bossmulti,
+			resumegame,
+			saveprogress,
+			pauseexit
 		};
 
 		class Button {

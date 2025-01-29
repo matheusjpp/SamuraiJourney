@@ -1,6 +1,10 @@
 #pragma once
 #include "InputManager.h"
 
+namespace Menu {
+	class PauseMenu;
+}
+
 namespace Managers {
 
 	namespace KeyManagement {
@@ -14,6 +18,7 @@ namespace Managers {
 			sf::Keyboard::Key jump;
 			sf::Keyboard::Key defend;
 			sf::Keyboard::Key usePotion;
+			sf::Keyboard::Key pause;
 		
 		public:
 			PlayerController(Entities::Characters::Player* pPlayer = nullptr);

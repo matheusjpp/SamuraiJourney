@@ -29,7 +29,7 @@ namespace Menu {
 		
 		virtual ~Menu();
 
-		void addButton(const std::string& info, Math::CoordF pos, Buttons::Button_ID id);
+		void addButton(const std::string& info, Math::CoordF pos, sf::Color selectedColor, Buttons::Button_ID id);
 		
 		void selectAbove();
 

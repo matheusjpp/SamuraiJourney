@@ -46,9 +46,10 @@ namespace Menu {
 		}
 	}
 
-	void Menu::addButton(const std::string& info, Math::CoordF pos, Buttons::Button_ID id) {
+	void Menu::addButton(const std::string& info, Math::CoordF pos, sf::Color selectedColor, Buttons::Button_ID id) {
 		float fontSize = 60.0f; // Constante mal feita que deveria ser um atributo do menu (tanto que é passada na construtora) , mas como todos terão o mesmo tamaho, vou deixar assim
 		Buttons::TextButton* button = new Buttons::TextButton(info, pos, buttonSize, fontSize, id);
+		button->setSelectedColor(selectedColor);
 		if (button == nullptr) {
 			std::cout << "ERROR::Menu:: not possible to create button" << std::endl;
 			exit(1);

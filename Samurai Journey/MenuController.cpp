@@ -81,14 +81,14 @@ namespace Managers {
 				if (key == select) {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
-					case Menu::Buttons::Button_ID::archersingle: {
-						//archer (false)
-						break;
-					}
-					case Menu::Buttons::Button_ID::bosssingle: {
-						new Levels::BossLevel(false, States::State_ID::bosslevel_singleplayer);
-						break;
-					}
+						case Menu::Buttons::Button_ID::archersingle: {
+							//archer (false)
+							break;
+						}
+						case Menu::Buttons::Button_ID::bosssingle: {
+							new Levels::BossLevel(false, States::State_ID::bosslevel_singleplayer);
+							break;
+						}
 					}
 				}
 
@@ -110,14 +110,14 @@ namespace Managers {
 				if (key == select) {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
-					case Menu::Buttons::Button_ID::archermulti: {
-						//archer (true)
-						break;
-					}
-					case Menu::Buttons::Button_ID::bossmulti: {
-						new Levels::BossLevel(true, States::State_ID::bosslevel_multiplayer);
-						break;
-					}
+						case Menu::Buttons::Button_ID::archermulti: {
+							//archer (true)
+							break;
+						}
+						case Menu::Buttons::Button_ID::bossmulti: {
+							new Levels::BossLevel(true, States::State_ID::bosslevel_multiplayer);
+							break;
+						}
 					}
 				}
 
@@ -134,10 +134,37 @@ namespace Managers {
 				}
 			}
 
-			///////
+			/* Pause Menu Commands */
+			else if (pStateM->getCurrentState()->getID() == States::State_ID::pause_menu) {
+				if (key == select) {
+					isActive = false;
+					switch (pMenu->getSelectedButtonID()) {
+						case Menu::Buttons::Button_ID::resumegame: {
+							pStateM->popState();
+							break;
+						}
+						case Menu::Buttons::Button_ID::pauseexit: {
+							pStateM->popState(4);
+							break;
+						}
+						// case load
+					}
+				}
 
+				else if (key == up) {
+					pMenu->selectAbove();
+				}
 
+				else if (key == down) {
+					pMenu->selectBelow();
+				}
 
+				else if (key == escape) {
+					pStateM->popState();
+				}
+				}
+
+			////
 
 		}
 

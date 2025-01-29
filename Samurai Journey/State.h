@@ -16,7 +16,8 @@ namespace Managers {
 			archerlevel_singleplayer,
 			archerlevel_multiplayer,
 			bosslevel_singleplayer,
-			bosslevel_multiplayer
+			bosslevel_multiplayer,
+			pause_menu
 		};
 
 		class State {

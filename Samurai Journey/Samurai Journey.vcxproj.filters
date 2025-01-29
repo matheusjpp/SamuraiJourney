@@ -126,6 +126,9 @@
     <ClInclude Include="Layer.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Coord.cpp">
@@ -239,6 +242,9 @@
     <ClCompile Include="Layer.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
@@ -350,6 +356,9 @@
       <Filter>Arquivos de Recurso</Filter>
     </Image>
     <Image Include="level2_map.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="pausebg.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
   </ItemGroup>

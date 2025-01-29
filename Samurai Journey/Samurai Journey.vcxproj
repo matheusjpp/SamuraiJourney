@@ -104,12 +104,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\danil\Desktop\JOGO\SFML-2.6.2\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Coding\Programas\SFML\SFML-2.6.2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\danil\Desktop\JOGO\SFML-2.6.2\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\Coding\Programas\SFML\SFML-2.6.2\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-system-d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -161,6 +161,7 @@
     <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="MovingEntity.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="Samurai Journey.cpp" />
@@ -229,6 +231,7 @@
     <Image Include="demon_run2.png" />
     <Image Include="level2_map.png" />
     <Image Include="menubg.png" />
+    <Image Include="pausebg.png" />
     <Image Include="wolf_attack.png" />
     <Image Include="wolf_attack2.png" />
     <Image Include="p1_attack.png" />

@@ -1,4 +1,5 @@
 #include "PlayerController.h"
+#include "PauseMenu.h"
 
 namespace Managers {
 
@@ -12,6 +13,7 @@ namespace Managers {
 			jump = sf::Keyboard::Unknown;
 			defend = sf::Keyboard::Unknown;
 			usePotion = sf::Keyboard::Unknown;
+			pause = sf::Keyboard::Escape;
 
 			if (pPlayer) { 
 				if (pPlayer->getIsPlayer1()) {
@@ -39,34 +41,44 @@ namespace Managers {
 		}
 
 		void PlayerController::notifyKeyPressed(sf::Keyboard::Key key) {
-			if (key == moveRight) {
-				if (pPlayer->getCanMove()) {
-					pPlayer->move(true);
+			if (pStateM->getCurrentState()->getID() == States::State_ID::archerlevel_singleplayer || 
+				pStateM->getCurrentState()->getID() == States::State_ID::archerlevel_multiplayer || 
+				pStateM->getCurrentState()->getID() == States::State_ID::bosslevel_singleplayer || 
+				pStateM->getCurrentState()->getID() == States::State_ID::bosslevel_multiplayer) { 
+				if (key == moveRight) {
+					if (pPlayer->getCanMove()) {
+						pPlayer->move(true);
+					}
 				}
-			}
 
-			if (key == moveLeft) {
-				if (pPlayer->getCanMove()) {
-					pPlayer->move(false);
+				if (key == moveLeft) {
+					if (pPlayer->getCanMove()) {
+						pPlayer->move(false);
+					}
 				}
-			}
 
-			if (key == jump) {
-				if (pPlayer->getCanJump()) {
-					pPlayer->jump();
+				if (key == jump) {
+					if (pPlayer->getCanJump()) {
+						pPlayer->jump();
+					}
 				}
-			}
 
-			if (key == attack) {
-				pPlayer->attack();
-			}
+				if (key == attack) {
+					pPlayer->attack();
+				}
 
-			if (key == defend) {
-				pPlayer->defend();
-			}
+				if (key == defend) {
+					pPlayer->defend();
+				}
 
-			if (key == usePotion) {
-				pPlayer->usePotion();
+				if (key == usePotion) {
+					pPlayer->usePotion();
+				}
+
+				if (key == pause) {
+					isActive = false;
+					new Menu::PauseMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::pause_menu);
+				}
 			}
 		}
 

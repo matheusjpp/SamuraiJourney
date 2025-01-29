@@ -33,7 +33,6 @@ namespace Levels {
 		movingEntities.execute(dt);
 		pPlayer1->changeObserverState(true);
 		
-
 		float cameraLimit = 960.0f; // empiricamente
 		if (pPlayer1->getPosition().x >= cameraLimit && pPlayer1->getPosition().x <= mapImage->getSize().x - cameraLimit) {
 			pPlayer1->centerCamera();
@@ -43,8 +42,6 @@ namespace Levels {
 
 		else
 			pGraphic->centerView(Math::CoordF(mapImage->getSize().x - cameraLimit, pGraphic->getWindowSize().y / 2.0f));
-
-		//cout << pPlayer1->getPosition().x << endl;
 
 		render();
 	}
