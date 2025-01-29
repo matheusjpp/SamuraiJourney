@@ -1,8 +1,11 @@
 #include "InputManager.h"
+#include "StateManager.h"
 
 namespace Managers {
 
     namespace KeyManagement {
+
+        States::StateManager* pStateM = States::StateManager::getInstance();
 
         // Inicializa o ponteiro estático
         InputManager* InputManager::pInput = nullptr;
@@ -39,15 +42,19 @@ namespace Managers {
 
         void InputManager::notifyKeyPressed(sf::Keyboard::Key key) {
             for (auto& observer : observers) {
-                if (observer)
-                    observer->notifyKeyPressed(key);
+                if (observer) {
+                    if (observer->getIsActive()) 
+                        observer->notifyKeyPressed(key);
+                }
             }
         }
 
         void InputManager::notifyKeyReleased(sf::Keyboard::Key key) {
             for (auto& observer : observers) {
-                if (observer)
-                    observer->notifyKeyReleased(key);
+                if (observer) {
+                    if (observer->getIsActive())
+                        observer->notifyKeyReleased(key);
+                }
             }
         }
 

@@ -3,11 +3,16 @@
 
 namespace Managers {
 
+    namespace States {
+        class StateManager;
+    }
+
     namespace KeyManagement {
 
         class InputManager : public Subject { // ConcreteSubject
         private:
             static InputManager* pInput;
+            static States::StateManager* pStateM;
             InputManager();
 
         public:

@@ -11,6 +11,7 @@ namespace Menu {
 		title(info, pGraphic->loadFont("alagard.ttf"), fontSize) 
 	{
 		menuController = new Managers::KeyManagement::MenuController(this);
+		//menuController->setIsActive(true);
 		{
 			if (menuController == nullptr) {
 				std::cout << "ERROR::Menu::MainMenu:: not possible to create observer to main menu" << std::endl;

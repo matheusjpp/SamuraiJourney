@@ -116,9 +116,11 @@ namespace Levels {
                     }
 
                     case 9: {
-                        Entities::Characters::Player* p2 = new Entities::Characters::Player(Math::CoordF(posx, posy), false);
-                        if (p2) {
-                            movingEntities.addEntity(p2);
+                        if (isMultiplayer) {
+                            Entities::Characters::Player* p2 = new Entities::Characters::Player(Math::CoordF(posx, posy), false);
+                            if (p2) {
+                                movingEntities.addEntity(p2);
+                            }
                         }
                         break;
                     }

@@ -37,9 +37,9 @@ namespace Managers {
 		void StateManager::popState() {
 			if (!stateStack.empty()) {
 				if (stateStack.top()) {
-					delete stateStack.top();
-					stateStack.top() = nullptr;
+					State* topState = stateStack.top();
 					stateStack.pop();
+					delete topState;
 					if (!stateStack.empty())
 						stateStack.top()->setIsActive(true);
 				}

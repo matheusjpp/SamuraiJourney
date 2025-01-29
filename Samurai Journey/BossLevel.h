@@ -6,7 +6,7 @@ namespace Levels {
 	class BossLevel : public Level {
 	
 	public:
-		BossLevel();
+		BossLevel(bool isMultiplayer, Managers::States::State_ID id = Managers::States::State_ID::empty);
 
 		~BossLevel();
 

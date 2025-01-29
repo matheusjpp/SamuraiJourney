@@ -169,6 +169,10 @@ namespace Entities {
 			}*/
 			}
 		}
+
+		void Player::changeObserverState(bool active) {
+			pControl->setIsActive(active);
+		}
 	}
 
 }

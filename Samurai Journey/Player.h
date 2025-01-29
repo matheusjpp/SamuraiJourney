@@ -56,6 +56,8 @@ namespace Entities {
 			void usePotion();
 
 			void centerCamera();
+
+			void changeObserverState(bool active);
 		};
 
 	}

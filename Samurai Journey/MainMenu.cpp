@@ -1,4 +1,5 @@
 #include "MainMenu.h"
+#include "MenuController.h"
 
 namespace Menu {
 
@@ -29,10 +30,28 @@ namespace Menu {
 		float startY = windowSize.y / 2.0f - ((textButtonList.size() * buttonSize.y) / 2.0f) - 180.0f; 
 		float spacing = 100.0f;
 		
-		addButton("New Game", Math::CoordF(centerX - buttonSize.x / 2.0f, startY), Buttons::Button_ID::newgame);
-		addButton("Load Game", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + spacing), Buttons::Button_ID::loadgame);
-		addButton("Leaderboard", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + 2*spacing), Buttons::Button_ID::leaderboard);
-		addButton("Exit", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + 3*spacing), Buttons::Button_ID::exit);
+		if (id == Managers::States::State_ID::main_menu) {
+			addButton("New Game", Math::CoordF(centerX - buttonSize.x / 2.0f, startY), Buttons::Button_ID::newgame);
+			addButton("Load Game", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + spacing), Buttons::Button_ID::loadgame);
+			addButton("Leaderboard", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + 2*spacing), Buttons::Button_ID::leaderboard);
+			addButton("Exit", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + 3*spacing), Buttons::Button_ID::exit);
+		}
+
+		else if (id == Managers::States::State_ID::newgame_menu) {
+			addButton("Singleplayer", Math::CoordF(centerX - buttonSize.x / 2.0f, startY), Buttons::Button_ID::singleplayer);
+			addButton("Multiplayer", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + spacing), Buttons::Button_ID::multiplayer);
+		}
+
+		else if (id == Managers::States::State_ID::singleplayer_menu) {
+			addButton("Archer Level", Math::CoordF(centerX - buttonSize.x / 2.0f, startY), Buttons::Button_ID::archersingle);
+			addButton("Boss Level", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + spacing), Buttons::Button_ID::bosssingle);
+		}
+
+		else if (id == Managers::States::State_ID::multiplayer_menu) {
+			addButton("Archer Level", Math::CoordF(centerX - buttonSize.x / 2.0f, startY), Buttons::Button_ID::archermulti);
+			addButton("Boss Level", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + spacing), Buttons::Button_ID::bossmulti);
+		}
+
 
 		initializeIterator();
 	}
@@ -45,6 +64,8 @@ namespace Menu {
 	}
 
 	void MainMenu::execute(float dt) {
+		menuController->setIsActive(true);
+
 		dt = pGraphic->getDeltaTime();
 		updateAnimation(dt);
 		render();

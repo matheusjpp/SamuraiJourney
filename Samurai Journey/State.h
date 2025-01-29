@@ -9,7 +9,14 @@ namespace Managers {
 
 		enum State_ID {
 			empty = 0,
-			main_menu
+			main_menu,
+			newgame_menu,
+			singleplayer_menu,
+			multiplayer_menu,
+			archerlevel_singleplayer,
+			archerlevel_multiplayer,
+			bosslevel_singleplayer,
+			bosslevel_multiplayer
 		};
 
 		class State {

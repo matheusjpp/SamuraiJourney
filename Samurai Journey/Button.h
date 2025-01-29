@@ -10,7 +10,13 @@ namespace Menu {
 			newgame,
 			loadgame,
 			leaderboard,
-			exit
+			exit,
+			singleplayer,
+			multiplayer,
+			archersingle,
+			archermulti,
+			bosssingle,
+			bossmulti
 		};
 
 		class Button {

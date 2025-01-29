@@ -6,7 +6,7 @@ Game::Game() {
 	pStateM = Managers::States::StateManager::getInstance();
 
 	new Menu::MainMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::main_menu);
-
+	
 	execute();
 }
 
