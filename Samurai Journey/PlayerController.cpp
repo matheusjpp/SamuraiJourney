@@ -13,10 +13,10 @@ namespace Managers {
 			defend = sf::Keyboard::Unknown;
 			usePotion = sf::Keyboard::Unknown;
 
-			if (pPlayer) {
+			if (pPlayer) { 
 				if (pPlayer->getIsPlayer1()) {
-					moveRight = sf::Keyboard::A;
-					moveLeft = sf::Keyboard::D;
+					moveRight = sf::Keyboard::D;
+					moveLeft = sf::Keyboard::A;
 					jump = sf::Keyboard::W;
 					attack = sf::Keyboard::Q;
 					defend = sf::Keyboard::E;
@@ -41,13 +41,13 @@ namespace Managers {
 		void PlayerController::notifyKeyPressed(sf::Keyboard::Key key) {
 			if (key == moveRight) {
 				if (pPlayer->getCanMove()) {
-					pPlayer->move(false);
+					pPlayer->move(true);
 				}
 			}
 
 			if (key == moveLeft) {
 				if (pPlayer->getCanMove()) {
-					pPlayer->move(true);
+					pPlayer->move(false);
 				}
 			}
 

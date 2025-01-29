@@ -3,13 +3,13 @@
 
 namespace Menu {
 
-	class MainMenu : public Menu {
+	class MainMenu : public Menu, public Managers::States::State {
 	private:
 		sf::RectangleShape* body;
 		GraphicalElements::Animation* menuAnimation;
 
 	public:
-		MainMenu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Menu_ID id);
+		MainMenu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Managers::States::State_ID id = Managers::States::State_ID::main_menu);
 
 		~MainMenu();
 
@@ -17,7 +17,7 @@ namespace Menu {
 
 		void setAnimation();
 
-		void execute();
+		void execute(float dt);
 
 		void updateAnimation(float dt);
 

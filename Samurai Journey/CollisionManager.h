@@ -16,7 +16,7 @@ namespace Managers {
 			List::EntitiesList* staticEntities;
 			List::EntitiesList* movingEntities;
 
-			static Managers::Collisions::CollisionManager* pCollision;
+			static CollisionManager* pCollision;
 
 			CollisionManager(List::EntitiesList* movingEntities = nullptr, List::EntitiesList* staticEntities = nullptr);
 

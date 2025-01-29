@@ -1,15 +1,22 @@
 #include "Menu.h"
+#include "MenuController.h"
 
 namespace Menu {
 
 	Managers::GraphicManager* Menu::pGraphic = Managers::GraphicManager::getInstance();
 
-	Menu::Menu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Menu_ID id) :
+	Menu::Menu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize) :
 		textButtonList(), it(), buttonSize(buttonSize),
 		windowSize(sf::Vector2f(pGraphic->getWindowSize().x, pGraphic->getWindowSize().y)),
 		title(info, pGraphic->loadFont("alagard.ttf"), fontSize) 
 	{
-		
+		menuController = new Managers::KeyManagement::MenuController(this);
+		{
+			if (menuController == nullptr) {
+				std::cout << "ERROR::Menu::MainMenu:: not possible to create observer to main menu" << std::endl;
+				exit(1);
+			}
+		}
 	}
 
 	Menu::~Menu() {
@@ -19,6 +26,10 @@ namespace Menu {
 				*it = nullptr;
 			}
 			textButtonList.clear();
+		}
+
+		if (menuController) {
+			menuController->setIsActive(false);
 		}
 	}
 
@@ -34,8 +45,9 @@ namespace Menu {
 		}
 	}
 
-	void Menu::addButton(const std::string& info, Math::CoordF pos, const sf::Color selectedColor, Buttons::Button_ID id) {
-		Buttons::TextButton* button = new Buttons::TextButton(info, pos, buttonSize, id);
+	void Menu::addButton(const std::string& info, Math::CoordF pos, Buttons::Button_ID id) {
+		float fontSize = 60.0f; // Constante mal feita que deveria ser um atributo do menu (tanto que é passada na construtora) , mas como todos terão o mesmo tamaho, vou deixar assim
+		Buttons::TextButton* button = new Buttons::TextButton(info, pos, buttonSize, fontSize, id);
 		if (button == nullptr) {
 			std::cout << "ERROR::Menu:: not possible to create button" << std::endl;
 			exit(1);

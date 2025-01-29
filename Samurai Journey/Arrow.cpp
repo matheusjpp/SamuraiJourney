@@ -2,7 +2,7 @@
 
 namespace Entities {
 
-	Arrow::Arrow(Math::CoordF pos, bool facingLeft, ID id) : /*isActive(false),*/
+	Arrow::Arrow(Math::CoordF pos, bool facingLeft, ID id) : damagePoints(ARROW_MAXDAMAGE), initialX(pos.x), distanceTraveled(0),
 		MovingEntity(pos, Math::CoordF(ARROW_SIZE_X, ARROW_SIZE_Y), id) {
 		isFacingLeft = facingLeft;
 
@@ -10,7 +10,11 @@ namespace Entities {
 	}
 
 	Arrow::~Arrow() {
-		//isActive = false;
+		
+	}
+
+	float Arrow::getDamagePoints() const {
+		return damagePoints;
 	}
 
 	void Arrow::update(float dt) {
@@ -24,6 +28,9 @@ namespace Entities {
 		velocity.y += ARROW_GRAVITY * dt; // Incrementa velocidade vertical
 		position.x += velocity.x * dt;
 		position.y += velocity.y * dt;
+
+		distanceTraveled = fabs(initialX - position.x);
+		damagePoints = max(ARROW_MINDAMAGE, ARROW_MAXDAMAGE - (distanceTraveled / 40.0f));
 
 		pCollision->notifyCollision(this, dt);
 		updateSprite(dt);

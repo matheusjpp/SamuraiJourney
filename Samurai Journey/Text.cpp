@@ -17,7 +17,7 @@ namespace Menu {
 		text.setString(info);
 		text.setCharacterSize(fontSize);
 		text.setFont(font);
-		text.setOutlineThickness(5.0f);
+		text.setOutlineThickness(0.0f);
 		text.setOutlineColor(borderColor);
 		text.setFillColor(textColor);
 		updateTextSize();
@@ -41,7 +41,7 @@ namespace Menu {
 	}
 
 	void Text::setTextPos(const Math::CoordF pos) {
-		textPos = pos;
+		text.setPosition(pos.x, pos.y);
 	}
 
 	void Text::setTextColor(const sf::Color& textColor) {

@@ -2,16 +2,11 @@
 
 namespace Menu {
 
-	MainMenu::MainMenu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Menu_ID id) :
-		Menu(buttonSize, info, fontSize, id) {
+	MainMenu::MainMenu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Managers::States::State_ID id) :
+		Menu(buttonSize, info, fontSize) , Managers::States::State(id) {
 
 		body = new sf::RectangleShape();
 		body->setSize(sf::Vector2f(1920.0f, 1080.0f));
-		
-		title.setTextPos(Math::CoordF(windowSize.x / 2.0f - title.getTextSize().x / 2.0f + 200.0f, 220.0f));
-		title.setTextColor(sf::Color(92, 116, 191));
-		title.setFontSize(170);
-		title.setBorderSize(4);
 
 		setAnimation();
 		createButtons();
@@ -30,22 +25,28 @@ namespace Menu {
 	}
 
 	void MainMenu::createButtons() {
-		addButton("New Game", Math::CoordF(windowSize.x / 2.0f, 900), sf::Color(255, 255, 255), Buttons::Button_ID::newgame);
-		addButton("New Game", Math::CoordF(windowSize.x / 2.0f, 1050), sf::Color(255, 255, 255), Buttons::Button_ID::newgame);
-		addButton("New Game", Math::CoordF(windowSize.x / 2.0f, 1200), sf::Color(255, 255, 255), Buttons::Button_ID::newgame);
-		addButton("New Game", Math::CoordF(windowSize.x / 2.0f, 1350), sf::Color(255, 255, 255), Buttons::Button_ID::newgame);
+		float centerX = windowSize.x / 2.0f;  
+		float startY = windowSize.y / 2.0f - ((textButtonList.size() * buttonSize.y) / 2.0f) - 180.0f; 
+		float spacing = 100.0f;
+		
+		addButton("New Game", Math::CoordF(centerX - buttonSize.x / 2.0f, startY), Buttons::Button_ID::newgame);
+		addButton("Load Game", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + spacing), Buttons::Button_ID::loadgame);
+		addButton("Leaderboard", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + 2*spacing), Buttons::Button_ID::leaderboard);
+		addButton("Exit", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + 3*spacing), Buttons::Button_ID::exit);
+
 		initializeIterator();
 	}
 
 	void MainMenu::setAnimation() {
 		menuAnimation = new GraphicalElements::Animation(body, Math::CoordF(1, 1));
 
-		menuAnimation->addNewAnimation(GraphicalElements::Animation_ID::menubg, "menubg2.png", 4);
+		menuAnimation->addNewAnimation(GraphicalElements::Animation_ID::menubg, "menubg.png", 4);
 		body->setOrigin(0, 0);
 	}
 
-	void MainMenu::execute() {
-		updateAnimation(pGraphic->getDeltaTime());
+	void MainMenu::execute(float dt) {
+		dt = pGraphic->getDeltaTime();
+		updateAnimation(dt);
 		render();
 	}
 
@@ -55,9 +56,12 @@ namespace Menu {
 
 	void MainMenu::render() {
 		pGraphic->render(body);
-		pGraphic->render(title.getText());
-		for (auto button : textButtonList) {
+		//pGraphic->render(title.getText());
+		std::list<Buttons::TextButton*>::iterator aux;
+		for (aux = textButtonList.begin(); aux != textButtonList.end(); aux++) {
+			Buttons::TextButton* button = *aux;
 			button->render();
+			button = nullptr;
 		}
 	}
 }

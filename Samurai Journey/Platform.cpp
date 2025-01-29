@@ -19,6 +19,7 @@ namespace Entities {
 
 		void Platform::execute() {
 			body->setPosition(sf::Vector2f(position.x, position.y));
+			body->setFillColor(sf::Color(0, 0, 0, 0));
 			render();
 		}
 

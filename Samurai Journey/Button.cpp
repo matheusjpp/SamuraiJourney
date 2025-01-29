@@ -9,6 +9,7 @@ namespace Menu {
 		Button::Button(Math::CoordF pos, Math::CoordF size, Button_ID id) : position(pos), size(size), id(id) {
 			box.setPosition(pos.x, pos.y);
 			box.setSize(sf::Vector2f(size.x, size.y));
+			
 		}
 
 		Button::~Button() {

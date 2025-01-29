@@ -18,7 +18,7 @@ namespace Menu {
 		void updateTextSize();
 
 	public:
-		Text(const std::string info, const sf::Font font, unsigned int fontSize = 10);
+		Text(const std::string info, const sf::Font font, unsigned int fontSize = 50);
 
 		~Text();
 

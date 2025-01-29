@@ -1,18 +1,18 @@
 #pragma once
 #include "TextButton.h"
 
-namespace Menu {
+namespace Managers {
+	namespace KeyManagement {
+		class MenuController;
+	}
+}
 
-	enum Menu_ID {
-		empty,
-		main,
-		pause
-	};
+namespace Menu {
 
 	class Menu	{
 	protected:
 		static Managers::GraphicManager* pGraphic;
-
+		Managers::KeyManagement::MenuController* menuController;
 		std::list<Buttons::TextButton*> textButtonList;
 		std::list<Buttons::TextButton*>::iterator it;
 
@@ -25,11 +25,11 @@ namespace Menu {
 		void initializeIterator();
 
 	public:
-		Menu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Menu_ID id);
+		Menu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize);
 		
 		virtual ~Menu();
 
-		void addButton(const std::string& info, Math::CoordF pos, const sf::Color selectedColor, Buttons::Button_ID id);
+		void addButton(const std::string& info, Math::CoordF pos, Buttons::Button_ID id);
 		
 		void selectAbove();
 

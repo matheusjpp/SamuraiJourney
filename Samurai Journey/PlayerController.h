@@ -12,7 +12,6 @@ namespace Managers {
 			sf::Keyboard::Key moveLeft;
 			sf::Keyboard::Key attack;
 			sf::Keyboard::Key jump;
-			sf::Keyboard::Key run;
 			sf::Keyboard::Key defend;
 			sf::Keyboard::Key usePotion;
 		

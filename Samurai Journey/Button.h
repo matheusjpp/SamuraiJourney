@@ -1,5 +1,5 @@
 #pragma once
-#include "EventsManager.h"
+#include "StateManager.h"
 
 namespace Menu {
 
@@ -7,8 +7,10 @@ namespace Menu {
 
 		enum Button_ID {
 			empty,
-			newgame
-
+			newgame,
+			loadgame,
+			leaderboard,
+			exit
 		};
 
 		class Button {

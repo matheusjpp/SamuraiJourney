@@ -4,9 +4,9 @@
 #define PLAYER_SIZE_X 64.0f
 #define PLAYER_SIZE_Y 42.0f
 
-#define PLAYER_SPEED  200.0f // Player Velocity
-#define GRAVITY 500.0f 
-#define JUMP 500.0f
+#define PLAYER_SPEED 250.0f // Player Velocity
+#define GRAVITY 700.0f // MUDAR
+#define JUMP 700.0f
 
 #define PLAYER_HP 100.0f 
 #define PLAYER_ATTACK_CD 0.2f
