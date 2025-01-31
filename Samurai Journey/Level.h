@@ -29,7 +29,7 @@ namespace Levels {
 	public: 
 		Level(bool isMultiplayer = false, Managers::States::State_ID id = Managers::States::State_ID::empty);
 
-		~Level();
+		virtual ~Level();
 
 		void createMap(const char* filePath);
 
@@ -37,9 +37,9 @@ namespace Levels {
 
 		void setPlayerPoints(int points);
 
-		virtual void updateCamera() = 0;
+		void updateCamera(float cameraLimit);
 
-		virtual void render() = 0;
+		void render();
 
 		virtual void execute(float dt) = 0;
 	};

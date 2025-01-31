@@ -6,14 +6,16 @@ namespace Entities {
 
 	namespace Characters {
 
-		Player::Player(Math::CoordF pos, bool isPlayer1, Levels::Level* level) : isDefending(false), isHealing(false), healTimer(0), points(0), pLevel(level),
-			Character(pos, Math::CoordF(PLAYER_SIZE_X, PLAYER_SIZE_Y), ID::player), isPlayer1(isPlayer1) {
-			
+		Player::Player(Math::CoordF pos, bool isPlayer1, Levels::Level* level) : isDefending(false), isHealing(false), isSlowed(false),
+			healTimer(0), points(0), pLevel(level), speed(PLAYER_SPEED),
+			Character(pos, Math::CoordF(PLAYER_SIZE_X, PLAYER_SIZE_Y), ID::player), isPlayer1(isPlayer1) 
+		{
 			setHP(PLAYER_HP);
 			damagePoints = PLAYER_ATTACK_DAMAGE;
 			attackCooldown = PLAYER_ATTACK_CD;
 			attackingTime = PLAYER_ATTACK_TIME;
 
+			pBush = new Obstacles::Bush();
 			pControl = new Managers::KeyManagement::PlayerController(this);
 			setTextures();
 		}
@@ -32,14 +34,16 @@ namespace Entities {
 		void Player::update(float dt) {
 			updateSprite(dt);
 			incrementAttackTime(dt);
+			speed = PLAYER_SPEED;
 
 			if (!isDefending) {
 				if (isMoving) {
+					setSlowness();
 					if (isFacingLeft) {
-						setVelocityX(PLAYER_SPEED);
+						setVelocityX(speed);
 					}
 					else {
-						setVelocityX(-PLAYER_SPEED);
+						setVelocityX(-speed);
 					}
 				}
 				else {
@@ -59,6 +63,7 @@ namespace Entities {
 			position.x += velocity.x * dt;
 			position.y += velocity.y * dt;
 			
+			isSlowed = false;
 			setCanJump(false);
 			pCollision->notifyCollision(this, dt);
 			body->setPosition(sf::Vector2f(position.x, position.y));
@@ -216,6 +221,15 @@ namespace Entities {
 			if (isPlayer1) {
 				points += pPoints;
 			}
+		}
+
+		void Player::setSlowness() {
+			if (isSlowed)
+				speed *= pBush->getSlowness();
+		}
+
+		void Player::setIsSlowed(bool isSl) {
+			isSlowed = isSl;
 		}
 	}
 

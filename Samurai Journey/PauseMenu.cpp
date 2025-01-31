@@ -45,8 +45,8 @@ namespace Menu {
 	}
 
 	void PauseMenu::execute(float dt) {
+		pGraphic->centerView(Math::CoordF(windowSize.x / 2.0f, windowSize.y / 2.0f));
 		menuController->setIsActive(true);
-
 		dt = pGraphic->getDeltaTime();
 		updateAnimation(dt);
 		render();

@@ -86,13 +86,22 @@ namespace Managers {
 					moveOnCollision(sender, otherEntity, intersection, dt);
 				}
 
-				if (otherEntity->getID() == ID::arrow) {
-					if (auto* arrow = dynamic_cast<Entities::Arrow*>(otherEntity)) {
+				else if (otherEntity->getID() == ID::bush) {
+					if (auto* player = dynamic_cast<Entities::Characters::Player*>(sender)) {
+						if (auto* bush = dynamic_cast<Entities::Obstacles::Bush*>(otherEntity)) {
+							player->setIsSlowed(true);
+						}
+					}
+				}
+
+				else if (otherEntity->getID() == ID::arrow) {
+					 if (auto* arrow = dynamic_cast<Entities::Arrow*>(otherEntity)) {
+						if (arrow) {
 						if (auto* player = dynamic_cast<Entities::Characters::Character*>(sender)) {
 							player->receiveDamage(arrow->getDamagePoints());
 						}
-						
-					}
+						}
+					 }
 				}
 				// OBSTÁCULOS QUE DEBUFFAM
 			}
@@ -117,6 +126,8 @@ namespace Managers {
 		}
 
 		void CollisionManager::moveOnCollision(Entities::MovingEntity* sender, Entities::Entity* otherEntity, Math::CoordF intersection, float dt) {
+			if (otherEntity->getID() == ID::bush || otherEntity->getID() == ID::fire) return;
+
 			Math::CoordF senderPos = sender->getPosition();
 			Math::CoordF otherPos = otherEntity->getPosition();
 

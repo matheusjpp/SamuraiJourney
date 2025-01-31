@@ -1,5 +1,5 @@
 #pragma once
-#include "Platform.h"
+#include "Fire.h"
 
 #define PLAYER_SIZE_X 64.0f
 #define PLAYER_SIZE_Y 42.0f
@@ -40,9 +40,12 @@ namespace Entities {
 			const bool isPlayer1;
 			bool isDefending;
 			bool isHealing;
+			bool isSlowed;
 			float healTimer;
 			int points;
 			Levels::Level* pLevel;
+			Obstacles::Bush* pBush;
+			float speed;
 
 		public:
 			Player(Math::CoordF pos = Math::CoordF(0, 0), bool isPlayer1 = true, Levels::Level* level= nullptr);
@@ -76,6 +79,10 @@ namespace Entities {
 			void checkEnemiesInRange();
 
 			void setPoints(int pPoints);
+
+			void setSlowness();
+
+			void setIsSlowed(bool isSl);
 		};
 
 	}

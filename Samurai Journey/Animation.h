@@ -24,7 +24,8 @@ namespace GraphicalElements {
 		hurt = 16,
 		hurt2 = 17,
 		death = 18,
-		shout = 19
+		shout = 19,
+		bush = 20
 	};
 
 	class Animation {

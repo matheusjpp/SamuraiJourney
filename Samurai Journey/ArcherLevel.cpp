@@ -1,12 +1,12 @@
-#include "BossLevel.h"
+#include "ArcherLevel.h"
 
 namespace Levels {
 
-	BossLevel::BossLevel(bool isMultiplayer, Managers::States::State_ID id, int playerPoints) :
-		Level(isMultiplayer, id) 
+	ArcherLevel::ArcherLevel(bool isMultiplayer, Managers::States::State_ID id) :
+		Level(isMultiplayer, id)
 	{
-		mapImage->setSize(sf::Vector2f(4320.0f, 1080.0f));
-		mapSprite->addNewAnimation(GraphicalElements::Animation_ID::map2, "level2_map.png", 1);
+		mapImage->setSize(sf::Vector2f(5480.0f, 1080.0f));
+		mapSprite->addNewAnimation(GraphicalElements::Animation_ID::map1, "level1_map.png", 1);
 		mapImage->setOrigin(0, 0);
 
 		background.addLayer("bg_layer1.png", 0.04f); // Camada mais distante
@@ -15,25 +15,21 @@ namespace Levels {
 
 		pCollision->setLists(staticEntities, movingEntities);
 
-		createMap("level2.tmj");
-
-		if (playerPoints > 0) {
-			cout << "pontos nao tao sendo atribuidos" << endl;
-			pPlayer1->setPoints(playerPoints);
-		}
+		createMap("level1.tmj");
 	}
 
-	BossLevel::~BossLevel() {
+	ArcherLevel::~ArcherLevel() {
 
 	}
 
-	void BossLevel::execute(float dt) {
-		updateCamera(960.0f);
+	void ArcherLevel::execute(float dt) {
+		updateCamera(970); //definir limit
+		cout << pPlayer1->getPosition().x << endl;
 		background.execute(dt);
-		mapSprite->update(GraphicalElements::Animation_ID::map2, false, (0, 0), dt);
+		mapSprite->update(GraphicalElements::Animation_ID::map1, false, (0, 0), dt);
 		movingEntities.execute(dt);
 		staticEntities.execute(dt);
-		
+
 		if (pPlayer1->getIsDying()) {
 			pPlayer1->changeObserverState(false);
 		}

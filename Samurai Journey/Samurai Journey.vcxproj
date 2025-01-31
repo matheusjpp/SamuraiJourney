@@ -135,9 +135,11 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Archer.h" />
+    <ClInclude Include="ArcherLevel.h" />
     <ClInclude Include="Arrow.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BossLevel.h" />
+    <ClInclude Include="Bush.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CollisionManager.h" />
@@ -148,6 +150,7 @@
     <ClInclude Include="EntitiesList.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EventsManager.h" />
+    <ClInclude Include="Fire.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GraphicManager.h" />
     <ClInclude Include="InputManager.h" />
@@ -175,9 +178,11 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Archer.cpp" />
+    <ClCompile Include="ArcherLevel.cpp" />
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BossLevel.cpp" />
+    <ClCompile Include="Bush.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
@@ -188,6 +193,7 @@
     <ClCompile Include="EntitiesList.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EventsManager.cpp" />
+    <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GraphicManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -214,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="level1.tmj" />
     <None Include="level2.tmj" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +230,8 @@
     <Image Include="archer_idle.png" />
     <Image Include="archer_walk.png" />
     <Image Include="arrow.png" />
+    <Image Include="fire.png" />
+    <Image Include="bush.png" />
     <Image Include="demon_attack.png" />
     <Image Include="demon_attack2.png" />
     <Image Include="demon_death.png" />
@@ -235,11 +244,13 @@
     <Image Include="demon_airattack.png" />
     <Image Include="demon_run2.png" />
     <Image Include="demon_shout.png" />
+    <Image Include="level1_map.png" />
     <Image Include="level2_map.png" />
     <Image Include="menubg.png" />
     <Image Include="p1_death.png" />
     <Image Include="p1_hurt.png" />
     <Image Include="pausebg.png" />
+    <Image Include="portal.png" />
     <Image Include="wolf_attack.png" />
     <Image Include="wolf_attack2.png" />
     <Image Include="p1_attack.png" />

@@ -10,12 +10,7 @@ namespace Levels {
 
 		~BossLevel();
 
-		void updateCamera();
-
-		void render();
-
 		void execute(float dt);
 	};
 	
-
 }

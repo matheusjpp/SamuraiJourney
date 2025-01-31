@@ -4,8 +4,8 @@ namespace Entities {
 
 	namespace Obstacles {
 
-		Platform::Platform(Math::CoordF pos, Math::CoordF size, bool isFake) : isFake(isFake), 
-			Obstacle(pos, size, ID::platform) {
+		Platform::Platform(Math::CoordF pos, Math::CoordF size, bool isFake, ID id) : isFake(isFake),
+			Obstacle(pos, size, id) {
 			//body->setOrigin(0, 0);
 		}
 

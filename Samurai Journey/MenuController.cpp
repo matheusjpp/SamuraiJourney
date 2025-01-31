@@ -25,8 +25,6 @@ namespace Managers {
 					switch (pMenu->getSelectedButtonID()) {
 						case Menu::Buttons::Button_ID::newgame: {
 							new Menu::MainMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::newgame_menu);
-							//new Levels::BossLevel();
-							//States::Levels::TimeLevel* t = new States::Levels::TimeLevel(false);
 							break;
 						}
 						case Menu::Buttons::Button_ID::exit: {
@@ -82,7 +80,7 @@ namespace Managers {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
 						case Menu::Buttons::Button_ID::archersingle: {
-							//archer (false)
+							new Levels::ArcherLevel(false, States::State_ID::bosslevel_singleplayer);
 							break;
 						}
 						case Menu::Buttons::Button_ID::bosssingle: {
@@ -111,7 +109,7 @@ namespace Managers {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
 						case Menu::Buttons::Button_ID::archermulti: {
-							//archer (true)
+							new Levels::ArcherLevel(true, States::State_ID::bosslevel_multiplayer);
 							break;
 						}
 						case Menu::Buttons::Button_ID::bossmulti: {
@@ -144,7 +142,8 @@ namespace Managers {
 							break;
 						}
 						case Menu::Buttons::Button_ID::pauseexit: {
-							pStateM->popState(4);
+							while (pStateM->getCurrentState()->getID() != States::State_ID::main_menu)
+								pStateM->popState();
 							break;
 						}
 						// case load

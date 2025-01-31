@@ -129,6 +129,15 @@
     <ClInclude Include="PauseMenu.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="Bush.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcherLevel.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Coord.cpp">
@@ -245,10 +254,22 @@
     <ClCompile Include="PauseMenu.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="Bush.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcherLevel.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
     <None Include="level2.tmj">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
+    <None Include="level1.tmj">
       <Filter>Arquivos de Recurso</Filter>
     </None>
   </ItemGroup>
@@ -389,6 +410,18 @@
       <Filter>Arquivos de Recurso</Filter>
     </Image>
     <Image Include="wolf_hurt.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="portal.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="fire.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="bush.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="level1_map.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
   </ItemGroup>

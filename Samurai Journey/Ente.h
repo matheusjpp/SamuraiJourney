@@ -8,7 +8,9 @@ enum ID {
 	archer,
 	demonsamurai,
 	arrow,
-	platform
+	platform,
+	bush,
+	fire
 };
 
 class Ente {

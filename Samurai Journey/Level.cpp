@@ -24,7 +24,18 @@ namespace Levels {
 	Level::~Level() {
         if (mapImage) delete mapImage;
         if (mapSprite) delete mapSprite;
-        // clear nas listas
+       
+        for (auto itS = (&staticEntities)->begin(); itS != (&staticEntities)->end(); ++itS) {
+            if (*itS) {
+                (&staticEntities)->removeEntity(*itS);
+                //(*itS) = nullptr;
+            }
+        }
+
+        for (auto itM = (&movingEntities)->begin(); itM != (&movingEntities)->end(); ++itM) {
+            (&movingEntities)->removeEntity(*itM);
+            //(*itM) = nullptr;
+        }
 	}
 
 	void Level::createMap(const char* filePath) {
@@ -114,12 +125,21 @@ namespace Levels {
                     }
 
                     case 7: {
-                        // fire to do
+                        Entities::Obstacles::Fire* fire = new Entities::Obstacles::Fire(Math::CoordF(posx, posy));
+                        if (fire) {
+                            staticEntities.addEntity(fire);
+                        }
                         break;
                     }
 
                     case 8: {
-                        // fire rand to do
+                        int aux = rand() % 2;
+                        if (aux == 1) {
+                            Entities::Obstacles::Fire* fire = new Entities::Obstacles::Fire(Math::CoordF(posx, posy));
+                            if (fire) {
+                                staticEntities.addEntity(fire);
+                            }
+                        }
                         break;
                     }
 
@@ -142,7 +162,7 @@ namespace Levels {
                     }
 
                     case 11: {
-                        Entities::Characters::DemonSamurai * demon = new Entities::Characters::DemonSamurai(Math::CoordF(posx, posy));
+                        Entities::Characters::DemonSamurai* demon = new Entities::Characters::DemonSamurai(Math::CoordF(posx, posy));
                         if (demon) {
                             movingEntities.addEntity(demon);
                         }
@@ -150,12 +170,28 @@ namespace Levels {
                     }
 
                     case 12: {
-                        // bush to do
+                        Entities::Obstacles::Bush* bush = new Entities::Obstacles::Bush(Math::CoordF(posx, posy - 15));
+                        if (bush) {
+                            staticEntities.addEntity(bush);
+                        }
                         break;
                     }
 
                     case 13: {
-                        // bush or demon samurai
+                        int aux = rand() % 2;
+
+                        if (aux == 1) {
+                            Entities::Characters::DemonSamurai* demon = new Entities::Characters::DemonSamurai(Math::CoordF(posx, posy - 250));
+                            if (demon) {
+                                movingEntities.addEntity(demon);
+                            }
+                        }
+                        else {
+                            Entities::Obstacles::Bush* bush = new Entities::Obstacles::Bush(Math::CoordF(posx + 20, posy - 5));
+                            if (bush) {
+                                staticEntities.addEntity(bush);
+                            }
+                        }
                         break;
                     }
                 }
@@ -175,6 +211,57 @@ namespace Levels {
             }
         }
 	}
+
+    void Level::updateCamera(float cameraLimit) {
+        if (pPlayer1->getIsActive()) {
+            if (pPlayer1->getPosition().x >= cameraLimit && pPlayer1->getPosition().x <= mapImage->getSize().x - cameraLimit) {
+                pPlayer1->centerCamera();
+            }
+            else if (pPlayer1->getPosition().x < mapImage->getSize().x / 2.0f) {
+                pGraphic->centerView(Math::CoordF(cameraLimit, pGraphic->getWindowSize().y / 2.0f));
+            }
+
+            else {
+                pGraphic->centerView(Math::CoordF(mapImage->getSize().x - cameraLimit, pGraphic->getWindowSize().y / 2.0f));
+            }
+        }
+
+        else if (isMultiplayer && pPlayer2->getIsActive()) {
+            if (pPlayer2->getPosition().x >= cameraLimit && pPlayer2->getPosition().x <= mapImage->getSize().x - cameraLimit) {
+                pPlayer2->centerCamera();
+            }
+            else if (pPlayer2->getPosition().x < mapImage->getSize().x / 2.0f) {
+                pGraphic->centerView(Math::CoordF(cameraLimit, pGraphic->getWindowSize().y / 2.0f));
+            }
+            else {
+                pGraphic->centerView(Math::CoordF(mapImage->getSize().x - cameraLimit, pGraphic->getWindowSize().y / 2.0f));
+            }
+        }
+    }
+
+    void Level::render() {
+        pGraphic->render(mapImage);
+
+        std::string hpStr = std::to_string(static_cast<int>(pPlayer1->getHP()));
+        p1life->setText("Player 1's HP: " + hpStr);
+        p1life->setTextPos(Math::CoordF(pGraphic->getCenterView().x - 930, 15));
+        sf::Text shadow = p1life->getText();
+        shadow.setFillColor(sf::Color(255, 255, 255, 80));
+        shadow.move(1.f, 1.f);
+        pGraphic->render(shadow);
+        pGraphic->render(p1life->getText());
+
+        if (isMultiplayer) {
+            std::string hpStr2 = std::to_string(static_cast<int>(pPlayer2->getHP()));
+            p2life->setText("Player 2's HP: " + hpStr2);
+            p2life->setTextPos(Math::CoordF(pGraphic->getCenterView().x - 930, 65));
+            sf::Text shadow2 = p2life->getText();
+            shadow2.setFillColor(sf::Color(255, 255, 255, 80));
+            shadow2.move(1.f, 1.f);
+            pGraphic->render(shadow2);
+            pGraphic->render(p2life->getText());
+        }
+    }
 
     List::EntitiesList* Level::getEntitiesList() {
         return &movingEntities;
