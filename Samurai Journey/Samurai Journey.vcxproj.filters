@@ -361,6 +361,36 @@
     <Image Include="pausebg.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
+    <Image Include="p1_hurt.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="p1_death.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="archer_death.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="archer_hurt.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="demon_death.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="demon_hurt.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="demon_hurt2.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="demon_shout.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="wolf_death.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="wolf_hurt.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="alagard.ttf">

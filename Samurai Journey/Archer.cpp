@@ -24,22 +24,22 @@ namespace Entities {
 			incrementAttackTime(dt);
 			isMoving = false;
 
-			float playerDistance = fabs(position.x - pPlayer->getPosition().x);
+			float playerDistance = fabs(position.x - pPlayer1->getPosition().x);
 
-			if (position.x > pPlayer->getPosition().x) isFacingLeft = false;
+			if (position.x > pPlayer1->getPosition().x) isFacingLeft = false;
 			else isFacingLeft = true;
 
 			if (isAttacking) {
 				movingDelayTimer += dt;
 				if (movingDelayTimer >= MOVING_DELAY_TIME) {
 					if (playerDistance <= ARCHER_VISION) {
-						if (position.x > pPlayer->getPosition().x) {
+						if (position.x > pPlayer1->getPosition().x) {
 							position.x -= PLAYER_SPEED * dt / 3.0f;
 							isFacingLeft = false;
 							isMoving = true;
 						}
 
-						if (position.x < pPlayer->getPosition().x) {
+						if (position.x < pPlayer1->getPosition().x) {
 							position.x += PLAYER_SPEED * dt / 3.0f;
 							isFacingLeft = true;
 							isMoving = true;
@@ -77,7 +77,7 @@ namespace Entities {
 
 			if (isAttacking) {
 				arrowDelayTimer += pGraphic->getDeltaTime();
-				if (arrowDelayTimer >= ARROW_DELAY_TIME) {
+				if (arrowDelayTimer >= ARCHER_DELAY_TIME) {
 					float positionx;
 					if (isFacingLeft) {
 						positionx = getPosition().x - getSize().x / 2 + 95;
@@ -101,13 +101,28 @@ namespace Entities {
 			sprite->addNewAnimation(GraphicalElements::Animation_ID::idle, "archer_idle.png", 8);
 			sprite->addNewAnimation(GraphicalElements::Animation_ID::walk, "archer_walk.png", 10);
 			sprite->addNewAnimation(GraphicalElements::Animation_ID::attack, "archer_attack.png", 21);
+			sprite->addNewAnimation(GraphicalElements::Animation_ID::hurt, "archer_hurt.png", 4);
+			sprite->addNewAnimation(GraphicalElements::Animation_ID::attack, "archer_death.png", 11);
 
 			body->setOrigin(size.x / 2 + 33, size.y / 2 + 65);
 		}
 
 		void Archer::updateSprite(float dt) {
-			if (isAttacking) {
+			if (isDying) {
+				deathTimer += dt;
+				sprite->update(GraphicalElements::Animation_ID::death, !isFacingLeft, position, dt);
+				if (deathTimer >= ARCHER_DEATH_TIME) isActive = false;
+			}
+
+
+			else if (isAttacking) {
 				sprite->update(GraphicalElements::Animation_ID::attack, !isFacingLeft, position, dt);
+			}
+
+			else if (isHurting) {
+				hurtingTimer += dt;
+				sprite->update(GraphicalElements::Animation_ID::hurt, !isFacingLeft, position, dt);
+				if (hurtingTimer >= ARCHER_HURT_TIME) { isHurting = false; hurtingTimer = 0; }
 			}
 
 			else if (isMoving) {

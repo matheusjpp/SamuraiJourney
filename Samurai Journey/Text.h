@@ -41,6 +41,10 @@ namespace Menu {
 		void setString(const std::string& info);
 
 		void setFontSize(unsigned int fontSize);
+
+		void moveText(float speed);
+
+		void setText(const std::string& newText);
 	};
 
 }

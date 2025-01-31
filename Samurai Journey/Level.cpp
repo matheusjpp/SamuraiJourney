@@ -4,13 +4,21 @@ namespace Levels {
 
     Managers::GraphicManager* Level::pGraphic = Managers::GraphicManager::getInstance();
 
-	Level::Level(bool isMultiplayer, Managers::States::State_ID id) : pPlayer1(nullptr), isMultiplayer(isMultiplayer), Managers::States::State(id) {
+	Level::Level(bool isMultiplayer, Managers::States::State_ID id) : pPlayer1(nullptr), pPlayer2(nullptr),
+        p1life(nullptr), p2life(nullptr), isMultiplayer(isMultiplayer), Managers::States::State(id)
+    {
         mapImage = new sf::RectangleShape();
         mapSprite = new GraphicalElements::Animation(mapImage, Math::CoordF(1, 1));
 
         pCollision = Managers::Collisions::CollisionManager::getInstance();
         pCollision->setLists(movingEntities, staticEntities);
         
+        p1life = new Menu::Text("Player 1's HP: ", pGraphic->loadFont("alagard.ttf"), 30);
+        p1life->setTextColor(sf::Color(31, 28, 43));
+        if (isMultiplayer) {
+            p2life = new Menu::Text("Player 2's HP: ", pGraphic->loadFont("alagard.ttf"), 30);
+            p2life->setTextColor(sf::Color(31, 28, 43));
+        }
     }
 
 	Level::~Level() {
@@ -60,7 +68,7 @@ namespace Levels {
                     }
 
                     case 2: {
-                        pPlayer1 = new Entities::Characters::Player(Math::CoordF(posx, posy), true);
+                        pPlayer1 = new Entities::Characters::Player(Math::CoordF(posx, posy), true, this);
                         if (pPlayer1) {
                             movingEntities.addEntity(pPlayer1);
                         }
@@ -117,9 +125,9 @@ namespace Levels {
 
                     case 9: {
                         if (isMultiplayer) {
-                            Entities::Characters::Player* p2 = new Entities::Characters::Player(Math::CoordF(posx, posy), false);
-                            if (p2) {
-                                movingEntities.addEntity(p2);
+                            pPlayer2 = new Entities::Characters::Player(Math::CoordF(posx, posy), false, this);
+                            if (pPlayer2) {
+                                movingEntities.addEntity(pPlayer2);
                             }
                         }
                         break;
@@ -160,14 +168,19 @@ namespace Levels {
             if (*itM) {
                 if ((*itM)->getID() == ID::wolf || (*itM)->getID() == ID::archer || (*itM)->getID() == ID::demonsamurai ) {
                     if (auto* enemy = dynamic_cast<Entities::Characters::Enemy*>(*itM)) {
-                        enemy->setPlayer(pPlayer1);
-                        //fazer pra p2
+                        enemy->setPlayers(pPlayer1, pPlayer2);
                     }
                 }
 
             }
         }
-
 	}
 
+    List::EntitiesList* Level::getEntitiesList() {
+        return &movingEntities;
+    }
+
+    void Level::setPlayerPoints(int points) {
+        pPlayer1->setPoints(points);
+    }
 }

@@ -1,5 +1,6 @@
 #include "CollisionManager.h"
 #include "Player.h"
+#include "Arrow.h"
 
 namespace Managers {
 	
@@ -55,16 +56,20 @@ namespace Managers {
 			for (auto itM = movingEntities->begin(); itM != movingEntities->end(); ++itM) {
 				if (*itM != sender) {
 					otherEntity = (*itM);
+					if ((*itM)->getIsActive()) {
+						auto* enemy = dynamic_cast<Entities::Characters::Character*>(otherEntity);
+						if (!enemy || !(enemy->getIsDying())) {
+							if (sender && otherEntity) {
+								centerDistance.x = sender->getPosition().x - otherEntity->getPosition().x;
+								centerDistance.y = sender->getPosition().y - otherEntity->getPosition().y;
 
-					if (sender && otherEntity) {
-						centerDistance.x = sender->getPosition().x - otherEntity->getPosition().x;
-						centerDistance.y = sender->getPosition().y - otherEntity->getPosition().y;
+								intersect.x = fabs(centerDistance.x) - (sender->getSize().x / 2.0f + otherEntity->getSize().x / 2.0f);
+								intersect.y = fabs(centerDistance.y) - (sender->getSize().y / 2.0f + otherEntity->getSize().y / 2.0f);
 
-						intersect.x = fabs(centerDistance.x) - (sender->getSize().x / 2.0f + otherEntity->getSize().x / 2.0f);
-						intersect.y = fabs(centerDistance.y) - (sender->getSize().y / 2.0f + otherEntity->getSize().y / 2.0f);
-
-						if (intersect.x < 0.0f && intersect.y < 0.0f) {
-							manageCollision(sender, otherEntity, intersect, dt);
+								if (intersect.x < 0.0f && intersect.y < 0.0f) {
+									manageCollision(sender, otherEntity, intersect, dt);
+								}
+							}
 						}
 					}
 				}
@@ -74,40 +79,36 @@ namespace Managers {
 		void CollisionManager::manageCollision(Entities::MovingEntity* sender, Entities::Entity* otherEntity, Math::CoordF intersection, float dt) {
 			/* Collision notified by a player */
 			if (sender->getID() == ID::player) {
-				if (otherEntity->getID() == ID::wolf) { // Collision with meelee enemy 
-					//take damage (dependendo de como for feito o ataque do inimigo)
+				if (otherEntity->getID() == ID::platform ||
+					otherEntity->getID() == ID::wolf ||
+					otherEntity->getID() == ID::archer ||
+					otherEntity->getID() == ID::demonsamurai) {
 					moveOnCollision(sender, otherEntity, intersection, dt);
 				}
 
-				if (otherEntity->getID() == ID::demonsamurai) { // Collision with meelee enemy 
-					//take damage (dependendo de como for feito o ataque do inimigo)
-					moveOnCollision(sender, otherEntity, intersection, dt);
+				if (otherEntity->getID() == ID::arrow) {
+					if (auto* arrow = dynamic_cast<Entities::Arrow*>(otherEntity)) {
+						if (auto* player = dynamic_cast<Entities::Characters::Character*>(sender)) {
+							player->receiveDamage(arrow->getDamagePoints());
+						}
+						
+					}
 				}
-
-				if (otherEntity->getID() == ID::archer) { // Collision with meelee enemy 
-					//take damage (dependendo de como for feito o ataque do inimigo)
-					moveOnCollision(sender, otherEntity, intersection, dt);
-				}
-
-				if (otherEntity->getID() == ID::platform) { // Collision with platform
-					moveOnCollision(sender, otherEntity, intersection, dt);
-				}
-
-				// else if (otherEntity->getID() == ID::projectile) so vai ter take damage e desativacao do projetil
+				// OBSTÁCULOS QUE DEBUFFAM
 			}
 
-			/* Collision notified by an enemy */ //tem que fazer de cada um especificamente pq o id é sobrescrito nas classes especializadas, mas sempre vai ser isso
-			else if (sender->getID() == ID::wolf) {
+			/* Collision notified by an enemy */ 
+			else if (sender->getID() == ID::wolf || sender->getID() == ID::archer || sender->getID() == ID::demonsamurai) {
 				moveOnCollision(sender, otherEntity, intersection, dt);
 			}
-
+			/*
 			else if (sender->getID() == ID::demonsamurai) {
 				moveOnCollision(sender, otherEntity, intersection, dt);
 			}
 
 			else if (sender->getID() == ID::archer) {
 				moveOnCollision(sender, otherEntity, intersection, dt);
-			}
+			}*/
 
 			else if (sender->getID() == ID::arrow) {
 				if (otherEntity->getID() == ID::player || otherEntity->getID() == ID::platform)

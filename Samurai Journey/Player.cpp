@@ -1,14 +1,16 @@
 #include "Player.h"
 #include "PlayerController.h"
+#include "Level.h"
 
 namespace Entities {
 
 	namespace Characters {
 
-		Player::Player(Math::CoordF pos, bool isPlayer1) : isDefending(false), isHealing(false), healCooldown(0),
+		Player::Player(Math::CoordF pos, bool isPlayer1, Levels::Level* level) : isDefending(false), isHealing(false), healTimer(0), points(0), pLevel(level),
 			Character(pos, Math::CoordF(PLAYER_SIZE_X, PLAYER_SIZE_Y), ID::player), isPlayer1(isPlayer1) {
 			
 			setHP(PLAYER_HP);
+			damagePoints = PLAYER_ATTACK_DAMAGE;
 			attackCooldown = PLAYER_ATTACK_CD;
 			attackingTime = PLAYER_ATTACK_TIME;
 
@@ -17,7 +19,10 @@ namespace Entities {
 		}
 
 		Player::~Player() {
-
+			if (pControl) {
+				pControl->setIsActive(false);
+				pControl = nullptr;
+			}
 		}
 
 		bool Player::getIsPlayer1() const {
@@ -25,6 +30,7 @@ namespace Entities {
 		}
 
 		void Player::update(float dt) {
+			updateSprite(dt);
 			incrementAttackTime(dt);
 
 			if (!isDefending) {
@@ -41,20 +47,20 @@ namespace Entities {
 				}
 			}
 
-			if (isHealing) {
-				healCooldown += dt;
-				if (healCooldown >= 2.0f) {
-					isHealing = false;
+			if (isAttacking) {
+				impactTimer += dt;
+				if (impactTimer >= PLAYER_IMPACT_TIME) {
+					checkEnemiesInRange();
+					impactTimer = 0;
 				}
 			}
 
 			velocity.y += GRAVITY * dt;
 			position.x += velocity.x * dt;
 			position.y += velocity.y * dt;
-
+			
 			setCanJump(false);
 			pCollision->notifyCollision(this, dt);
-			updateSprite(dt);
 			body->setPosition(sf::Vector2f(position.x, position.y));
 		}
 
@@ -75,6 +81,8 @@ namespace Entities {
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::fall, "p1_fall.png", 3);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::defend, "p1_defend.png", 6);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::heal, "p1_heal.png", 15);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::hurt, "p1_hurt.png", 4);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::death, "p1_death.png", 9);
 			
 			}
 
@@ -87,25 +95,46 @@ namespace Entities {
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::fall, "p2_fall.png", 3);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::defend, "p2_defend.png", 6);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::heal, "p2_heal.png", 15);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::hurt, "p2_hurt.png", 4);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::death, "p2_death.png", 9);
 			}
 
 			body->setOrigin(size.x / 2 + 15, size.y / 2 + 52);
+			
 		}
 
 		void Player::updateSprite(float dt) {
-			if (isDefending) {
+			if (isDying) {
+				deathTimer += dt;
+				sprite->update(GraphicalElements::Animation_ID::death, !isFacingLeft, position, dt);
+				if (deathTimer >= PLAYER_DEATH_TIME) isActive = false;
+			}
+
+			else if (isAttacking) {
+				if (!canJump)
+					sprite->update(GraphicalElements::Animation_ID::airattack, !isFacingLeft, position, dt);
+				else
+					sprite->update(GraphicalElements::Animation_ID::attack, !isFacingLeft, position, dt);
+			}
+
+			else if (isHurting) {
+				hurtingTimer += dt;
+				sprite->update(GraphicalElements::Animation_ID::hurt, !isFacingLeft, position, dt);
+				if (hurtingTimer >= PLAYER_HURT_TIME) { isHurting = false; hurtingTimer = 0; }
+			}
+
+			else if (isDefending) {
 				sprite->update(GraphicalElements::Animation_ID::defend, !isFacingLeft, position, dt);
 			}
 
 			else if (isHealing) {
+				healTimer += dt;
 				sprite->update(GraphicalElements::Animation_ID::heal, !isFacingLeft, position, dt);
+				if (healTimer >= PLAYER_HEAL_TIME) { isHealing = false; }
 			}
 
-			else if (isAttacking) {
-				if (!canJump) 
-					sprite->update(GraphicalElements::Animation_ID::airattack, !isFacingLeft, position, dt);
-				else 
-					sprite->update(GraphicalElements::Animation_ID::attack, !isFacingLeft, position, dt);
+			else if (isHurting) {
+				sprite->update(GraphicalElements::Animation_ID::hurt, !isFacingLeft, position, dt);
 			}
 
 			else if (!canJump) {
@@ -149,29 +178,44 @@ namespace Entities {
 		}
 
 		void Player::centerCamera() {
-			if (isPlayer1) {
-				pGraphic->centerView(Math::CoordF(position.x, pGraphic->getWindowSize().y / 2));
-				/*if (pPlayer2) {
-					if (fabs(pPlayer2->getPosition().x - position.x) > 960) {
-						pPlayer2->setPosition(Math::CoordF((position.x + 50.0f), position.y));
-					}
-				}
-			}
-			else {
-				if (pPlayer2) {
-					if (!pPlayer2->getIsActive()) {
-						pGraphic->centerView(Math::CoordF(position.x, pGraphic->getWindowSize().y / 2));
-					}
-				}
-				else {
-					pGraphic->centerView(Math::CoordF(position.x, pGraphic->getWindowSize().y / 2));
-				}
-			}*/
-			}
+			pGraphic->centerView(Math::CoordF(position.x, pGraphic->getWindowSize().y / 2));	
 		}
 
 		void Player::changeObserverState(bool active) {
 			pControl->setIsActive(active);
+		}
+
+		void Player::checkEnemiesInRange() {
+			List::EntitiesList* list = pLevel->getEntitiesList();
+			
+			for (auto it = list->begin(); it != list->end(); ++it) {
+				if (auto* enemy = dynamic_cast<Characters::Enemy*>(*it)) {
+					if (enemy->getIsActive()) {
+						float playerX = position.x;
+						float playerY = position.y - PLAYER_ATTACK_RANGEHEIGHT;
+						float enemyX = enemy->getPosition().x;
+						float enemyY = enemy->getPosition().y;
+
+						bool inRangeY = fabs(playerY - enemyY) <= PLAYER_ATTACK_RANGEHEIGHT;
+
+						if (!isFacingLeft) {
+							if ((playerX - enemyX <= PLAYER_ATTACK_RANGE) && (playerX > enemyX) && inRangeY)
+								enemy->receiveDamage(getDamagePoints());
+						}
+						else
+							if ((enemyX - playerX <= PLAYER_ATTACK_RANGE) && (enemyX > playerX) && inRangeY)
+								enemy->receiveDamage(getDamagePoints());
+					}
+					else
+						points += 100;
+				}
+			}
+		}
+
+		void Player::setPoints(int pPoints) {
+			if (isPlayer1) {
+				points += pPoints;
+			}
 		}
 	}
 

@@ -5,7 +5,7 @@ namespace Entities {
 
 	Managers::Collisions::CollisionManager* MovingEntity::pCollision = Managers::Collisions::CollisionManager::getInstance();
 
-	MovingEntity::MovingEntity(Math::CoordF pos, Math::CoordF size, ID id) : velocity(0), isMoving(false), canMove(true), isFacingLeft(false),
+	MovingEntity::MovingEntity(Math::CoordF pos, Math::CoordF size, ID id) : velocity(0), isMoving(false), canMove(true), isFacingLeft(false), damagePoints(0),
 		Entity (pos, size, id) {
 		
 	}
@@ -50,6 +50,10 @@ namespace Entities {
 
 	void MovingEntity::stopMoving() {
 		isMoving = false;
+	}
+
+	const float MovingEntity::getDamagePoints() const {
+		return damagePoints;
 	}
 
 }

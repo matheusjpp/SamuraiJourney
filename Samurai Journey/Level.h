@@ -20,8 +20,11 @@ namespace Levels {
 		List::EntitiesList staticEntities;
 
 		Entities::Characters::Player* pPlayer1;
-		//p2
+		Entities::Characters::Player* pPlayer2;
 		bool isMultiplayer;
+
+		Menu::Text* p1life;
+		Menu::Text* p2life;
 
 	public: 
 		Level(bool isMultiplayer = false, Managers::States::State_ID id = Managers::States::State_ID::empty);
@@ -29,6 +32,12 @@ namespace Levels {
 		~Level();
 
 		void createMap(const char* filePath);
+
+		List::EntitiesList* getEntitiesList();
+
+		void setPlayerPoints(int points);
+
+		virtual void updateCamera() = 0;
 
 		virtual void render() = 0;
 

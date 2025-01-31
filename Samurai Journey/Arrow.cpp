@@ -2,10 +2,10 @@
 
 namespace Entities {
 
-	Arrow::Arrow(Math::CoordF pos, bool facingLeft, ID id) : damagePoints(ARROW_MAXDAMAGE), initialX(pos.x), distanceTraveled(0),
+	Arrow::Arrow(Math::CoordF pos, bool facingLeft, ID id) : initialX(pos.x), distanceTraveled(0),
 		MovingEntity(pos, Math::CoordF(ARROW_SIZE_X, ARROW_SIZE_Y), id) {
 		isFacingLeft = facingLeft;
-
+		damagePoints = ARROW_MAXDAMAGE;
 		setTextures();
 	}
 
@@ -13,7 +13,7 @@ namespace Entities {
 		
 	}
 
-	float Arrow::getDamagePoints() const {
+	const float Arrow::getDamagePoints() const {
 		return damagePoints;
 	}
 

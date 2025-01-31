@@ -11,11 +11,16 @@ namespace Entities {
 		protected:
 			float hp;
 			bool canJump;
+			bool isDying;
+			bool isHurting;
 			bool isAttacking;
 			float attackCooldown;
 			float attackingTime;
 			float cooldownTimer;
 			float attackTimer;
+			float deathTimer;
+			float hurtingTimer;
+			float impactTimer;
 
 		public:
 			Character(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::empty, float hp = 0);
@@ -25,6 +30,10 @@ namespace Entities {
 			float getHP() const;
 
 			void setHP(float HP);
+
+			const bool getIsDying() const;
+
+			void receiveDamage(float damage);
 
 			void jump();
 

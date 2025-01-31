@@ -4,7 +4,7 @@ namespace Entities {
 
 	namespace Characters {
 
-		Wolf::Wolf(Math::CoordF pos, ID id) : isFirstAttack(true), firstAttackTimer(0), scaleFactor(1.2),
+		Wolf::Wolf(Math::CoordF pos, ID id) : isFirstAttack(true), firstAttackTimer(0),
 			Enemy(pos, Math::CoordF(WOLF_SIZE_X, WOLF_SIZE_Y), id) {
 			
 			setHP(WOLF_HP);
@@ -19,48 +19,52 @@ namespace Entities {
 		}
 
 		void Wolf::update(float dt) {
+			updateSprite(dt);
 			incrementAttackTime(dt);
 			isMoving = false;
 			
-			float playerDistance = fabs(position.x - pPlayer->getPosition().x);
+			Player* nearestPlayer = getNearestPlayer();
 
-			if (playerDistance <= WOLF_VISION) {
-				if (isFirstAttack) {
-					if (position.x > pPlayer->getPosition().x) {
-						position.x -= WOLF_SPEED * dt / 2.5f;
-						isFacingLeft = false;
-						isMoving = true;
+			if (nearestPlayer) {
+				float playerDistance = fabs(position.x - nearestPlayer->getPosition().x);
+				if (playerDistance <= WOLF_VISION) {
+					if (isFirstAttack) {
+						if (position.x > nearestPlayer->getPosition().x) {
+							position.x -= WOLF_SPEED * dt / 2.5f;
+							isFacingLeft = false;
+							isMoving = true;
+						}
+
+						if (position.x < nearestPlayer->getPosition().x) {
+							position.x += WOLF_SPEED * dt / 2.5f;
+							isFacingLeft = true;
+							isMoving = true;
+						}
 					}
+					else {
+						if (position.x > nearestPlayer->getPosition().x) {
+							position.x -= WOLF_SPEED * 0.8 * dt / 3.0f;
+							isFacingLeft = false;
+							isMoving = true;
+						}
 
-					if (position.x < pPlayer->getPosition().x) {
-						position.x += WOLF_SPEED * dt / 2.5f;
-						isFacingLeft = true;
-						isMoving = true;
+						if (position.x < nearestPlayer->getPosition().x) {
+							position.x += WOLF_SPEED * 0.8 * dt / 3.0f;
+							isFacingLeft = true;
+							isMoving = true;
+						}
 					}
 				}
-				else {
-					if (position.x > pPlayer->getPosition().x) {
-						position.x -= WOLF_SPEED * 0.8 * dt / 3.0f;
-						isFacingLeft = false;
-						isMoving = true;
-					}
 
-					if (position.x < pPlayer->getPosition().x) {
-						position.x += WOLF_SPEED * 0.8 * dt / 3.0f;
-						isFacingLeft = true;
-						isMoving = true;
-					}
+				if (isFirstAttack && playerDistance <= WOLF_ATTACK2_DISTANCE && fabs(pPlayer1->getPosition().y - position.y) <= fabs(pPlayer1->getSize().y - size.y)) {
+					isMoving = false;
+					attack();
+				} 
+
+				else if (playerDistance <= WOLF_ATTACK_DISTANCE && fabs(pPlayer1->getPosition().y - position.y) <= fabs(pPlayer1->getSize().y - size.y)) {
+					isMoving = false;
+					attack();
 				}
-			}
-
-			if (isFirstAttack && playerDistance <= WOLF_ATTACK2_DISTANCE) {
-				isMoving = false;
-				attack();
-			} 
-
-			else if (playerDistance <= WOLF_ATTACK_DISTANCE) {
-				isMoving = false;
-				attack();
 			}
 
 			velocity.y += GRAVITY * dt;
@@ -69,7 +73,7 @@ namespace Entities {
 
 			setCanJump(false);
 			pCollision->notifyCollision(this, dt);
-			updateSprite(dt);
+			
 			body->setPosition(sf::Vector2f(position.x, position.y));
 		}
 
@@ -92,6 +96,12 @@ namespace Entities {
 			}
 		}
 
+		const float Wolf::getDamagePoints() const {
+			if (isFirstAttack)
+				return WOLF_ATTACK2_DAMAGE;
+			return WOLF_ATTACK_DAMAGE;
+		}
+
 		void Wolf::setTextures() {
 			sprite = new GraphicalElements::Animation(body, Math::CoordF(4, 2));
 
@@ -100,29 +110,55 @@ namespace Entities {
 			sprite->addNewAnimation(GraphicalElements::Animation_ID::jump, "wolf_jump.png", 3);
 			sprite->addNewAnimation(GraphicalElements::Animation_ID::attack, "wolf_attack.png", 5);
 			sprite->addNewAnimation(GraphicalElements::Animation_ID::attack2, "wolf_attack2.png", 12);
+			sprite->addNewAnimation(GraphicalElements::Animation_ID::hurt, "wolf_hurt.png", 6);
+			sprite->addNewAnimation(GraphicalElements::Animation_ID::death, "wolf_death.png", 8);
 
 			body->setSize(sf::Vector2f(64.0f, 42.0f));
 			body->setOrigin(size.x / 2, size.y / 2 + 9);
 		}
 
 		void Wolf::updateSprite(float dt) {
+			const float scaleFactor = 1.2;
 			float sizex = getSize().x;
 			float sizey = getSize().y;
 
-			if (isAttacking) {
+			if (isDying) {
 				body->setSize(sf::Vector2f(scaleFactor * sizex, scaleFactor * sizey));
 				body->setOrigin(size.x / 2 + 5, size.y / 2 + 14);
-				if (isFirstAttack) {
-					firstAttackTimer += dt;
-					sprite->update(GraphicalElements::Animation_ID::attack2, isFacingLeft, position, dt);
-					if (firstAttackTimer >= WOLF_ATTACK2_TIME) {
-						isFirstAttack = false;
+				deathTimer += dt;
+				sprite->update(GraphicalElements::Animation_ID::death, isFacingLeft, position, dt);
+				if (deathTimer >= WOLF_DEATH_TIME) isActive = false;
+			}
+
+			else if (isAttacking) {
+				body->setSize(sf::Vector2f(scaleFactor * sizex, scaleFactor * sizey));
+				body->setOrigin(size.x / 2 + 5, size.y / 2 + 14);
+				attackTimer += dt;
+				if (isAttacking) {
+					body->setSize(sf::Vector2f(scaleFactor * sizex, scaleFactor * sizey));
+					body->setOrigin(size.x / 2 + 5, size.y / 2 + 14);
+					if (isFirstAttack) {
+						firstAttackTimer += dt;
+						sprite->update(GraphicalElements::Animation_ID::attack2, isFacingLeft, position, dt);
+						if (firstAttackTimer >= WOLF_ATTACK2_TIME) {
+							isFirstAttack = false;
+						}
+					}
+					else {
+						sprite->update(GraphicalElements::Animation_ID::attack, isFacingLeft, position, dt);
 					}
 				}
-				else {
-					sprite->update(GraphicalElements::Animation_ID::attack, isFacingLeft, position, dt);
-				}
 			}
+
+			else if (isHurting) {
+				body->setSize(sf::Vector2f(scaleFactor * sizex, scaleFactor * sizey));
+				body->setOrigin(size.x / 2 + 5, size.y / 2 + 14);
+				hurtingTimer += dt;
+				sprite->update(GraphicalElements::Animation_ID::hurt, isFacingLeft, position, dt);
+				if (hurtingTimer >= WOLF_HURT_TIME) { isHurting = false; hurtingTimer = 0; }
+			}
+
+			
 
 			else if (!canJump) {
 				body->setSize(sf::Vector2f(scaleFactor * sizex, scaleFactor * sizey));

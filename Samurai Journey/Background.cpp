@@ -7,7 +7,7 @@ namespace GraphicalElements {
 		Managers::GraphicManager* Background::pGraphic = Managers::GraphicManager::getInstance();
 
 		Background::Background() :
-			prevCameraPos(pGraphic->getCenterView()),layers() {
+			prevCameraPos(0.0f, 0.0f), layers() {
 	
 		}
 
@@ -40,7 +40,7 @@ namespace GraphicalElements {
 		}
 
 		void Background :: execute(float dt) {
-			sf::Vector2f cameraPos = pGraphic->getCenterView();
+			sf::Vector2f cameraPos = pGraphic->getCameraPosition();
 			sf::Vector2f ds = cameraPos - prevCameraPos;
 			prevCameraPos = cameraPos;
 			for (int i = 0; i < layers.size(); i++) {

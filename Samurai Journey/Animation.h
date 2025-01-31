@@ -20,7 +20,11 @@ namespace GraphicalElements {
 		arrow = 12,
 		menubg = 13,
 		map1 = 14,
-		map2 = 15
+		map2 = 15,
+		hurt = 16,
+		hurt2 = 17,
+		death = 18,
+		shout = 19
 	};
 
 	class Animation {

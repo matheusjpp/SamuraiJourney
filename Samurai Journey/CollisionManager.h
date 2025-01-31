@@ -2,6 +2,7 @@
 #include "Mediator.h"
 
 namespace Entities {
+	class Arrow;
 	namespace Characters {
 		class Player;
 	}

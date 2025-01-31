@@ -7,14 +7,18 @@ namespace Entities {
 
 		class Enemy : public Character {
 		protected:
-			Player* pPlayer;
+			Player* pPlayer1;
+			Player* pPlayer2;
+			Math::CoordF p1distance;
 
 		public:
 			Enemy(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::empty);
 
 			virtual ~Enemy();
 
-			void setPlayer(Player* p);
+			void setPlayers(Player* p1, Player* p2 = nullptr);
+
+			Player* getNearestPlayer();
 
 			virtual void update(float dt) = 0;
 

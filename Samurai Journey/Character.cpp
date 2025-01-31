@@ -4,9 +4,10 @@ namespace Entities {
 
 	namespace Characters {
 
-		Character::Character(Math::CoordF pos, Math::CoordF size, ID id, float hp) : hp(1), canJump(false), isAttacking(false), attackCooldown(0), attackingTime(0),
-			attackTimer(0), cooldownTimer(0),
-			MovingEntity(pos, size, id) {
+		Character::Character(Math::CoordF pos, Math::CoordF size, ID id, float hp) : hp(1), canJump(false), isDying(false), isHurting(false),
+			isAttacking(false), attackCooldown(0), attackingTime(0), attackTimer(0), cooldownTimer(0), deathTimer(0), hurtingTimer (0), impactTimer(0),
+			MovingEntity(pos, size, id) 
+		{
 
 		}
 
@@ -20,6 +21,23 @@ namespace Entities {
 
 		void Character::setHP(float HP) {
 			hp = HP;
+		}
+
+		const bool Character::getIsDying() const {
+			return isDying;
+		}
+
+		void Character::receiveDamage(float damage) {
+			hp -= damage;
+			isHurting = true;
+			if (hp <= 0) {
+				isHurting = false;
+				isAttacking = false;
+				canJump = false;
+				canMove = false;
+				isMoving = false;
+				isDying = true;
+			}
 		}
 
 		void Character::jump() {

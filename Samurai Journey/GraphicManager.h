@@ -50,6 +50,8 @@ namespace Managers {
 		bool pollEvent(sf::Event &e);
 
 		sf::Font loadFont(const char* fontPath);
+
+		sf::Vector2f getCameraPosition() const;
 	};
 
 }

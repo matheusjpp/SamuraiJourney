@@ -15,10 +15,9 @@ namespace GraphicalElements {
 			const float speed;
 
 			sf::Texture* texture;
-			sf::RectangleShape background;
-			sf::RectangleShape auxBackground;
+			std::vector<sf::RectangleShape> backgrounds;
 		
-			void switchTexture();
+			void updatePositions();
 
 		public:
 			Layer(sf::Texture* texture,const float speed);

@@ -218,19 +218,27 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="archer_attack.png" />
+    <Image Include="archer_death.png" />
+    <Image Include="archer_hurt.png" />
     <Image Include="archer_idle.png" />
     <Image Include="archer_walk.png" />
     <Image Include="arrow.png" />
     <Image Include="demon_attack.png" />
     <Image Include="demon_attack2.png" />
+    <Image Include="demon_death.png" />
+    <Image Include="demon_hurt.png" />
+    <Image Include="demon_hurt2.png" />
     <Image Include="demon_idle.png" />
     <Image Include="demon_run.png" />
     <Image Include="demon_idle2.png" />
     <Image Include="demon_airattack2.png" />
     <Image Include="demon_airattack.png" />
     <Image Include="demon_run2.png" />
+    <Image Include="demon_shout.png" />
     <Image Include="level2_map.png" />
     <Image Include="menubg.png" />
+    <Image Include="p1_death.png" />
+    <Image Include="p1_hurt.png" />
     <Image Include="pausebg.png" />
     <Image Include="wolf_attack.png" />
     <Image Include="wolf_attack2.png" />
@@ -250,6 +258,8 @@
     <Image Include="p2_idle.png" />
     <Image Include="p2_jump.png" />
     <Image Include="p2_walk.png" />
+    <Image Include="wolf_death.png" />
+    <Image Include="wolf_hurt.png" />
     <Image Include="wolf_idle.png" />
     <Image Include="wolf_jump.png" />
     <Image Include="wolf_run.png" />

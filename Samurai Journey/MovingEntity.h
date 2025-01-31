@@ -17,6 +17,7 @@ namespace Entities {
 		bool isFacingLeft;
 		bool isMoving;
 		bool canMove;
+		float damagePoints;
 
 	public:
 		MovingEntity(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::empty);
@@ -36,6 +37,8 @@ namespace Entities {
 		void move(bool left);
 
 		void stopMoving();
+		
+		virtual const float getDamagePoints() const;
 
 		virtual void update(float dt) = 0;
 

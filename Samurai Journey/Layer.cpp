@@ -1,82 +1,57 @@
 #include "Layer.h"
+#include <cmath>
 
 namespace GraphicalElements {
+    namespace Parallax {
 
-	namespace Parallax {
+        Managers::GraphicManager* Layer::pGraphic = Managers::GraphicManager::getInstance();
 
-		Managers::GraphicManager* Layer::pGraphic = Managers::GraphicManager::getInstance();
-	
-		Layer::Layer(sf::Texture* texture, const float speed) :
-			texture(texture), dimension(0.0f, 0.0f, 0.0f, 0.0f), speed(speed),
-			Windowsize(sf::Vector2f((float)pGraphic->getWindowSize().x, (float)pGraphic->getWindowSize().y)) 
-		{
-	
-			backgroundSize = sf::Vector2f((float)texture->getSize().x, (float)texture->getSize().y);
+        Layer::Layer(sf::Texture* texture, const float speed) :
+            texture(texture), speed(speed),
+            Windowsize(sf::Vector2f((float)pGraphic->getWindowSize().x, (float)pGraphic->getWindowSize().y))
+        {
+            backgroundSize = sf::Vector2f((float)texture->getSize().x, (float)texture->getSize().y);
 
-			dimension.width = (float)(-fabs(texture->getSize().x));
-			dimension.height = texture->getSize().y;
-			dimension.left = texture->getSize().x;
+            int numRepetitions = std::ceil(Windowsize.x / backgroundSize.x) + 1;
 
-			background.setSize(backgroundSize);
-			background.setTexture(texture);
-			background.setPosition(0.0f, 0.0f);
-		
+            for (int i = 0; i < numRepetitions; i++) {
+                sf::RectangleShape bg(backgroundSize);
+                bg.setTexture(texture);
+                bg.setPosition(i * backgroundSize.x, 0.0f);
+                backgrounds.push_back(bg);
+            }
+        }
 
-			//auxBackground.setSize(backgroundSize);
-			////auxBackground.setTexture(texture);
-			//auxBackground.setPosition(backgroundSize.x, 0.0f);
-		}
+        Layer::~Layer() {}
 
-		Layer::~Layer() {
-	
-		}
+        void Layer::renderLayer() {
+            for (auto& bg : backgrounds) {
+                pGraphic->render(&bg);
+            }
+        }
 
-		void Layer::switchTexture() {
-			sf::RectangleShape aux = background;
-			background = auxBackground;
-			//auxBackground = aux;
-		}
+        void Layer::update(const sf::Vector2f ds, const sf::Vector2f currentCameraPos) {
+            if (ds.x != 0.0f) {
+                for (auto& bg : backgrounds) {
+                    bg.move(ds.x * -speed, 0.0f);
+                }
+                updatePositions();
+            }
+        }
 
-		void Layer::renderLayer() {
-			pGraphic->render(&background);
-			if (speed != 0.0f) {
-				//pGraphic->render(&auxBackground);
-			}
-		}
+        void Layer::updatePositions() {
+            float leftBoundary = pGraphic->getCameraPosition().x - Windowsize.x / 2.0f;
+            float rightBoundary = pGraphic->getCameraPosition().x + Windowsize.x / 2.0f;
 
-		void Layer::update(const sf::Vector2f ds, const sf::Vector2f currentCameraPos) {
-			const float y = currentCameraPos.y - backgroundSize.y / 2.0f;
-			sf::Vector2f backgroundPosition = background.getPosition();
-			sf::Vector2f auxBackgroundPosition = auxBackground.getPosition();
-			background.setPosition(sf::Vector2f(backgroundPosition.x, y));
-			auxBackground.setPosition(sf::Vector2f(auxBackgroundPosition.x, y));
-			if (ds.x != 0.0f) {
-				const float rightPos = currentCameraPos.x + backgroundSize.x / 2.0f;
-				const float leftPos = currentCameraPos.x - backgroundSize.x / 2.0f;
-				if (speed != 0.0f) {
-					background.move(ds.x * -speed, 0.0f);
-					auxBackground.move(ds.x * -speed, 0.0f);
-					if (ds.x > 0.0f) {
-						if ((backgroundPosition.x + backgroundSize.x) < leftPos) {
-							switchTexture();
-							background.setPosition(leftPos, backgroundPosition.y);
-							//auxBackground.setPosition(rightPos, auxBackgroundPosition.y);
-						}
-					}
-					else {
-						if (backgroundPosition.x > leftPos) {
-							switchTexture();
-							background.setPosition(leftPos - backgroundSize.x, backgroundPosition.y);
-							//auxBackground.setPosition(leftPos, auxBackgroundPosition.y);
-						}
-					}
-				}
-				else {
-					background.setPosition(leftPos, backgroundPosition.y);
-				}
-			}
-		}
+            for (auto& bg : backgrounds) {
+                if (bg.getPosition().x + backgroundSize.x < leftBoundary) {
+                    bg.setPosition(bg.getPosition().x + backgrounds.size() * backgroundSize.x, bg.getPosition().y);
+                }
+                else if (bg.getPosition().x > rightBoundary) {
+                    bg.setPosition(bg.getPosition().x - backgrounds.size() * backgroundSize.x, bg.getPosition().y);
+                }
+            }
+        }
 
-	}
-
+    }
 }

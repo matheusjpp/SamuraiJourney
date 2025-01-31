@@ -5,14 +5,21 @@
 #define WOLF_SIZE_Y 42.0f
 
 #define WOLF_SPEED 350.0f
-
-#define WOLF_VISION 300.0f
+#define WOLF_VISION 250.0f
 #define WOLF_HP 100.0f
-#define WOLF_ATTACK_CD 0.8f
-#define WOLF_ATTACK_TIME 0.6f
-#define WOLF_ATTACK2_TIME 2.0f
+#define WOLF_ATTACK_CD 1.0f
+
+#define WOLF_ATTACK_DAMAGE 10.0f
+#define WOLF_ATTACK2_DAMAGE 20.0f
+
+#define WOLF_ATTACK_TIME 0.75f
+#define WOLF_ATTACK2_TIME 1.8f
+
 #define WOLF_ATTACK_DISTANCE 100.0f
-#define WOLF_ATTACK2_DISTANCE 200.0f
+#define WOLF_ATTACK2_DISTANCE 150.0f
+
+#define WOLF_HURT_TIME 0.9f
+#define WOLF_DEATH_TIME 1.2f
 
 namespace Entities {
 
@@ -22,7 +29,6 @@ namespace Entities {
 		private:
 			bool isFirstAttack;
 			float firstAttackTimer;
-			const float scaleFactor;
 
 		public:
 			Wolf(Math::CoordF pos = Math::CoordF(0.0f, 0.0f), ID id = ID::wolf);
@@ -34,6 +40,8 @@ namespace Entities {
 			void execute();
 
 			void attack();
+
+			const float getDamagePoints() const;
 
 			void setTextures();
 

@@ -102,4 +102,8 @@ namespace Managers {
 		}
 		return font;
 	}
+
+	sf::Vector2f GraphicManager::getCameraPosition() const {
+		return window->getView().getCenter();
+	}
 }

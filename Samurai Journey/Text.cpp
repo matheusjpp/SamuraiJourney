@@ -41,7 +41,9 @@ namespace Menu {
 	}
 
 	void Text::setTextPos(const Math::CoordF pos) {
-		text.setPosition(pos.x, pos.y);
+		text.setPosition(sf::Vector2f(pos.x, pos.y));
+		textPos = pos;
+		updateTextSize();
 	}
 
 	void Text::setTextColor(const sf::Color& textColor) {
@@ -72,6 +74,14 @@ namespace Menu {
 	void Text::setFontSize(unsigned int fontSize) {
 		text.setCharacterSize(fontSize);
 		updateTextSize();
+	}
+
+	void Text::moveText(float speed) {
+		text.move(sf::Vector2f(speed, 0));
+	}
+
+	void Text::setText(const std::string& newText) {
+		text.setString(newText);
 	}
 
 }
