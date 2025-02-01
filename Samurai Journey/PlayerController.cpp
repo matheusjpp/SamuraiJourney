@@ -1,5 +1,5 @@
 #include "PlayerController.h"
-#include "PauseMenu.h"
+#include "ConcreteMenu.h"
 
 namespace Managers {
 
@@ -77,7 +77,7 @@ namespace Managers {
 
 				if (key == pause) {
 					isActive = false;
-					new Menu::PauseMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::pause_menu);
+					new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::pause_menu);
 				}
 			}
 		}

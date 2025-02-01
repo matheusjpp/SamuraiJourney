@@ -102,7 +102,7 @@
     <ClInclude Include="Menu.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenu.h">
+    <ClInclude Include="ConcreteMenu.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
@@ -126,9 +126,6 @@
     <ClInclude Include="Layer.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="PauseMenu.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Bush.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
@@ -136,6 +133,9 @@
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="ArcherLevel.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="EndGameMenu.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
@@ -227,7 +227,7 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
+    <ClCompile Include="ConcreteMenu.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
@@ -251,9 +251,6 @@
     <ClCompile Include="Layer.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="PauseMenu.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="Bush.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
@@ -261,6 +258,9 @@
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="ArcherLevel.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="EndGameMenu.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -422,6 +422,12 @@
       <Filter>Arquivos de Recurso</Filter>
     </Image>
     <Image Include="level1_map.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="gameoverbg.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="winbg.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
   </ItemGroup>

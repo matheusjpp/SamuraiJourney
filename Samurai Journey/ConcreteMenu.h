@@ -9,15 +9,15 @@ namespace Managers {
 
 namespace Menu {
 
-	class MainMenu : public Menu, public Managers::States::State {
+	class ConcreteMenu : public Menu {
 	private:
-		sf::RectangleShape* body;
+		//sf::RectangleShape* body;
 		GraphicalElements::Animation* menuAnimation;
 
 	public:
-		MainMenu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Managers::States::State_ID id = Managers::States::State_ID::empty);
+		ConcreteMenu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Managers::States::State_ID id = Managers::States::State_ID::empty);
 
-		~MainMenu();
+		~ConcreteMenu();
 
 		void createButtons();
 

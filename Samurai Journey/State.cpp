@@ -7,7 +7,7 @@ namespace Managers {
 
 		StateManager* State::pStateM = StateManager::getInstance();
 
-		State::State(State_ID id) : isActive (false), id(id) {
+		State::State(State_ID id) : isActive (false), stateID(id) {
 			pStateM->pushState(this);
 		}
 
@@ -16,7 +16,7 @@ namespace Managers {
 		}
 
 		const State_ID State::getID() const {
-			return id;
+			return stateID;
 		}
 
 		const bool State::getIsActive() const {

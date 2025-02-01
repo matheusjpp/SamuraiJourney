@@ -8,7 +8,7 @@
 #define GRAVITY 700.0f
 #define JUMP 700.0f
 
-#define PLAYER_HP 200.0f
+#define PLAYER_HP 100.0f
 #define PLAYER_ATTACK_DAMAGE 50.0f
 #define PLAYER_ATTACK_CD 0.2f
 #define PLAYER_ATTACK_TIME 0.9f

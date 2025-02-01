@@ -10,6 +10,7 @@ namespace Entities {
 			Player* pPlayer1;
 			Player* pPlayer2;
 			Math::CoordF p1distance;
+			bool counted;
 
 		public:
 			Enemy(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(0, 0), ID id = ID::empty);
@@ -19,6 +20,10 @@ namespace Entities {
 			void setPlayers(Player* p1, Player* p2 = nullptr);
 
 			Player* getNearestPlayer();
+
+			void setCounted(bool c);
+
+			const bool getCounted() const;
 
 			virtual void update(float dt) = 0;
 

@@ -17,14 +17,16 @@ namespace Managers {
 			archerlevel_multiplayer,
 			bosslevel_singleplayer,
 			bosslevel_multiplayer,
-			pause_menu
+			pause_menu,
+			gameover_menu,
+			win_menu
 		};
 
 		class State {
 		protected:
 			static StateManager* pStateM;
 			bool isActive;
-			State_ID id;
+			State_ID stateID;
 		
 		public:
 			State(State_ID id = empty);

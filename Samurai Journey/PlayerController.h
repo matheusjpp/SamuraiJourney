@@ -2,7 +2,7 @@
 #include "InputManager.h"
 
 namespace Menu {
-	class PauseMenu;
+	class ConcreteMenu;
 }
 
 namespace Managers {

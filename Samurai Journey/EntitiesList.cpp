@@ -18,7 +18,7 @@ namespace List {
             std::cerr << "Erro: Entidade nula passada para addEntity." << std::endl;
         }
     }
-
+    /*
     void EntitiesList::removeEntity(Entities::Entity* pEntity) {
         if (!pEntity) {
             std::cerr << "Erro: Entidade nula passada para removeEntity." << std::endl;
@@ -34,24 +34,17 @@ namespace List {
         }
 
         std::cerr << "Erro: Entidade não encontrada na lista." << std::endl;
-    }
+    }*/
 
-    void EntitiesList::removeEntity(unsigned int ind) {
-        if (ind >= entList.getSize()) {
-            std::cerr << "Erro: Índice inválido passado para removeEntity." << std::endl;
+    void EntitiesList::removeEntity(Entities::Entity* pEntity) {
+        if (!pEntity) {
+            std::cerr << "Erro: Entidade nula passada para removeEntity." << std::endl;
             return;
         }
 
-        unsigned int currentInd = 0;
-        for (auto it = entList.begin(); it != entList.end(); ++it) {
-            if (currentInd == ind) {
-                delete* it;         // Libera a memória da entidade
-                entList.remove(*it); // Remove o nó da lista
-                return;
-            }
-            ++currentInd;
-        }
+        entList.remove(pEntity);
     }
+
 
     int EntitiesList::getSize() const {
         return static_cast<int>(entList.getSize());

@@ -30,13 +30,13 @@ namespace Entities {
 				if (playerDistance <= WOLF_VISION) {
 					if (isFirstAttack) {
 						if (position.x > nearestPlayer->getPosition().x) {
-							position.x -= WOLF_SPEED * dt / 2.5f;
+							position.x -= WOLF_SPEED * dt / 2.0f;
 							isFacingLeft = false;
 							isMoving = true;
 						}
 
 						if (position.x < nearestPlayer->getPosition().x) {
-							position.x += WOLF_SPEED * dt / 2.5f;
+							position.x += WOLF_SPEED * dt / 2.0f;
 							isFacingLeft = true;
 							isMoving = true;
 						}

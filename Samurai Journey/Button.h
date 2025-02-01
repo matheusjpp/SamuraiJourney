@@ -19,7 +19,8 @@ namespace Menu {
 			bossmulti,
 			resumegame,
 			saveprogress,
-			pauseexit
+			pauseexit,
+			savescore
 		};
 
 		class Button {

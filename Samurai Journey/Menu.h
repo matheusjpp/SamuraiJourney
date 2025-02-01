@@ -9,9 +9,8 @@ namespace Managers {
 
 namespace Menu {
 
-	class Menu	{
+	class Menu : public Ente, public Managers::States::State {
 	protected:
-		static Managers::GraphicManager* pGraphic;
 		Managers::KeyManagement::MenuController* menuController;
 		std::list<Buttons::TextButton*> textButtonList;
 		std::list<Buttons::TextButton*>::iterator it;
@@ -25,7 +24,7 @@ namespace Menu {
 		void initializeIterator();
 
 	public:
-		Menu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize);
+		Menu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Managers::States::State_ID id = Managers::States::State_ID::empty);
 		
 		virtual ~Menu();
 

@@ -25,7 +25,10 @@ namespace GraphicalElements {
 		hurt2 = 17,
 		death = 18,
 		shout = 19,
-		bush = 20
+		bush = 20,
+		pausebg,
+		gameoverbg,
+		winbg
 	};
 
 	class Animation {

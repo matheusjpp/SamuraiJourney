@@ -24,7 +24,7 @@ namespace Managers {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
 						case Menu::Buttons::Button_ID::newgame: {
-							new Menu::MainMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::newgame_menu);
+							new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::newgame_menu);
 							break;
 						}
 						case Menu::Buttons::Button_ID::exit: {
@@ -51,11 +51,11 @@ namespace Managers {
 					 isActive = false;
 					 switch (pMenu->getSelectedButtonID()) {
 						 case Menu::Buttons::Button_ID::singleplayer: {
-							 new Menu::MainMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::singleplayer_menu);
+							 new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::singleplayer_menu);
 							 break;
 						 }
 						 case Menu::Buttons::Button_ID::multiplayer: {
-							 new Menu::MainMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::multiplayer_menu);
+							 new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::multiplayer_menu);
 							 break;
 						 }
 					 }

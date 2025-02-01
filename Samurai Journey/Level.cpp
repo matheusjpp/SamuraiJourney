@@ -21,22 +21,35 @@ namespace Levels {
         }
     }
 
-	Level::~Level() {
-        if (mapImage) delete mapImage;
-        if (mapSprite) delete mapSprite;
-       
-        for (auto itS = (&staticEntities)->begin(); itS != (&staticEntities)->end(); ++itS) {
-            if (*itS) {
-                (&staticEntities)->removeEntity(*itS);
-                //(*itS) = nullptr;
-            }
+    Level::~Level() {
+        if (mapImage) {
+            delete mapImage;
+            mapImage = nullptr;
         }
 
-        for (auto itM = (&movingEntities)->begin(); itM != (&movingEntities)->end(); ++itM) {
-            (&movingEntities)->removeEntity(*itM);
-            //(*itM) = nullptr;
+        if (mapSprite) {
+            delete mapSprite;
+            mapSprite = nullptr;
         }
-	}
+
+        if (pPlayer1) {
+            pPlayer1->changeObserverState(false);
+        }
+
+        if (isMultiplayer) {
+            pPlayer2->changeObserverState(false);
+        }
+
+        while (staticEntities.getSize() > 0) {
+            Entities::Entity* entity = *staticEntities.begin();
+            staticEntities.removeEntity(entity);
+        }
+
+        while (movingEntities.getSize() > 0) {
+            Entities::Entity* entity = *movingEntities.begin();
+            movingEntities.removeEntity(entity);
+        }
+    }
 
 	void Level::createMap(const char* filePath) {
         std::ifstream file(filePath);

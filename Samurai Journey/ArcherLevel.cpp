@@ -29,7 +29,7 @@ namespace Levels {
 		mapSprite->update(GraphicalElements::Animation_ID::map1, false, (0, 0), dt);
 		movingEntities.execute(dt);
 		staticEntities.execute(dt);
-
+		
 		if (pPlayer1->getIsDying()) {
 			pPlayer1->changeObserverState(false);
 		}

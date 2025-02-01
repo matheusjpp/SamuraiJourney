@@ -27,7 +27,6 @@ namespace Managers {
 		void CollisionManager::setLists(List::EntitiesList& stEnt, List::EntitiesList& movEnt) {
 			staticEntities = &stEnt;
 			movingEntities = &movEnt;
-
 		}
 
 		void CollisionManager::notifyCollision(Entities::MovingEntity* sender, float dt) {

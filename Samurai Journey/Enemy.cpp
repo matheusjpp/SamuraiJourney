@@ -3,7 +3,7 @@
 namespace Entities {
 
 	namespace Characters {
-		Enemy::Enemy(Math::CoordF pos, Math::CoordF size, ID id) :
+		Enemy::Enemy(Math::CoordF pos, Math::CoordF size, ID id) : counted(false),
 			Character(pos, size, id), pPlayer1(nullptr) {
 			
 		}
@@ -24,6 +24,14 @@ namespace Entities {
 			Math::CoordF d1 = fabs(position.x - pPlayer1->getPosition().x);
 			Math::CoordF d2 = fabs(position.x - pPlayer2->getPosition().x);
 			return (d1.x > d2.x ? pPlayer2 : pPlayer1);
+		}
+
+		void Enemy::setCounted(bool c) {
+			counted = c;
+		}
+
+		const bool Enemy::getCounted() const {
+			return counted;
 		}
 
 	}

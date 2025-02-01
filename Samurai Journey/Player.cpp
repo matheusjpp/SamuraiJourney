@@ -15,7 +15,7 @@ namespace Entities {
 			attackCooldown = PLAYER_ATTACK_CD;
 			attackingTime = PLAYER_ATTACK_TIME;
 
-			pBush = new Obstacles::Bush();
+			pBush = new Obstacles::Bush(Math::CoordF(0,0), (Math::CoordF(0,0)));
 			pControl = new Managers::KeyManagement::PlayerController(this);
 			setTextures();
 		}
@@ -35,7 +35,6 @@ namespace Entities {
 			updateSprite(dt);
 			incrementAttackTime(dt);
 			speed = PLAYER_SPEED;
-
 			if (!isDefending) {
 				if (isMoving) {
 					setSlowness();
@@ -192,10 +191,11 @@ namespace Entities {
 
 		void Player::checkEnemiesInRange() {
 			List::EntitiesList* list = pLevel->getEntitiesList();
-			
 			for (auto it = list->begin(); it != list->end(); ++it) {
 				if (auto* enemy = dynamic_cast<Characters::Enemy*>(*it)) {
 					if (enemy->getIsActive()) {
+						if (enemy->getPosition().y > 1000) enemy->receiveDamage(enemy->getHP());
+						
 						float playerX = position.x;
 						float playerY = position.y - PLAYER_ATTACK_RANGEHEIGHT;
 						float enemyX = enemy->getPosition().x;
@@ -211,8 +211,10 @@ namespace Entities {
 							if ((enemyX - playerX <= PLAYER_ATTACK_RANGE) && (enemyX > playerX) && inRangeY)
 								enemy->receiveDamage(getDamagePoints());
 					}
-					else
+					else if (!enemy->getCounted()) {
 						points += 100;
+						enemy->setCounted(true);
+					}
 				}
 			}
 		}

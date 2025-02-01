@@ -3,12 +3,13 @@
 
 namespace Menu {
 
-	Managers::GraphicManager* Menu::pGraphic = Managers::GraphicManager::getInstance();
+	//Managers::GraphicManager* Menu::pGraphic = Managers::GraphicManager::getInstance();
 
-	Menu::Menu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize) :
+	Menu::Menu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Managers::States::State_ID id) :
 		textButtonList(), it(), buttonSize(buttonSize),
 		windowSize(sf::Vector2f(pGraphic->getWindowSize().x, pGraphic->getWindowSize().y)),
-		title(info, pGraphic->loadFont("alagard.ttf"), fontSize) 
+		title(info, pGraphic->loadFont("alagard.ttf"), fontSize),
+		Ente(), Managers::States::State(id)
 	{
 		menuController = new Managers::KeyManagement::MenuController(this);
 		//menuController->setIsActive(true);

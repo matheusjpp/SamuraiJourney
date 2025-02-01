@@ -33,19 +33,22 @@ namespace Levels {
 		mapSprite->update(GraphicalElements::Animation_ID::map2, false, (0, 0), dt);
 		movingEntities.execute(dt);
 		staticEntities.execute(dt);
-		
+
 		if (pPlayer1->getIsDying()) {
 			pPlayer1->changeObserverState(false);
 		}
 		else if (pPlayer1->getIsActive()) {
+			if (pPlayer1->getPosition().y > 1000) pPlayer1->receiveDamage(pPlayer1->getHP());
 			pPlayer1->changeObserverState(true);
 		}
 
 		if (isMultiplayer) {
 			if (pPlayer2->getIsDying())
 				pPlayer2->changeObserverState(false);
-			else if (pPlayer2->getIsActive())
+			else if (pPlayer2->getIsActive()) {
+				if (pPlayer2->getPosition().y > 1000) pPlayer2->receiveDamage(pPlayer2->getHP());
 				pPlayer2->changeObserverState(true);
+			}
 		}
 
 		render();
