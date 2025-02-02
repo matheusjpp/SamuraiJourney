@@ -5,7 +5,8 @@ namespace Levels {
     Managers::GraphicManager* Level::pGraphic = Managers::GraphicManager::getInstance();
 
 	Level::Level(bool isMultiplayer, Managers::States::State_ID id) : pPlayer1(nullptr), pPlayer2(nullptr),
-        p1life(nullptr), p2life(nullptr), isMultiplayer(isMultiplayer), Managers::States::State(id)
+        p1life(nullptr), p2life(nullptr), isMultiplayer(isMultiplayer),
+        Managers::States::State(id)
     {
         mapImage = new sf::RectangleShape();
         mapSprite = new GraphicalElements::Animation(mapImage, Math::CoordF(1, 1));

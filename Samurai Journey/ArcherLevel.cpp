@@ -47,4 +47,8 @@ namespace Levels {
 		render();
 	}
 
+	void ArcherLevel::verifyLevelEnd() {
+
+	}
+
 }

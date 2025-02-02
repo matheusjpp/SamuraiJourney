@@ -10,6 +10,8 @@ namespace Levels {
 
 		~ArcherLevel();
 
+		void verifyLevelEnd();
+
 		void execute(float dt);
 	};
 

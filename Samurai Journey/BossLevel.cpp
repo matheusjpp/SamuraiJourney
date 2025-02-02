@@ -27,6 +27,36 @@ namespace Levels {
 
 	}
 
+	void BossLevel::verifyLevelEnd() {
+
+		if (!pPlayer1->getIsActive()) {
+			if (isMultiplayer) {
+				if (!pPlayer2->getIsActive()) {
+					new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::gameover_menu);
+				}
+			}
+			else {
+				new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::gameover_menu);
+			}
+		}
+		
+		int enemiesCounter = 0;
+		for (auto itM = (&movingEntities)->begin(); itM != (&movingEntities)->end(); ++itM) {
+			if (*itM) {
+				if (auto* enemy = dynamic_cast<Entities::Characters::Enemy*>(*itM)) {
+					if (enemy->getIsActive()) {
+						enemiesCounter++;
+					}
+				}
+			}
+		}
+
+		if (enemiesCounter == 0) {
+			new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::win_menu);
+		}
+
+	}
+
 	void BossLevel::execute(float dt) {
 		updateCamera(960.0f);
 		background.execute(dt);
@@ -51,6 +81,7 @@ namespace Levels {
 			}
 		}
 
+		verifyLevelEnd();
 		render();
 	}
 

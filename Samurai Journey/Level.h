@@ -41,6 +41,8 @@ namespace Levels {
 
 		void render();
 
+		virtual void verifyLevelEnd() = 0;
+
 		virtual void execute(float dt) = 0;
 	};
 

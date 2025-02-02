@@ -161,7 +161,59 @@ namespace Managers {
 				else if (key == escape) {
 					pStateM->popState();
 				}
+			}
+
+			/* Game Over Menu Commands */
+			else if (pStateM->getCurrentState()->getID() == States::State_ID::gameover_menu) {
+				if (key == select) {
+					isActive = false;
+					switch (pMenu->getSelectedButtonID()) {
+						case Menu::Buttons::Button_ID::savescore: {
+							// leaderboards
+							break;
+						}
+						case Menu::Buttons::Button_ID::pauseexit: {
+							while (pStateM->getCurrentState()->getID() != States::State_ID::main_menu)
+								pStateM->popState();
+							break;
+						}
+					}
 				}
+
+				else if (key == up) {
+					pMenu->selectAbove();
+				}
+
+				else if (key == down) {
+					pMenu->selectBelow();
+				}
+			}
+
+			/* Win Menu Commands */
+			else if (pStateM->getCurrentState()->getID() == States::State_ID::win_menu) {
+				if (key == select) {
+					isActive = false;
+					switch (pMenu->getSelectedButtonID()) {
+						case Menu::Buttons::Button_ID::savescore: {
+							// leaderboards
+							break;
+						}
+						case Menu::Buttons::Button_ID::pauseexit: {
+							while (pStateM->getCurrentState()->getID() != States::State_ID::main_menu)
+								pStateM->popState();
+							break;
+						}
+					}
+				}
+
+				else if (key == up) {
+					pMenu->selectAbove();
+				}
+
+				else if (key == down) {
+					pMenu->selectBelow();
+				}
+			}
 
 			////
 

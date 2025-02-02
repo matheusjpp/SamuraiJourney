@@ -10,6 +10,8 @@ namespace Levels {
 
 		~BossLevel();
 
+		void verifyLevelEnd();
+
 		void execute(float dt);
 	};
 	
