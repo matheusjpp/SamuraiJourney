@@ -246,6 +246,12 @@ namespace Levels {
             else {
                 pGraphic->centerView(Math::CoordF(mapImage->getSize().x - cameraLimit, pGraphic->getWindowSize().y / 2.0f));
             }
+
+            if (isMultiplayer) {
+                if (fabs(pPlayer1->getPosition().x - pPlayer2->getPosition().x) > 960.0f) {
+                    pPlayer2->setPosition(Math::CoordF(pPlayer1->getPosition().x, pPlayer1->getPosition().y - 20));
+                }
+            }
         }
 
         else if (isMultiplayer && pPlayer2->getIsActive()) {

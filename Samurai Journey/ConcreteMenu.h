@@ -11,7 +11,6 @@ namespace Menu {
 
 	class ConcreteMenu : public Menu {
 	private:
-		//sf::RectangleShape* body;
 		GraphicalElements::Animation* menuAnimation;
 
 	public:
