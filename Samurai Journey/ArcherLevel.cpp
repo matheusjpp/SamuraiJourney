@@ -2,7 +2,7 @@
 
 namespace Levels {
 
-	ArcherLevel::ArcherLevel(bool isMultiplayer, Managers::States::State_ID id) :
+	ArcherLevel::ArcherLevel(bool isMultiplayer, Managers::States::State_ID id) : pPortal(nullptr),
 		Level(isMultiplayer, id)
 	{
 		mapImage->setSize(sf::Vector2f(5480.0f, 1080.0f));
@@ -23,7 +23,7 @@ namespace Levels {
 	}
 
 	void ArcherLevel::execute(float dt) {
-		updateCamera(970); //definir limit
+		updateCamera(970);
 		cout << pPlayer1->getPosition().x << endl;
 		background.execute(dt);
 		mapSprite->update(GraphicalElements::Animation_ID::map1, false, (0, 0), dt);
@@ -34,21 +34,59 @@ namespace Levels {
 			pPlayer1->changeObserverState(false);
 		}
 		else if (pPlayer1->getIsActive()) {
+			if (pPlayer1->getPosition().y > 1080) pPlayer1->receiveDamage(pPlayer1->getHP());
 			pPlayer1->changeObserverState(true);
 		}
 
 		if (isMultiplayer) {
 			if (pPlayer2->getIsDying())
 				pPlayer2->changeObserverState(false);
-			else if (pPlayer2->getIsActive())
+			else if (pPlayer2->getIsActive()) {
+				if (pPlayer2->getPosition().y > 1080) pPlayer2->receiveDamage(pPlayer2->getHP());
 				pPlayer2->changeObserverState(true);
+			}
 		}
 
+		verifyLevelEnd();
 		render();
 	}
 
 	void ArcherLevel::verifyLevelEnd() {
+		if (!pPlayer1->getIsActive()) {
+			if (isMultiplayer) {
+				if (!pPlayer2->getIsActive()) {
+					new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::gameover_menu);
+				}
+			}
+			else {
+				new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::gameover_menu);
+			}
+		}
 
+		int enemiesCounter = 0;
+		for (auto itM = (&movingEntities)->begin(); itM != (&movingEntities)->end(); ++itM) {
+			if (*itM) {
+				if (auto* enemy = dynamic_cast<Entities::Characters::Enemy*>(*itM)) {
+					if (enemy->getIsActive()) {
+						enemiesCounter++;
+					}
+				}
+			}
+		}
+
+		if (enemiesCounter == 0) {
+			for (auto itM = (&staticEntities)->begin(); itM != (&staticEntities)->end(); ++itM) {
+				if (*itM) {
+					if (auto* portal = dynamic_cast<Entities::Obstacles::Portal*>(*itM)) {
+						portal->setCanTeleport(true);
+						pPortal = portal;
+					}
+				}
+			}
+			if (pPortal->getTeleportRequest()) {
+				new BossLevel(isMultiplayer, isMultiplayer ? Managers::States::State_ID::bosslevel_multiplayer : Managers::States::State_ID::bosslevel_singleplayer, pPlayer1->getScorePoints());
+			}
+		}
 	}
 
 }

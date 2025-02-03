@@ -138,6 +138,9 @@
     <ClInclude Include="EndGameMenu.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Coord.cpp">
@@ -261,6 +264,9 @@
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="EndGameMenu.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -428,6 +434,9 @@
       <Filter>Arquivos de Recurso</Filter>
     </Image>
     <Image Include="winbg.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="..\portal.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
   </ItemGroup>

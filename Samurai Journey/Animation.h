@@ -26,9 +26,10 @@ namespace GraphicalElements {
 		death = 18,
 		shout = 19,
 		bush = 20,
-		pausebg,
-		gameoverbg,
-		winbg
+		portal = 21,
+		pausebg = 22,
+		gameoverbg = 23,
+		winbg = 24
 	};
 
 	class Animation {

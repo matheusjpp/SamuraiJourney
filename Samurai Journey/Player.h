@@ -1,5 +1,5 @@
 #pragma once
-#include "Fire.h"
+#include "Portal.h"
 
 #define PLAYER_SIZE_X 64.0f
 #define PLAYER_SIZE_Y 42.0f
@@ -83,6 +83,8 @@ namespace Entities {
 			void setSlowness();
 
 			void setIsSlowed(bool isSl);
+
+			const int getScorePoints() const;
 		};
 
 	}

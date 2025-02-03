@@ -31,8 +31,8 @@ namespace Entities {
 			hp -= damage;
 			isHurting = true;
 			if (hp <= 0) {
-				isHurting = false;
-				isAttacking = false;
+				//isHurting = false;
+				//isAttacking = false;
 				canJump = false;
 				canMove = false;
 				isMoving = false;

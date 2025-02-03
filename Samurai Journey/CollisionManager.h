@@ -8,7 +8,15 @@ namespace Entities {
 	}
 }
 
+namespace Levels {
+	class BossLevel;
+}
+
 namespace Managers {
+
+	namespace States {
+		class StateManager;
+	}
 
 	namespace Collisions {
 
@@ -18,7 +26,7 @@ namespace Managers {
 			List::EntitiesList* movingEntities;
 
 			static CollisionManager* pCollision;
-
+			
 			CollisionManager(List::EntitiesList* movingEntities = nullptr, List::EntitiesList* staticEntities = nullptr);
 
 		public:

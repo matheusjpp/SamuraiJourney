@@ -1,6 +1,7 @@
 #include "CollisionManager.h"
 #include "Player.h"
 #include "Arrow.h"
+#include "BossLevel.h"
 
 namespace Managers {
 	
@@ -96,11 +97,21 @@ namespace Managers {
 				else if (otherEntity->getID() == ID::arrow) {
 					 if (auto* arrow = dynamic_cast<Entities::Arrow*>(otherEntity)) {
 						if (arrow) {
-						if (auto* player = dynamic_cast<Entities::Characters::Character*>(sender)) {
-							player->receiveDamage(arrow->getDamagePoints());
-						}
+							if (auto* player = dynamic_cast<Entities::Characters::Character*>(sender)) {
+								player->receiveDamage(arrow->getDamagePoints());
+							}
 						}
 					 }
+				}
+
+				else if (otherEntity->getID() == ID::portal) {
+					if (auto* portal = dynamic_cast<Entities::Obstacles::Portal*>(otherEntity)) {
+						if (portal) {
+							if (portal->getCanTeleport()) {
+								portal->setTeleportRequest(true);
+							}
+						}
+					}
 				}
 				// OBSTÁCULOS QUE DEBUFFAM
 			}
@@ -109,14 +120,6 @@ namespace Managers {
 			else if (sender->getID() == ID::wolf || sender->getID() == ID::archer || sender->getID() == ID::demonsamurai) {
 				moveOnCollision(sender, otherEntity, intersection, dt);
 			}
-			/*
-			else if (sender->getID() == ID::demonsamurai) {
-				moveOnCollision(sender, otherEntity, intersection, dt);
-			}
-
-			else if (sender->getID() == ID::archer) {
-				moveOnCollision(sender, otherEntity, intersection, dt);
-			}*/
 
 			else if (sender->getID() == ID::arrow) {
 				if (otherEntity->getID() == ID::player || otherEntity->getID() == ID::platform)

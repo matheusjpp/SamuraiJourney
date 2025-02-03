@@ -10,7 +10,8 @@ enum ID {
 	arrow,
 	platform,
 	bush,
-	fire
+	fire,
+	portal
 };
 
 class Ente {
@@ -30,8 +31,4 @@ public:
 	ID getID() const;
 
 	virtual void render() = 0;
-
-	void mudarCor(sf::Color);
-	//virtual void execute(float dt) = 0;
-
 };

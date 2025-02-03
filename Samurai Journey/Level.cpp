@@ -139,7 +139,7 @@ namespace Levels {
                     }
 
                     case 7: {
-                        Entities::Obstacles::Fire* fire = new Entities::Obstacles::Fire(Math::CoordF(posx, posy));
+                        Entities::Obstacles::Fire* fire = new Entities::Obstacles::Fire(Math::CoordF(posx, posy - 20));
                         if (fire) {
                             staticEntities.addEntity(fire);
                         }
@@ -149,7 +149,7 @@ namespace Levels {
                     case 8: {
                         int aux = rand() % 2;
                         if (aux == 1) {
-                            Entities::Obstacles::Fire* fire = new Entities::Obstacles::Fire(Math::CoordF(posx, posy));
+                            Entities::Obstacles::Fire* fire = new Entities::Obstacles::Fire(Math::CoordF(posx, posy - 20));
                             if (fire) {
                                 staticEntities.addEntity(fire);
                             }
@@ -208,6 +208,14 @@ namespace Levels {
                         }
                         break;
                     }
+
+                    case 14: {
+                        Entities::Obstacles::Portal* portal = new Entities::Obstacles::Portal(Math::CoordF(posx, posy));
+                        if (portal) {
+                            staticEntities.addEntity(portal);
+                        }
+                        break;
+                    }
                 }
 
 
@@ -257,7 +265,8 @@ namespace Levels {
         pGraphic->render(mapImage);
 
         std::string hpStr = std::to_string(static_cast<int>(pPlayer1->getHP()));
-        p1life->setText("Player 1's HP: " + hpStr);
+        if (pPlayer1->getHP() < 0) p1life->setText("Player 1's HP: 0");
+        else p1life->setText("Player 1's HP: " + hpStr);
         p1life->setTextPos(Math::CoordF(pGraphic->getCenterView().x - 930, 15));
         sf::Text shadow = p1life->getText();
         shadow.setFillColor(sf::Color(255, 255, 255, 80));
@@ -267,7 +276,8 @@ namespace Levels {
 
         if (isMultiplayer) {
             std::string hpStr2 = std::to_string(static_cast<int>(pPlayer2->getHP()));
-            p2life->setText("Player 2's HP: " + hpStr2);
+            if (pPlayer2->getHP() < 0) p2life->setText("Player 2's HP: 0");
+            else p2life->setText("Player 2's HP: " + hpStr2);
             p2life->setTextPos(Math::CoordF(pGraphic->getCenterView().x - 930, 65));
             sf::Text shadow2 = p2life->getText();
             shadow2.setFillColor(sf::Color(255, 255, 255, 80));

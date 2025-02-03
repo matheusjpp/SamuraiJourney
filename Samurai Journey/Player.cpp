@@ -233,6 +233,10 @@ namespace Entities {
 		void Player::setIsSlowed(bool isSl) {
 			isSlowed = isSl;
 		}
+
+		const int Player::getScorePoints() const {
+			return points;
+		}
 	}
 
 }

@@ -4,7 +4,7 @@ namespace Entities {
 
 	namespace Obstacles {
 
-		Fire::Fire(Math::CoordF pos, Math::CoordF size, ID idfire) : Obstacle(pos, size, id), damage(FIRE_DAMAGE) {
+		Fire::Fire(Math::CoordF pos, Math::CoordF size, ID id) : Obstacle(pos, size, id), damage(FIRE_DAMAGE) {
 			setTextures();
 		}
 
@@ -23,7 +23,7 @@ namespace Entities {
 		}
 
 		void Fire::setTextures() {
-			sprite = new GraphicalElements::Animation(body, Math::CoordF(2.2, 2.2));
+			sprite = new GraphicalElements::Animation(body, Math::CoordF(2, 2));
 
 			sprite->addNewAnimation(GraphicalElements::Animation_ID::bush, "fire.png", 12);
 		}

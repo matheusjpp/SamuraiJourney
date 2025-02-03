@@ -10,10 +10,12 @@ namespace Entities {
 		class Fire : public Obstacle {
 		private:
 			float damage;
+
 		public:
 			Fire(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(50, 120), ID id = ID::fire);
 
 			~Fire();
+
 			void update(float dt);
 
 			void execute();
@@ -21,7 +23,6 @@ namespace Entities {
 			void setTextures();
 
 			void updateSprite(float dt);
-
 		};
 
 	}

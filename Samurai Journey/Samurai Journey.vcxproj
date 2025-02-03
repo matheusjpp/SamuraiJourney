@@ -168,6 +168,7 @@
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="Portal.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="Subject.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Samurai Journey.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="State.cpp" />
@@ -224,6 +226,7 @@
     <None Include="level2.tmj" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\portal.png" />
     <Image Include="archer_attack.png" />
     <Image Include="archer_death.png" />
     <Image Include="archer_hurt.png" />

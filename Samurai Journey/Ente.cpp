@@ -20,7 +20,3 @@ void Ente::setID(ID id) {
 ID Ente::getID() const {
 	return id;
 }
-
-void Ente::mudarCor(sf::Color cor) {
-	body->setFillColor(cor);
-}

@@ -28,7 +28,6 @@ namespace Levels {
 	}
 
 	void BossLevel::verifyLevelEnd() {
-
 		if (!pPlayer1->getIsActive()) {
 			if (isMultiplayer) {
 				if (!pPlayer2->getIsActive()) {
@@ -54,7 +53,6 @@ namespace Levels {
 		if (enemiesCounter == 0) {
 			new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::win_menu);
 		}
-
 	}
 
 	void BossLevel::execute(float dt) {
