@@ -180,10 +180,13 @@ namespace Levels {
                     }
 
                     case 10: {
-                        Entities::Obstacles::Platform* fake = static_cast<Entities::Obstacles::Platform*>(obstacleFactory.FactoryMethod(Math::CoordF(posx, posy - 20), false, true, nullptr, nullptr, ID::platform));
+                        int aux = rand() % 2;
+                        if (aux == 1) {
+                            Entities::Obstacles::Platform* fake = static_cast<Entities::Obstacles::Platform*>(obstacleFactory.FactoryMethod(Math::CoordF(posx, posy - 20), false, true, nullptr, nullptr, ID::platform));
                             //new Entities::Obstacles::Platform(Math::CoordF(posx, posy), Math::CoordF(10.0f, 10.0f), true);
-                        if (fake) {
-                            staticEntities.addEntity(fake);
+                            if (fake) {
+                                staticEntities.addEntity(fake);
+                            }
                         }
                         break;
                     }
@@ -235,8 +238,6 @@ namespace Levels {
                         break;
                     }
                 }
-
-
             }
         }
 

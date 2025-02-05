@@ -79,11 +79,17 @@ namespace Managers {
 		void CollisionManager::manageCollision(Entities::MovingEntity* sender, Entities::Entity* otherEntity, Math::CoordF intersection, float dt) {
 			/* Collision notified by a player */
 			if (sender->getID() == ID::player) {
-				if (otherEntity->getID() == ID::platform ||
-					otherEntity->getID() == ID::wolf ||
+				if (otherEntity->getID() == ID::wolf ||
 					otherEntity->getID() == ID::archer ||
 					otherEntity->getID() == ID::demonsamurai) {
 					moveOnCollision(sender, otherEntity, intersection, dt);
+				}
+
+				else if (otherEntity->getID() == ID::platform) {
+					if (auto* plat = dynamic_cast<Entities::Obstacles::Platform*> (otherEntity)) {
+						if (!plat->getIsFake())
+							moveOnCollision(sender, otherEntity, intersection, dt);
+					}
 				}
 
 				else if (otherEntity->getID() == ID::bush) {
@@ -118,7 +124,15 @@ namespace Managers {
 
 			/* Collision notified by an enemy */ 
 			else if (sender->getID() == ID::wolf || sender->getID() == ID::archer || sender->getID() == ID::demonsamurai) {
-				moveOnCollision(sender, otherEntity, intersection, dt);
+				if (otherEntity->getID() == ID::platform) {
+					if (auto* plat = dynamic_cast<Entities::Obstacles::Platform*> (otherEntity)) {
+						if (!plat->getIsFake())
+							moveOnCollision(sender, otherEntity, intersection, dt);
+					}
+				}
+
+				else
+					moveOnCollision(sender, otherEntity, intersection, dt);
 			}
 
 			else if (sender->getID() == ID::arrow) {
