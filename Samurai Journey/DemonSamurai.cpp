@@ -22,6 +22,22 @@ namespace Entities {
 			
 		}
 
+		int DemonSamurai::getCont() {
+			return cont;
+		}
+
+		bool DemonSamurai::getIsLastBuffed() {
+			return isLastBuffed;
+		}
+
+		bool DemonSamurai::getIsShouting(){
+			return isShouting;
+		}
+
+		const float DemonSamurai::getShoutTimer()const {
+			return shoutTimer;
+		}
+
 		void DemonSamurai::shout() {
 			//setDmg(dobro tbm)
 				//dobra tudo aqui em cima confia 

@@ -16,6 +16,8 @@ namespace Entities {
 
 			void update(float dt);
 
+			const bool getIsFake();
+
 			void execute();
 
 			void setTextures();

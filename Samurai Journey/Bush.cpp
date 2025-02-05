@@ -36,6 +36,10 @@ namespace Entities {
 			sprite->update(GraphicalElements::Animation_ID::bush, false, position, dt);
 		}
 
+		//const float Bush::getSlowness() const {
+			//return slowness;
+		//}
+
 	}
 
 }

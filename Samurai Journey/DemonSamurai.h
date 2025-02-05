@@ -41,6 +41,14 @@ namespace Entities {
 			void setTextures();
 
 			void updateSprite(float dt);
+
+			static int getCont();
+
+			static bool getIsLastBuffed();
+
+			const float getShoutTimer() const;
+
+			bool getIsShouting();
 		};
 
 	}

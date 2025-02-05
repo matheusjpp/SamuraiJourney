@@ -16,7 +16,7 @@ namespace Entities {
 
 			~Bush();
 
-			const float getSlowness() const;
+			//const float getSlowness() const;
 
 			void update(float dt);
 
@@ -25,6 +25,8 @@ namespace Entities {
 			void setTextures();
 
 			void updateSprite(float dt);
+
+			const float getSlowness() const;
 		};
 
 	}

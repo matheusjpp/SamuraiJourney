@@ -113,6 +113,8 @@ namespace List {
             head = tail = nullptr;
             size = 0;
         }
+        
+
 
         // Retorna o tamanho da lista
         size_t getSize() const { return size; }

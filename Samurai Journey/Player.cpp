@@ -177,6 +177,14 @@ namespace Entities {
 			return isDefending;
 		}
 
+		bool Player::getIsHealing() {
+			return isHealing;
+		}
+
+		const float Player::getHealTimer() const {
+			return healTimer;
+		}
+
 		void Player::usePotion() {
 			isHealing = true;
 		}

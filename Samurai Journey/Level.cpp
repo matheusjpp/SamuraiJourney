@@ -300,4 +300,143 @@ namespace Levels {
     void Level::setPlayerPoints(int points) {
         pPlayer1->setPoints(points);
     }
+
+    void Level::saveLevel(const char* filePath) {
+        json j;
+
+        j["GAME"] = pStateM->getCurrentState()->getID();
+
+        if (pPlayer1) {
+            j["Player1"]["position"]["x"] = pPlayer1->getPosition().x;
+            j["Player1"]["position"]["y"] = pPlayer1->getPosition().y;
+            j["Player1"]["isActive"] = pPlayer1->getIsActive();
+            j["Player1"]["isPlayer1"] = pPlayer1->getIsPlayer1();
+            j["Player1"]["points"] = pPlayer1->getScorePoints();
+            j["Player1"]["isDefending"] = pPlayer1->getIsDefending();
+            j["Player1"]["isHealing"] = pPlayer1->getIsHealing();
+            j["Player1"]["healTimer"] = pPlayer1->getHealTimer();
+            j["Player1"]["hp"] = pPlayer1->getHP();
+            j["Player1"]["isDying"] = pPlayer1->getIsDying();
+            j["Player1"]["isHurting"] = pPlayer1->getIsHurting();
+            j["Player1"]["isAttacking"] = pPlayer1->getIsAttacking();
+            j["Player1"]["attackColdown"] = pPlayer1->getAttackCooldown();
+            j["Player1"]["cooldownTimer"] = pPlayer1->getCooldownTimer();
+            j["Player1"]["attackTimer"] = pPlayer1->getAttacktime();
+            j["Player1"]["deathTimer"] = pPlayer1->getDeathTimer();
+            j["Player1"]["hurtingTimer"] = pPlayer1->getHurtingTimer();
+            j["Player1"]["impactTimer"] = pPlayer1->getImpactTimer();
+            j["Player1"]["isFacingLeft"] = pPlayer1->getIsFacingLeft();
+            j["Player1"]["isMoving"] = pPlayer1->getIsMoving();
+        }
+        if (pPlayer2) {
+            j["Player2"]["position"]["x"] = pPlayer2->getPosition().x;
+            j["Player2"]["position"]["y"] = pPlayer2->getPosition().y;
+            j["Player2"]["isActive"] = pPlayer2->getIsActive();
+            j["Player2"]["isPlayer1"] = pPlayer2->getIsPlayer1();
+            j["Player2"]["points"] = pPlayer2->getScorePoints();
+            j["Player2"]["isDefending"] = pPlayer2->getIsDefending();
+            j["Player2"]["isHealing"] = pPlayer2->getIsHealing();
+            j["Player2"]["healTimer"] = pPlayer2->getHealTimer();
+            j["Player2"]["hp"] = pPlayer2->getHP();
+            j["Player2"]["isDying"] = pPlayer2->getIsDying();
+            j["Player2"]["isHurting"] = pPlayer2->getIsHurting();
+            j["Player2"]["isAttacking"] = pPlayer2->getIsAttacking();
+            j["Player2"]["attackColdown"] = pPlayer2->getAttackCooldown();
+            j["Player2"]["cooldownTimer"] = pPlayer2->getCooldownTimer();
+            j["Player2"]["attackTimer"] = pPlayer2->getAttacktime();
+            j["Player2"]["deathTimer"] = pPlayer2->getDeathTimer();
+            j["Player2"]["hurtingTimer"] = pPlayer2->getHurtingTimer();
+            j["Player2"]["impactTimer"] = pPlayer2->getImpactTimer();
+            j["Player2"]["isFacingLeft"] = pPlayer2->getIsFacingLeft();
+            j["Player2"]["isMoving"] = pPlayer2->getIsMoving();
+        }
+        //save obstacles
+        for (auto itS = staticEntities.begin(); itS != staticEntities.end(); itS++) {
+            
+            auto& sE = *itS;
+
+            json entity;
+
+            entity["type"] = sE->getID();
+            entity["position"]["x"] = sE->getPosition().x;
+            entity["position"]["y"] = sE->getPosition().y;
+            entity["isFake"] = static_cast<Entities::Obstacles::Platform*>(sE)->getIsFake();
+            //entity["slowness"] = static_cast<Entities::Obstacles::Bush*>(sE)->getSlowness();
+
+            j["obstacles"].push_back(entity);
+        }
+        //save enemies
+        for (auto itM = movingEntities.begin(); itM != movingEntities.end(); itM++) {
+            auto& sM = *itM;
+
+            if (sM->getID() != ID::player) {
+                if (sM->getID() == ID::wolf || sM->getID()== ID::archer || sM->getID()== ID::demonsamurai) {
+                     json enemy;
+                     enemy["position"]["x"] = sM->getPosition().x;
+                     enemy["position"]["y"] = sM->getPosition().y;
+                     enemy["isActive"] = sM->getIsActive();
+                     enemy["isFacingLeft"] = static_cast<Entities::MovingEntity*>(sM)->getIsFacingLeft();
+                     enemy["isMoving"] = static_cast<Entities::MovingEntity*>(sM)->getIsMoving();
+                     enemy["counted"] = static_cast<Entities::Characters::Enemy*>(sM)->getCounted();
+                     enemy["hp"] = static_cast<Entities::Characters::Enemy*> (sM)->getHP();
+                     enemy["isDying"] = static_cast<Entities::Characters::Enemy*> (sM)->getIsDying();
+                     enemy["isHurting"] = static_cast<Entities::Characters::Enemy*> (sM)->getIsHurting();
+                     enemy["isAttacking"] = static_cast<Entities::Characters::Enemy*> (sM)->getIsAttacking();
+                     enemy["attackColdown"] = static_cast<Entities::Characters::Enemy*> (sM)->getAttackCooldown();
+                     enemy["cooldownTimer"] = static_cast<Entities::Characters::Enemy*> (sM)->getCooldownTimer();
+                     enemy["attackTimer"] = static_cast<Entities::Characters::Enemy*> (sM)->getAttacktime();
+                     enemy["deathTimer"] = static_cast<Entities::Characters::Enemy*> (sM)->getDeathTimer();
+                     enemy["hurtingTimer"] = static_cast<Entities::Characters::Enemy*> (sM)->getHurtingTimer();
+                     enemy["impactTimer"] = static_cast<Entities::Characters::Enemy*> (sM)->getImpactTimer();
+                     enemy["isFacingLeft"] = static_cast<Entities::Characters::Enemy*> (sM)->getIsFacingLeft();
+                     enemy["isMoving"] = static_cast<Entities::Characters::Enemy*> (sM)->getIsMoving();   
+
+                     if (sM->getID() == ID::wolf) {
+                         enemy["isFirstAttack"] = static_cast<Entities::Characters::Wolf*>(sM)->getIsFirstAttack();
+                         enemy["FirstAttackTimer"] = static_cast<Entities::Characters::Wolf*>(sM)->getFirstAttackTimer();
+                     }
+                     if (sM->getID() == ID::archer) {
+                         enemy["arrowDelayTimer"] = static_cast<Entities::Characters::Archer*>(sM)->getArrowDelayTimer();
+                         enemy["movingDelayTimer"] = static_cast<Entities::Characters::Archer*>(sM)->getMovingDelayTimer();
+                     }
+                     if (sM->getID() == ID::demonsamurai) {
+                         enemy["cont"] = static_cast<Entities::Characters::DemonSamurai*>(sM)->getCont();
+                         enemy["isLastBuffed"] = static_cast<Entities::Characters::DemonSamurai*>(sM)->getIsLastBuffed();
+                         enemy["shoutTimer"] = static_cast<Entities::Characters::DemonSamurai*>(sM)->getShoutTimer();
+                         enemy["isShouting"] = static_cast<Entities::Characters::DemonSamurai*>(sM)->getIsShouting();
+                     }
+                     j["enemies"].push_back(enemy);
+                }
+           }
+        }
+
+        //save projectile
+        for (auto itM = movingEntities.begin(); itM != movingEntities.end(); itM++) {
+            auto& sM = *itM;
+
+            json projec;
+            if (sM->getID() == ID::arrow) {
+                json projec;
+                projec["position"]["x"] = sM->getPosition().x;
+                projec["position"]["y"] = sM->getPosition().y;
+                projec["isActive"] = sM->getIsActive();
+                //isFacingLeft no reason to save
+                projec["isMoving"] = static_cast<Entities::MovingEntity*>(sM)->getIsMoving();
+                projec["initialX"] = static_cast<Entities::Arrow*>(sM)->getInitialX();
+                projec["distanceTraveled"] = static_cast<Entities::Arrow*>(sM)->getDistanceTraveled();
+            }
+            j["projectiles"].push_back(projec);
+        }
+
+        //open file to write
+
+        std::ofstream file(filePath, std::ofstream::trunc);
+        if (!file.is_open()) {
+            cout << "Error file(save)" << endl;
+        }
+        file << j.dump(4);
+        file.close();
+    }
 }
+
+
