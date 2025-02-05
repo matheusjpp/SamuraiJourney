@@ -69,6 +69,14 @@ namespace Entities {
 			render();
 		}
 
+		const float Archer::getArrowDelayTimer() const{
+			return arrowDelayTimer;
+		}
+
+		float Archer::getMovingDelayTimer() {
+			return movingDelayTimer;
+		}
+
 		void Archer::attack() {
 			if (canAttack()) {
 				isAttacking = true;

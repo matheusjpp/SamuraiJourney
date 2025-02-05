@@ -27,6 +27,10 @@ namespace Entities {
 			return isDying;
 		}
 
+		const float Character::getAttackCooldown() const {
+			return attackCooldown;
+		}
+
 		void Character::receiveDamage(float damage) {
 			hp -= damage;
 			isHurting = true;
@@ -75,7 +79,29 @@ namespace Entities {
 		bool Character::getIsAttacking() const {
 			return isAttacking;
 		}
+		bool Character::getIsHurting() {
+			return isHurting;
+		}
 
+		float Character::getAttacktime() {
+			return attackingTime;
+		}
+
+		const float Character::getCooldownTimer() const {
+			return cooldownTimer;
+		}
+
+		const float Character::getDeathTimer() const {
+			return deathTimer;
+		}
+
+		const float Character::getHurtingTimer() const {
+			return hurtingTimer;
+		}
+
+		const float Character::getImpactTimer() const {
+			return impactTimer;
+		}
 	}
 
 }

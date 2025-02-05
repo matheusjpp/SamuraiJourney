@@ -34,6 +34,10 @@ namespace Entities {
 		return isFacingLeft;
 	}
 
+	bool MovingEntity::getIsMoving() {
+		return isMoving;
+	}
+
 	void MovingEntity::move(bool left) {
 		if (canMove) {
 			isMoving = true;

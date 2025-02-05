@@ -41,6 +41,8 @@ namespace Entities {
 
 			bool getCanJump() const;
 
+			bool getIsHurting();
+
 			virtual void update(float dt) = 0;
 
 			virtual void execute() = 0;
@@ -56,6 +58,18 @@ namespace Entities {
 			virtual void setTextures() = 0;
 
 			virtual void updateSprite(float dt) = 0;
+
+			const float getAttackCooldown() const;
+
+			const float getCooldownTimer() const;
+
+			float getAttacktime();
+
+			const float getDeathTimer() const;
+
+			const float getHurtingTimer() const;
+
+			const float getImpactTimer() const;
 		};
 
 

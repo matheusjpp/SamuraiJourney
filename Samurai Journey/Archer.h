@@ -34,6 +34,10 @@ namespace Entities {
 
 			void execute();
 
+			const float getArrowDelayTimer() const;
+
+			 float getMovingDelayTimer() ;
+
 			void attack();
 
 			void setTextures();

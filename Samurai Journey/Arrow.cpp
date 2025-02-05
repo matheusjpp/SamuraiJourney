@@ -13,6 +13,14 @@ namespace Entities {
 		
 	}
 
+	float Arrow::getDistanceTraveled()  {
+		return distanceTraveled;
+	}
+
+	const float Arrow::getInitialX() const {
+		return initialX;
+	}
+
 	const float Arrow::getDamagePoints() const {
 		return damagePoints;
 	}

@@ -34,6 +34,8 @@ namespace Entities {
 
 		bool getIsFacingLeft() const;
 
+		bool getIsMoving();
+
 		void move(bool left);
 
 		void stopMoving();

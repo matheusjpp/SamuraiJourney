@@ -24,6 +24,10 @@ namespace Entities {
 		
 		const float getDamagePoints() const;
 
+		const float getInitialX() const;
+
+		float getDistanceTraveled();
+
 		void update(float dt);
 
 		void execute();

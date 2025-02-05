@@ -70,6 +70,10 @@ namespace Entities {
 
 			bool getIsDefending();
 
+			bool getIsHealing();
+
+			const float getHealTimer() const;
+
 			void usePotion();
 
 			void centerCamera();

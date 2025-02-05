@@ -31,6 +31,10 @@ namespace Entities {
 
 		}
 
+		const bool Platform::getIsFake() {
+			return isFake;
+		}
+
 	}
 
 }

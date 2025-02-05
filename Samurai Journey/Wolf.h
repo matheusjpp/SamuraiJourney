@@ -41,6 +41,10 @@ namespace Entities {
 
 			void attack();
 
+			bool getIsFirstAttack();
+
+			const float getFirstAttackTimer() const;
+
 			const float getDamagePoints() const;
 
 			void setTextures();
