@@ -9,7 +9,7 @@ namespace Managers {
 
 		CollisionManager* CollisionManager::pCollision = nullptr;
 
-		CollisionManager::CollisionManager(List::EntitiesList* movingEntities, List::EntitiesList* staticEntities) : movingEntities(movingEntities), staticEntities(staticEntities) {
+		CollisionManager::CollisionManager(List::EntitiesList* movingEntities, List::EntitiesList* staticEntities) : Mediator(movingEntities, staticEntities) {
 
 		}
 

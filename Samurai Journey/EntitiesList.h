@@ -10,7 +10,6 @@ namespace List {
         ~EntitiesList();
         void addEntity(Entities::Entity* pEntity);
         void removeEntity(Entities::Entity* pEntity);
-        void removeEntity(unsigned int ind);
         int getSize() const;
         void execute(float dt);
         List<Entities::Entity*>::Iterator begin();

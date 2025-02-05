@@ -24,7 +24,7 @@ namespace Levels {
 
 	void ArcherLevel::execute(float dt) {
 		updateCamera(970);
-		cout << pPlayer1->getPosition().x << endl;
+		cout << pPlayer1->getScorePoints() << endl;
 		background.execute(dt);
 		mapSprite->update(GraphicalElements::Animation_ID::map1, false, (0, 0), dt);
 		movingEntities.execute(dt);
@@ -46,7 +46,7 @@ namespace Levels {
 				pPlayer2->changeObserverState(true);
 			}
 		}
-
+		
 		verifyLevelEnd();
 		render();
 	}
@@ -70,6 +70,7 @@ namespace Levels {
 					if (enemy->getIsActive()) {
 						enemiesCounter++;
 					}
+					
 				}
 			}
 		}

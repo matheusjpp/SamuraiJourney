@@ -22,9 +22,6 @@ namespace Managers {
 
 		class CollisionManager : public Mediator {
 		private:
-			List::EntitiesList* staticEntities;
-			List::EntitiesList* movingEntities;
-
 			static CollisionManager* pCollision;
 			
 			CollisionManager(List::EntitiesList* movingEntities = nullptr, List::EntitiesList* staticEntities = nullptr);

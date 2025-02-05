@@ -18,7 +18,6 @@ namespace Levels {
 		createMap("level2.tmj");
 
 		if (playerPoints > 0) {
-			cout << "pontos nao tao sendo atribuidos" << endl;
 			pPlayer1->setPoints(playerPoints);
 		}
 	}
@@ -61,7 +60,7 @@ namespace Levels {
 		mapSprite->update(GraphicalElements::Animation_ID::map2, false, (0, 0), dt);
 		movingEntities.execute(dt);
 		staticEntities.execute(dt);
-
+		
 		if (pPlayer1->getIsDying()) {
 			pPlayer1->changeObserverState(false);
 		}
