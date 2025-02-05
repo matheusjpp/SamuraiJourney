@@ -147,9 +147,11 @@
     <ClInclude Include="DemonSamurai.h" />
     <ClInclude Include="EndGameMenu.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="Ente.h" />
     <ClInclude Include="EntitiesList.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EventsManager.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="Game.h" />
@@ -165,9 +167,11 @@
     <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="ObstacleFactory.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
@@ -191,9 +195,11 @@
     <ClCompile Include="DemonSamurai.cpp" />
     <ClCompile Include="EndGameMenu.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="Ente.cpp" />
     <ClCompile Include="EntitiesList.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="EventsManager.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -208,8 +214,10 @@
     <ClCompile Include="MovingEntity.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="ObstacleFactory.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Samurai Journey.cpp" />
     <ClCompile Include="Player.cpp" />

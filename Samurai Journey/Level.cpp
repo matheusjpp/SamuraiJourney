@@ -4,6 +4,10 @@ namespace Levels {
 
     Managers::GraphicManager* Level::pGraphic = Managers::GraphicManager::getInstance();
 
+    Entities::Factories::EnemyFactory Level::enemyFactory;
+    Entities::Factories::PlayerFactory Level::playerFactory;
+    Entities::Factories::ObstacleFactory Level::obstacleFactory;
+
 	Level::Level(bool isMultiplayer, Managers::States::State_ID id) : pPlayer1(nullptr), pPlayer2(nullptr),
         p1life(nullptr), p2life(nullptr), isMultiplayer(isMultiplayer),
         Managers::States::State(id)
@@ -63,7 +67,6 @@ namespace Levels {
 
         try {
             file >> tmjData;
-            std::cout << "Arquivo JSON carregado com sucesso!" << std::endl;
         }
         catch (const std::exception& e) {
             std::cerr << "Erro ao processar JSON: " << e.what() << std::endl;
@@ -85,7 +88,8 @@ namespace Levels {
                     }
 
                     case 1: {
-                        Entities::Obstacles::Platform* tmp = new Entities::Obstacles::Platform(Math::CoordF(posx/*-5*/, posy + 8), Math::CoordF(10.0f, 10.0f), false);
+                        Entities::Obstacles::Platform* tmp = static_cast<Entities::Obstacles::Platform*>(obstacleFactory.FactoryMethod(Math::CoordF(posx, posy + 8), false, false, nullptr, nullptr, ID::platform));
+                            //new Entities::Obstacles::Platform(Math::CoordF(posx/*-5*/, posy + 8), Math::CoordF(10.0f, 10.0f), false);
                         if (tmp) {
                             staticEntities.addEntity(tmp);
                         }
@@ -93,7 +97,8 @@ namespace Levels {
                     }
 
                     case 2: {
-                        pPlayer1 = new Entities::Characters::Player(Math::CoordF(posx, posy), true, this);
+                        pPlayer1 = static_cast<Entities::Characters::Player*>(playerFactory.FactoryMethod(Math::CoordF(posx, posy), true, false, nullptr, this, ID::player));
+                            //new Entities::Characters::Player(Math::CoordF(posx, posy), true, this);
                         if (pPlayer1) {
                             movingEntities.addEntity(pPlayer1);
                         }
@@ -101,7 +106,8 @@ namespace Levels {
                     }
 
                     case 3: {
-                        Entities::Characters::Wolf* w = new Entities::Characters::Wolf(Math::CoordF(posx, posy));
+                        Entities::Characters::Wolf* w = static_cast<Entities::Characters::Wolf*>(enemyFactory.FactoryMethod(Math::CoordF(posx, posy), false, false, nullptr, nullptr, ID::wolf));
+                            //new Entities::Characters::Wolf(Math::CoordF(posx, posy));
                         if (w) {
                             movingEntities.addEntity(w);
                         }
@@ -111,7 +117,8 @@ namespace Levels {
                     case 4: {
                         int aux = rand() % 2;
                         if (aux == 1) {
-                            Entities::Characters::Wolf* w1 = new Entities::Characters::Wolf(Math::CoordF(posx, posy));
+                            Entities::Characters::Wolf* w1 = static_cast<Entities::Characters::Wolf*>(enemyFactory.FactoryMethod(Math::CoordF(posx, posy), false, false, nullptr, nullptr, ID::wolf));
+                                //new Entities::Characters::Wolf(Math::CoordF(posx, posy));
                             if (w1) {
                                 movingEntities.addEntity(w1);
                             }
@@ -120,7 +127,8 @@ namespace Levels {
                     }
 
                     case 5: {
-                        Entities::Characters::Archer* a = new Entities::Characters::Archer(Math::CoordF(posx, posy), &movingEntities);
+                        Entities::Characters::Archer* a = static_cast<Entities::Characters::Archer*>(enemyFactory.FactoryMethod(Math::CoordF(posx, posy), false, false, &movingEntities, nullptr, ID::archer));
+                            //new Entities::Characters::Archer(Math::CoordF(posx, posy), &movingEntities);
                         if (a) {
                             movingEntities.addEntity(a);
                         }
@@ -130,7 +138,8 @@ namespace Levels {
                     case 6: {
                         int aux = rand() % 2;
                         if (aux == 1) {
-                            Entities::Characters::Archer* a1 = new Entities::Characters::Archer(Math::CoordF(posx, posy), &movingEntities);
+                            Entities::Characters::Archer* a1 = static_cast<Entities::Characters::Archer*>(enemyFactory.FactoryMethod(Math::CoordF(posx, posy), false, false, &movingEntities, nullptr, ID::archer));
+                                //new Entities::Characters::Archer(Math::CoordF(posx, posy), &movingEntities);
                             if (a1) {
                                 movingEntities.addEntity(a1);
                             }
@@ -139,7 +148,8 @@ namespace Levels {
                     }
 
                     case 7: {
-                        Entities::Obstacles::Fire* fire = new Entities::Obstacles::Fire(Math::CoordF(posx, posy - 20));
+                        Entities::Obstacles::Fire* fire = static_cast<Entities::Obstacles::Fire*>(obstacleFactory.FactoryMethod(Math::CoordF(posx, posy - 20), false, false, nullptr, nullptr, ID::fire));
+                            //new Entities::Obstacles::Fire(Math::CoordF(posx, posy - 20));
                         if (fire) {
                             staticEntities.addEntity(fire);
                         }
@@ -149,7 +159,8 @@ namespace Levels {
                     case 8: {
                         int aux = rand() % 2;
                         if (aux == 1) {
-                            Entities::Obstacles::Fire* fire = new Entities::Obstacles::Fire(Math::CoordF(posx, posy - 20));
+                            Entities::Obstacles::Fire* fire = static_cast<Entities::Obstacles::Fire*>(obstacleFactory.FactoryMethod(Math::CoordF(posx, posy - 20), false, false, nullptr, nullptr, ID::fire));
+                                //new Entities::Obstacles::Fire(Math::CoordF(posx, posy - 20));
                             if (fire) {
                                 staticEntities.addEntity(fire);
                             }
@@ -159,7 +170,8 @@ namespace Levels {
 
                     case 9: {
                         if (isMultiplayer) {
-                            pPlayer2 = new Entities::Characters::Player(Math::CoordF(posx, posy), false, this);
+                            pPlayer2 = static_cast<Entities::Characters::Player*>(playerFactory.FactoryMethod(Math::CoordF(posx, posy), false, false, nullptr, this, ID::player));
+                                //new Entities::Characters::Player(Math::CoordF(posx, posy), false, this);
                             if (pPlayer2) {
                                 movingEntities.addEntity(pPlayer2);
                             }
@@ -168,7 +180,8 @@ namespace Levels {
                     }
 
                     case 10: {
-                        Entities::Obstacles::Platform* fake = new Entities::Obstacles::Platform(Math::CoordF(posx, posy), Math::CoordF(10.0f, 10.0f), true);
+                        Entities::Obstacles::Platform* fake = static_cast<Entities::Obstacles::Platform*>(obstacleFactory.FactoryMethod(Math::CoordF(posx, posy - 20), false, true, nullptr, nullptr, ID::platform));
+                            //new Entities::Obstacles::Platform(Math::CoordF(posx, posy), Math::CoordF(10.0f, 10.0f), true);
                         if (fake) {
                             staticEntities.addEntity(fake);
                         }
@@ -176,7 +189,8 @@ namespace Levels {
                     }
 
                     case 11: {
-                        Entities::Characters::DemonSamurai* demon = new Entities::Characters::DemonSamurai(Math::CoordF(posx, posy));
+                        Entities::Characters::DemonSamurai* demon = static_cast<Entities::Characters::DemonSamurai*>(enemyFactory.FactoryMethod(Math::CoordF(posx, posy), false, false, nullptr, nullptr, ID::demonsamurai));
+                            //new Entities::Characters::DemonSamurai(Math::CoordF(posx, posy));
                         if (demon) {
                             movingEntities.addEntity(demon);
                         }
@@ -184,7 +198,8 @@ namespace Levels {
                     }
 
                     case 12: {
-                        Entities::Obstacles::Bush* bush = new Entities::Obstacles::Bush(Math::CoordF(posx, posy - 15));
+                        Entities::Obstacles::Bush* bush = static_cast<Entities::Obstacles::Bush*>(obstacleFactory.FactoryMethod(Math::CoordF(posx, posy - 15), false, false, nullptr, nullptr, ID::bush));
+                            //new Entities::Obstacles::Bush(Math::CoordF(posx, posy - 15));
                         if (bush) {
                             staticEntities.addEntity(bush);
                         }
@@ -195,13 +210,15 @@ namespace Levels {
                         int aux = rand() % 2;
 
                         if (aux == 1) {
-                            Entities::Characters::DemonSamurai* demon = new Entities::Characters::DemonSamurai(Math::CoordF(posx, posy - 250));
+                            Entities::Characters::DemonSamurai* demon = static_cast<Entities::Characters::DemonSamurai*>(enemyFactory.FactoryMethod(Math::CoordF(posx, posy - 250), false, false, nullptr, nullptr, ID::demonsamurai));
+                                //new Entities::Characters::DemonSamurai(Math::CoordF(posx, posy - 250));
                             if (demon) {
                                 movingEntities.addEntity(demon);
                             }
                         }
                         else {
-                            Entities::Obstacles::Bush* bush = new Entities::Obstacles::Bush(Math::CoordF(posx + 20, posy - 5));
+                            Entities::Obstacles::Bush* bush = static_cast<Entities::Obstacles::Bush*>(obstacleFactory.FactoryMethod(Math::CoordF(posx + 20, posy - 5), false, false, nullptr, nullptr, ID::bush));
+                                //new Entities::Obstacles::Bush(Math::CoordF(posx + 20, posy - 5));
                             if (bush) {
                                 staticEntities.addEntity(bush);
                             }
@@ -210,7 +227,8 @@ namespace Levels {
                     }
 
                     case 14: {
-                        Entities::Obstacles::Portal* portal = new Entities::Obstacles::Portal(Math::CoordF(posx, posy));
+                        Entities::Obstacles::Portal* portal = static_cast<Entities::Obstacles::Portal*>(obstacleFactory.FactoryMethod(Math::CoordF(posx, posy), false, false, nullptr, nullptr, ID::portal));
+                            //new Entities::Obstacles::Portal(Math::CoordF(posx, posy));
                         if (portal) {
                             staticEntities.addEntity(portal);
                         }

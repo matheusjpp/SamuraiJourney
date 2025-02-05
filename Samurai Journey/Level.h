@@ -1,5 +1,5 @@
 #pragma once
-#include "ConcreteMenu.h"
+#include "PlayerFactory.h"
 #include <fstream>
 
 #include <nlohmann/json.hpp>
@@ -25,6 +25,10 @@ namespace Levels {
 
 		Menu::Text* p1life;
 		Menu::Text* p2life;
+
+		static Entities::Factories::EnemyFactory enemyFactory;
+		static Entities::Factories::PlayerFactory playerFactory;
+		static Entities::Factories::ObstacleFactory obstacleFactory;
 
 	public:
 		Level(bool isMultiplayer = false, Managers::States::State_ID id = Managers::States::State_ID::empty);
