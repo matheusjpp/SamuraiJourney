@@ -341,7 +341,7 @@ namespace Levels {
             j["Player1"]["isAttacking"] = pPlayer1->getIsAttacking();
             j["Player1"]["attackCooldown"] = pPlayer1->getAttackCooldown();
             j["Player1"]["cooldownTimer"] = pPlayer1->getCooldownTimer();
-            j["Player1"]["attackTimer"] = pPlayer1->getAttacktime();
+            j["Player1"]["attackTimer"] = pPlayer1->getAttackTimer();
             j["Player1"]["deathTimer"] = pPlayer1->getDeathTimer();
             j["Player1"]["hurtingTimer"] = pPlayer1->getHurtingTimer();
             j["Player1"]["impactTimer"] = pPlayer1->getImpactTimer();
@@ -364,7 +364,7 @@ namespace Levels {
                 j["Player2"]["isAttacking"] = pPlayer2->getIsAttacking();
                 j["Player2"]["attackCooldown"] = pPlayer2->getAttackCooldown();
                 j["Player2"]["cooldownTimer"] = pPlayer2->getCooldownTimer();
-                j["Player2"]["attackTimer"] = pPlayer2->getAttacktime();
+                j["Player2"]["attackTimer"] = pPlayer2->getAttackTimer();
                 j["Player2"]["deathTimer"] = pPlayer2->getDeathTimer();
                 j["Player2"]["hurtingTimer"] = pPlayer2->getHurtingTimer();
                 j["Player2"]["impactTimer"] = pPlayer2->getImpactTimer();
@@ -407,7 +407,7 @@ namespace Levels {
                 enemy["isAttacking"] = static_cast<Entities::Characters::Enemy*> (sM)->getIsAttacking();
                 enemy["attackCooldown"] = static_cast<Entities::Characters::Enemy*> (sM)->getAttackCooldown();
                 enemy["cooldownTimer"] = static_cast<Entities::Characters::Enemy*> (sM)->getCooldownTimer();
-                enemy["attackTimer"] = static_cast<Entities::Characters::Enemy*> (sM)->getAttacktime();
+                enemy["attackTimer"] = static_cast<Entities::Characters::Enemy*> (sM)->getAttackTimer();
                 enemy["deathTimer"] = static_cast<Entities::Characters::Enemy*> (sM)->getDeathTimer();
                 enemy["hurtingTimer"] = static_cast<Entities::Characters::Enemy*> (sM)->getHurtingTimer();
                 enemy["impactTimer"] = static_cast<Entities::Characters::Enemy*> (sM)->getImpactTimer();
@@ -493,6 +493,7 @@ namespace Levels {
                 pPlayer1->setHurtingTimer(j["Player1"]["hurtingTimer"]);
                 pPlayer1->setImpactTimer(j["Player1"]["impactTimer"]);
                 pPlayer1->setIsFacingLeft(j["Player1"]["isFacingLeft"]);
+                pPlayer1->setAttackTimer(j["Player1"]["attackTimer"]);
 
                 movingEntities.addEntity(pPlayer1);
             }
@@ -519,6 +520,7 @@ namespace Levels {
                     pPlayer2->setHurtingTimer(j["Player2"]["hurtingTimer"]);
                     pPlayer2->setImpactTimer(j["Player2"]["impactTimer"]);
                     pPlayer2->setIsFacingLeft(j["Player2"]["isFacingLeft"]);
+                    pPlayer2->setAttackTimer(j["Player1"]["attackTimer"]);
 
                     movingEntities.addEntity(pPlayer2);
                 }
@@ -590,6 +592,7 @@ namespace Levels {
                         wolf->setImpactTimer(enemyData["impactTimer"]);
                         wolf->setIsFirstAttack(enemyData["isFirstAttack"]);
                         wolf->setFirstAttackTimer(enemyData["FirstAttackTimer"]);
+                        wolf->setAttackTimer(enemyData["attackTimer"]);
 
                         movingEntities.addEntity(wolf);
                     }
@@ -615,6 +618,7 @@ namespace Levels {
                         archer->setImpactTimer(enemyData["impactTimer"]);
                         archer->setArrowDelayTimer(enemyData["arrowDelayTimer"]);
                         archer->setMovingDelayTimer(enemyData["movingDelayTimer"]);
+                        archer->setAttackTimer(enemyData["attackTimer"]);
 
                         movingEntities.addEntity(archer);
                     }
@@ -642,6 +646,7 @@ namespace Levels {
                         demonsamurai->setIsLastBuffed(enemyData["isLastBuffed"]);
                         demonsamurai->setShoutTimer(enemyData["shoutTimer"]);
                         demonsamurai->setIsShouting(enemyData["isShouting"]);
+                        demonsamurai->setAttackTimer(enemyData["attackTimer"]);
 
                         movingEntities.addEntity(demonsamurai);
                     }

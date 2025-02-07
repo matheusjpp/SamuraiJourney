@@ -26,25 +26,29 @@ namespace Entities {
 	}
 
 	void Arrow::update(float dt) {
-		cout << "x: " << position.x << "   y: " << position.y << endl;
 		if (isFacingLeft) {
-			velocity.x -= ARROW_SPEED * dt;
+			velocity.x -= ARROW_SPEED;
 		}
 		else {
-			velocity.x += ARROW_SPEED * dt;
+			velocity.x += ARROW_SPEED;
 		}
 
+		velocity.x *= exp(-ARROW_AIR_RESISTANCE * dt);
 		velocity.y += ARROW_GRAVITY * dt; // Incrementa velocidade vertical
+		cout << velocity.x << endl;
 		position.x += velocity.x * dt;
 		position.y += velocity.y * dt;
 
 		distanceTraveled = fabs(initialX - position.x);
-		damagePoints = max(ARROW_MINDAMAGE, ARROW_MAXDAMAGE - (distanceTraveled / 40.0f));
+		damagePoints = max(ARROW_MINDAMAGE, ARROW_MAXDAMAGE * (distanceTraveled / 80.0f));
+
+		if (damagePoints == ARROW_MINDAMAGE) {
+			velocity.y += ARROW_GRAVITY * dt;
+		}
 
 		pCollision->notifyCollision(this, dt);
 		updateSprite(dt);
 		body->setPosition(sf::Vector2f(position.x, position.y));
-
 	}
 
 	void Arrow::execute() {

@@ -4,8 +4,9 @@
 #define ARROW_SIZE_X 15.0f
 #define ARROW_SIZE_Y 10.0f
 
-#define ARROW_GRAVITY 3.0f
-#define ARROW_SPEED 150.0f
+#define ARROW_GRAVITY 4.0f
+#define ARROW_SPEED 300.0f
+#define ARROW_AIR_RESISTANCE 100.0f
 
 #define ARROW_MAXDAMAGE 20.0f
 #define ARROW_MINDAMAGE 10.0f

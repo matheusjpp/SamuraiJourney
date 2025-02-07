@@ -81,13 +81,15 @@ namespace Entities {
 
 			const float getCooldownTimer() const;
 
-			float getAttacktime();
+			float getAttackTimer();
 
 			const float getDeathTimer() const;
 
 			const float getHurtingTimer() const;
 
 			const float getImpactTimer() const;
+
+			const float getAttackTimer() const;
 		};
 
 

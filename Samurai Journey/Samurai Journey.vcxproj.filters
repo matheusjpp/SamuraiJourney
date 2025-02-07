@@ -308,6 +308,9 @@
     <None Include="level1.tmj">
       <Filter>Arquivos de Recurso</Filter>
     </None>
+    <None Include="save.json">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="p1_idle.png">

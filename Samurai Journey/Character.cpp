@@ -83,8 +83,8 @@ namespace Entities {
 			return isHurting;
 		}
 
-		float Character::getAttacktime() {
-			return attackingTime;
+		float Character::getAttackTimer() {
+			return attackTimer;
 		}
 
 		const float Character::getCooldownTimer() const {
@@ -137,6 +137,10 @@ namespace Entities {
 
 		void Character::setImpactTimer(float iTimer) {
 			impactTimer = iTimer;
+		}
+
+		const float Character::getAttackTimer() const {
+			return attackTimer;
 		}
 	}
 
