@@ -137,6 +137,7 @@
     <ClInclude Include="Archer.h" />
     <ClInclude Include="ArcherLevel.h" />
     <ClInclude Include="Arrow.h" />
+    <ClInclude Include="ArrowFactory.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BossLevel.h" />
     <ClInclude Include="Bush.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="Archer.cpp" />
     <ClCompile Include="ArcherLevel.cpp" />
     <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="ArrowFactory.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BossLevel.cpp" />
     <ClCompile Include="Bush.cpp" />

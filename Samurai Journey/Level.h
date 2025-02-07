@@ -1,5 +1,5 @@
 #pragma once
-#include "PlayerFactory.h"
+#include "ArrowFactory.h"
 #include <fstream>
 
 #include <nlohmann/json.hpp>
@@ -29,13 +29,14 @@ namespace Levels {
 		static Entities::Factories::EnemyFactory enemyFactory;
 		static Entities::Factories::PlayerFactory playerFactory;
 		static Entities::Factories::ObstacleFactory obstacleFactory;
+		static Entities::Factories::ArrowFactory arrowFactory;
 
 	public:
 		Level(bool isMultiplayer = false, Managers::States::State_ID id = Managers::States::State_ID::empty);
 
 		virtual ~Level();
 
-		void createMap(const char* filePath);
+		void createLevel(const char* filePath);
 
 		List::EntitiesList* getEntitiesList();
 
@@ -46,6 +47,8 @@ namespace Levels {
 		void render();
 
 		virtual void saveLevel(const char* filePath);
+
+		void loadLevel(const char* filePath);
 
 		virtual void verifyLevelEnd() = 0;
 

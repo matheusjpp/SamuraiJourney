@@ -15,7 +15,7 @@ namespace Levels {
 
 		pCollision->setLists(staticEntities, movingEntities);
 
-		createMap("level2.tmj");
+		createLevel("level2.tmj");
 
 		if (playerPoints > 0) {
 			pPlayer1->setPoints(playerPoints);

@@ -15,7 +15,7 @@ namespace Levels {
 
 		pCollision->setLists(staticEntities, movingEntities);
 
-		createMap("level1.tmj");
+		createLevel("level1.tmj");
 	}
 
 	ArcherLevel::~ArcherLevel() {
