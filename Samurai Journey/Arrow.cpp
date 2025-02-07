@@ -63,4 +63,12 @@ namespace Entities {
 		sprite->update(GraphicalElements::Animation_ID::arrow, isFacingLeft, position, dt);
 	}
 
+	void Arrow::setDistanceTraveled(float dTravel) {
+		distanceTraveled = dTravel;
+	}
+
+	void Arrow::setInitialX(float iX) {
+		initialX = iX;
+	}
+
 }

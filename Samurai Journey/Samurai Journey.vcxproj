@@ -173,6 +173,7 @@
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="Portal.h" />
+    <ClInclude Include="ProjectilesFactory.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="Subject.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="Portal.cpp" />
+    <ClCompile Include="ProjectilesFactory.cpp" />
     <ClCompile Include="Samurai Journey.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="State.cpp" />

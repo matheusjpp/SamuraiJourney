@@ -32,6 +32,24 @@ namespace Entities {
 			void setHP(float HP);
 
 			const bool getIsDying() const;
+			
+			void setIsDying(bool isD);
+
+			void setIsHurting(bool isH);
+
+			void setIsAttacking(bool isAttack);
+
+			void setAttackCooldown(float attackC);
+
+			void setCooldownTimer(float cTimer);
+
+			void setAttackTimer(float aTimer);
+
+			void setDeathTimer(float dTimer);
+
+			void setHurtingTimer(float hTimer);
+
+			void setImpactTimer(float iTimer);
 
 			void receiveDamage(float damage);
 

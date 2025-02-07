@@ -36,6 +36,8 @@ namespace Entities {
 
 		bool getIsMoving();
 
+		void setIsFacingLeft(bool isFl);
+
 		void move(bool left);
 
 		void stopMoving();

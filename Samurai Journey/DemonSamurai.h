@@ -44,6 +44,14 @@ namespace Entities {
 
 			static int getCont();
 
+			void setCont(int c);
+			
+			void setIsLastBuffed(bool isLb);
+
+			void setIsShouting(bool isS);
+
+			void setShoutTimer(float sTimer);
+
 			static bool getIsLastBuffed();
 
 			const float getShoutTimer() const;

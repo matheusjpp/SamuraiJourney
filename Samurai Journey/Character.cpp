@@ -102,6 +102,42 @@ namespace Entities {
 		const float Character::getImpactTimer() const {
 			return impactTimer;
 		}
+
+		void Character::setIsDying(bool isD) {
+			isDying = isD;
+		}
+
+		void Character::setIsHurting(bool isH) {
+			isHurting = isH;
+		}
+
+		void Character::setIsAttacking(bool isAttack) {
+			isAttacking = isAttack;
+		}
+
+		void Character::setAttackCooldown(float attackC) {
+			attackCooldown = attackC;
+		}
+
+		void Character::setCooldownTimer(float cTimer) {
+			cooldownTimer = cTimer;
+		}
+
+		void Character::setAttackTimer(float aTimer) {
+			attackTimer = aTimer;
+		}
+
+		void Character::setDeathTimer(float dTimer) {
+			deathTimer = dTimer;
+		}
+
+		void Character::setHurtingTimer(float hTimer) {
+			hurtingTimer = hTimer;
+		}
+
+		void Character::setImpactTimer(float iTimer) {
+			impactTimer = iTimer;
+		}
 	}
 
 }

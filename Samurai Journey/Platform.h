@@ -18,6 +18,8 @@ namespace Entities {
 
 			const bool getIsFake();
 
+			void setIsFake(bool isF);
+
 			void execute();
 
 			void setTextures();

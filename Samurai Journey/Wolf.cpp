@@ -86,8 +86,16 @@ namespace Entities {
 			return isFirstAttack;
 		}
 
+		void Wolf::setIsFirstAttack(bool isFatt) {
+			isFirstAttack = isFatt;
+		}
+
 		const float Wolf::getFirstAttackTimer() const {
 			return firstAttackTimer;
+		}
+
+		void Wolf::setFirstAttackTimer(float fAttackT) {
+			firstAttackTimer = fAttackT;
 		}
 
 		void Wolf::attack() {

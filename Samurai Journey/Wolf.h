@@ -43,7 +43,11 @@ namespace Entities {
 
 			bool getIsFirstAttack();
 
+			void setIsFirstAttack(bool isFatt);
+
 			const float getFirstAttackTimer() const;
+
+			void setFirstAttackTimer(float fAttackT);
 
 			const float getDamagePoints() const;
 
