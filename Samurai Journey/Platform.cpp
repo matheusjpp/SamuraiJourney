@@ -27,6 +27,10 @@ namespace Entities {
 
 		}
 
+		void Platform::setIsFake(bool isF) {
+			isFake = isF;
+		}
+
 		void Platform::updateSprite(float dt) {
 
 		}

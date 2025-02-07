@@ -73,8 +73,16 @@ namespace Entities {
 			return arrowDelayTimer;
 		}
 
+		void Archer::setArrowDelayTimer(float aDelayT) {
+			arrowDelayTimer = aDelayT;
+		}
+
 		float Archer::getMovingDelayTimer() {
 			return movingDelayTimer;
+		}
+
+		void Archer::setMovingDelayTimer(float mDelayT) {
+			movingDelayTimer = mDelayT;
 		}
 
 		void Archer::attack() {

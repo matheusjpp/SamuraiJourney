@@ -23,6 +23,8 @@ namespace Entities {
 
 			const bool getTeleportRequest() const;
 
+			bool getIsRequesting();
+
 			void update(float dt);
 
 			void execute();

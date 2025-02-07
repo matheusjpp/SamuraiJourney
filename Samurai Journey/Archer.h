@@ -36,7 +36,11 @@ namespace Entities {
 
 			const float getArrowDelayTimer() const;
 
+			void setArrowDelayTimer(float aDelayT);
+
 			 float getMovingDelayTimer() ;
+
+			 void setMovingDelayTimer(float mDelayT);
 
 			void attack();
 

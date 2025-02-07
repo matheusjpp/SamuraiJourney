@@ -84,6 +84,14 @@ namespace Entities {
 
 			void setPoints(int pPoints);
 
+			void setIsActive(bool isAct);
+
+			void setIsDefending(bool isDef);
+
+			void setIsHealing(bool isHeal);
+
+			void setHealTimer(float hTimer);
+
 			void setSlowness();
 
 			void setIsSlowed(bool isSl);

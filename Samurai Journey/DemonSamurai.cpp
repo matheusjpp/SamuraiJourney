@@ -50,6 +50,22 @@ namespace Entities {
 			
 		}
 
+		void DemonSamurai::setCont(int c) {
+			cont = c;
+		}
+
+		void DemonSamurai::setIsLastBuffed(bool isLb) {
+			isLastBuffed = isLb;
+		}
+
+		void DemonSamurai::setIsShouting(bool iSs) {
+			isShouting = iSs;
+		}
+
+		void DemonSamurai::setShoutTimer(float sTimer) {
+			shoutTimer = sTimer;
+		}
+
 		void DemonSamurai::update(float dt) {
 			updateSprite(dt);
 

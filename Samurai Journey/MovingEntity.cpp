@@ -34,6 +34,10 @@ namespace Entities {
 		return isFacingLeft;
 	}
 
+	void MovingEntity:: setIsFacingLeft(bool isFl) {
+		isFacingLeft = isFl;
+	}
+
 	bool MovingEntity::getIsMoving() {
 		return isMoving;
 	}

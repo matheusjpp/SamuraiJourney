@@ -14,7 +14,7 @@ namespace Entities {
 
 	class Arrow : public MovingEntity {
 	private:
-		const float initialX;
+		float initialX;
 		float distanceTraveled;
 
 	public:
@@ -26,7 +26,11 @@ namespace Entities {
 
 		const float getInitialX() const;
 
+		void setInitialX(float iX);
+
 		float getDistanceTraveled();
+
+		void setDistanceTraveled(float dTravel);
 
 		void update(float dt);
 

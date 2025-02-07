@@ -40,6 +40,10 @@ namespace Entities {
 			render();
 		}
 
+		bool Portal::getIsRequesting() {
+			return isRequesting;
+		}
+
 		void Portal::setTextures() {
 			sprite = new GraphicalElements::Animation(body, Math::CoordF(7, 7));
 

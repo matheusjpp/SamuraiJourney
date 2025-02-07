@@ -245,6 +245,23 @@ namespace Entities {
 		const int Player::getScorePoints() const {
 			return points;
 		}
+
+		void Player::setIsDefending(bool isDef) {
+			isDefending = isDef;
+		}
+
+		void Player::setIsActive(bool isAct) {
+			isActive = isAct;
+		}
+
+		void Player::setIsHealing(bool isHeal) {
+			isHealing = isHeal;
+		}
+
+		void Player::setHealTimer(float hTimer) {
+			healTimer = hTimer;
+		}
+			
 	}
 
 }
