@@ -16,6 +16,11 @@
 
 namespace Entities {
 
+	namespace Factories {
+		class ArrowFactory;
+	};
+
+
 	namespace Characters {
 
 		class Archer : public Enemy {
@@ -24,6 +29,7 @@ namespace Entities {
 			List::EntitiesList* movEnt;
 			float arrowDelayTimer;
 			float movingDelayTimer;
+			static Factories::ArrowFactory arrowFactory;
 
 		public:
 			Archer(Math::CoordF pos = Math::CoordF(0.0f, 0.0f), List::EntitiesList* movingEntities = nullptr, ID id = ID::archer);

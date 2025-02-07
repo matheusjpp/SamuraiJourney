@@ -30,7 +30,6 @@ namespace Levels {
 
 	void ArcherLevel::execute(float dt) {
 		updateCamera(970);
-		cout << pPlayer1->getScorePoints() << endl;
 		background.execute(dt);
 		mapSprite->update(GraphicalElements::Animation_ID::map1, false, (0, 0), dt);
 		movingEntities.execute(dt);

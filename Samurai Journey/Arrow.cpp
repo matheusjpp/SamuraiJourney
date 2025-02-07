@@ -26,6 +26,7 @@ namespace Entities {
 	}
 
 	void Arrow::update(float dt) {
+		cout << "x: " << position.x << "   y: " << position.y << endl;
 		if (isFacingLeft) {
 			velocity.x -= ARROW_SPEED * dt;
 		}

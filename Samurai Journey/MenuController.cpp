@@ -34,7 +34,6 @@ namespace Managers {
 							break;
 						}
 						case Menu::Buttons::Button_ID::loadgame: {
-							cout << "load sendo chamado" << endl;
 							std::ifstream file("save.json");
 							if (!file.is_open()) {
 								std::cerr << "Erro ao abrir o salvamento" << std::endl;
@@ -49,8 +48,6 @@ namespace Managers {
 								std::cerr << "Erro ao processar JSON: " << e.what() << std::endl;
 								return;
 							}
-
-							cout << j["GAME"] << endl;
 
 							if (j["GAME"] == Managers::States::State_ID::archerlevel_singleplayer) {
 								new Levels::ArcherLevel(false, States::State_ID::archerlevel_singleplayer, true);
@@ -173,7 +170,6 @@ namespace Managers {
 
 			/* Pause Menu Commands */
 			else if (pStateM->getCurrentState()->getID() == States::State_ID::pause_menu) {
-				cout << pStateM->getPreviousState()->getID() << endl;
 				if (key == select) {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {

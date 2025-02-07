@@ -100,17 +100,6 @@ namespace Managers {
 					}
 				}
 
-				else if (otherEntity->getID() == ID::arrow) {
-					 if (auto* arrow = dynamic_cast<Entities::Arrow*>(otherEntity)) {
-						if (arrow) {
-							if (auto* player = dynamic_cast<Entities::Characters::Character*>(sender)) {
-								player->receiveDamage(arrow->getDamagePoints());
-								arrow->setIsActive(false);
-							}
-						}
-					 }
-				}
-
 				else if (otherEntity->getID() == ID::portal) {
 					if (auto* portal = dynamic_cast<Entities::Obstacles::Portal*>(otherEntity)) {
 						if (portal) {
@@ -136,9 +125,15 @@ namespace Managers {
 					moveOnCollision(sender, otherEntity, intersection, dt);
 			}
 
+			/* Collision notified by arrow */
 			else if (sender->getID() == ID::arrow) {
-				if (otherEntity->getID() == ID::platform)
-					sender->setIsActive(false);
+				if (otherEntity->getID() == ID::player) {
+					if (auto* player = dynamic_cast<Entities::Characters::Character*>(otherEntity)) {
+						player->receiveDamage(sender->getDamagePoints());
+					}
+					
+				}
+				sender->setIsActive(false);
 			}
 		}
 

@@ -1,8 +1,11 @@
- #include "Archer.h"
+#include "Archer.h"
+#include "ArrowFactory.h"
 
 namespace Entities {
 
 	namespace Characters {
+
+		Factories::ArrowFactory Archer::arrowFactory;
 
 		Archer::Archer(Math::CoordF pos, List::EntitiesList* movingEntities, ID id) : pArrow(nullptr), arrowDelayTimer (0), movingDelayTimer (0),
 			Enemy(pos, Math::CoordF(PLAYER_SIZE_X, PLAYER_SIZE_Y), id) {
@@ -103,7 +106,9 @@ namespace Entities {
 					}
 					float positiony = getPosition().y - 25;
 
-					pArrow = new Arrow(Math::CoordF(positionx, positiony), !isFacingLeft);
+					pArrow = static_cast<Entities::Arrow*>(arrowFactory.FactoryMethod(Math::CoordF(positionx, positiony), false, false, nullptr, nullptr, ID::arrow));
+					pArrow->setIsFacingLeft(!isFacingLeft);
+						//new Arrow(Math::CoordF(positionx, positiony), !isFacingLeft);
 					movEnt->addEntity(pArrow);
 					arrowDelayTimer = 0.0f;
 					isAttacking = false;

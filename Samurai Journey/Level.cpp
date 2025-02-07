@@ -442,6 +442,7 @@ namespace Levels {
                 projec["isFacingLeft"] = static_cast<Entities::MovingEntity*>(sM)->getIsFacingLeft();
                 projec["initialX"] = static_cast<Entities::Arrow*>(sM)->getInitialX();
                 projec["distanceTraveled"] = static_cast<Entities::Arrow*>(sM)->getDistanceTraveled();
+
                 j["projectiles"].push_back(projec);
             }
         }
@@ -655,10 +656,10 @@ namespace Levels {
                     continue; 
                 }
 
-                Entities::Arrow* arrow = static_cast<Entities::Arrow*>(arrowFactory.FactoryMethod(Math::CoordF(0, 0), false, false, nullptr, nullptr, ID::arrow));
+                Entities::Arrow* arrow = static_cast<Entities::Arrow*>(arrowFactory.FactoryMethod(Math::CoordF(projectileData["position"]["x"], projectileData["position"]["y"]), false, false, nullptr, nullptr, ID::arrow));
                 
                 if (arrow) {
-                    arrow->setPosition(Math::CoordF((projectileData["position"]["x"], projectileData["position"]["y"])));
+                    //arrow->setPosition(Math::CoordF(projectileData["position"]["x"], projectileData["position"]["y"]));
                     arrow->setIsActive(projectileData["isActive"]);
                     arrow->setIsFacingLeft(projectileData["isFacingLeft"]);
                     arrow->setInitialX(projectileData["initialX"]);
