@@ -32,6 +32,7 @@ namespace Levels {
 		updateCamera(970);
 		background.execute(dt);
 		mapSprite->update(GraphicalElements::Animation_ID::map1, false, (0, 0), dt);
+		executePortal();
 		movingEntities.execute(dt);
 		staticEntities.execute(dt);
 		

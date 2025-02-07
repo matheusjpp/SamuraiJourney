@@ -35,15 +35,15 @@ namespace Entities {
 
 		velocity.x *= exp(-ARROW_AIR_RESISTANCE * dt);
 		velocity.y += ARROW_GRAVITY * dt; // Incrementa velocidade vertical
-		cout << velocity.x << endl;
+		
 		position.x += velocity.x * dt;
 		position.y += velocity.y * dt;
 
 		distanceTraveled = fabs(initialX - position.x);
-		damagePoints = max(ARROW_MINDAMAGE, ARROW_MAXDAMAGE * (distanceTraveled / 80.0f));
+		damagePoints = max(ARROW_MINDAMAGE, ARROW_MAXDAMAGE - (ARROW_MAXDAMAGE - ARROW_MINDAMAGE) * (distanceTraveled / 500.0f));
 
 		if (damagePoints == ARROW_MINDAMAGE) {
-			velocity.y += ARROW_GRAVITY * dt;
+			velocity.y += ARROW_GRAVITY * 1.5 * dt;
 		}
 
 		pCollision->notifyCollision(this, dt);

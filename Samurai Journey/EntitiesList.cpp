@@ -59,7 +59,7 @@ namespace List {
                 continue; 
             }
 
-            if (entity && entity->getIsActive()) {
+            if (entity && entity->getIsActive() && entity->getID() != ID::portal) {
                 entity->execute();
             }
         }

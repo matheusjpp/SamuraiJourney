@@ -9,6 +9,8 @@ namespace Entities {
 		private:
 			bool canTeleport;
 			bool isRequesting;
+			bool right;
+			bool rendered;
 
 		public:
 			Portal(Math::CoordF pos = Math::CoordF(0, 0), Math::CoordF size = Math::CoordF(200, 480), ID id = ID::portal);
@@ -32,6 +34,8 @@ namespace Entities {
 			void setTextures();
 
 			void updateSprite(float dt);
+
+			void setDirection(bool r);
 		};
 
 	}

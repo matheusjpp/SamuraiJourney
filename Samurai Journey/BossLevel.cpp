@@ -2,7 +2,7 @@
 
 namespace Levels {
 
-	BossLevel::BossLevel(bool isMultiplayer, Managers::States::State_ID id, int playerPoints, bool isLoaded) :
+	BossLevel::BossLevel(bool isMultiplayer, Managers::States::State_ID id, int playerPoints, bool isLoaded) : pastPoints(playerPoints),
 		Level(isMultiplayer, id) 
 	{
 		mapImage->setSize(sf::Vector2f(4320.0f, 1080.0f));
@@ -17,7 +17,7 @@ namespace Levels {
 
 		if (!isLoaded) {
 			createLevel("level2.tmj");
-			if (playerPoints > 0) {
+			if (pastPoints > 0) {
 				pPlayer1->setPoints(playerPoints);
 			}
 		}
@@ -63,6 +63,7 @@ namespace Levels {
 		updateCamera(960.0f);
 		background.execute(dt);
 		mapSprite->update(GraphicalElements::Animation_ID::map2, false, (0, 0), dt);
+		executePortal();
 		movingEntities.execute(dt);
 		staticEntities.execute(dt);
 		

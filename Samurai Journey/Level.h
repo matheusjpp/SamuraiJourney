@@ -50,6 +50,8 @@ namespace Levels {
 
 		void loadLevel(const char* filePath);
 
+		void executePortal();
+
 		virtual void verifyLevelEnd() = 0;
 
 		virtual void execute(float dt) = 0;

@@ -4,7 +4,7 @@ namespace Entities {
 
 	namespace Obstacles {
 
-		Portal::Portal(Math::CoordF pos, Math::CoordF size, ID id) : canTeleport(false), isRequesting(false),
+		Portal::Portal(Math::CoordF pos, Math::CoordF size, ID id) : canTeleport(false), isRequesting(false), right(false), rendered(false),
 			Obstacle(pos, size, id)
 		{
 			setTextures();
@@ -51,7 +51,11 @@ namespace Entities {
 		}
 
 		void Portal::updateSprite(float dt) {
-			sprite->update(GraphicalElements::Animation_ID::portal, false, position, dt);
+			sprite->update(GraphicalElements::Animation_ID::portal, right, position, dt);
+		}
+
+		void Portal::setDirection(bool r) {
+			right = r;
 		}
 
 	}

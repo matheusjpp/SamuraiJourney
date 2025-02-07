@@ -234,6 +234,7 @@ namespace Levels {
                         Entities::Obstacles::Portal* portal = static_cast<Entities::Obstacles::Portal*>(obstacleFactory.FactoryMethod(Math::CoordF(posx, posy), false, false, nullptr, nullptr, ID::portal));
                             //new Entities::Obstacles::Portal(Math::CoordF(posx, posy));
                         if (portal) {
+                            if (pStateM->getCurrentState()->getID() == Managers::States::State_ID::bosslevel_singleplayer || pStateM->getCurrentState()->getID() == Managers::States::State_ID::bosslevel_multiplayer) portal->setDirection(true);
                             staticEntities.addEntity(portal);
                         }
                         break;
@@ -319,6 +320,14 @@ namespace Levels {
 
     void Level::setPlayerPoints(int points) {
         pPlayer1->setPoints(points);
+    }
+
+    void Level::executePortal() {
+        for (auto itS = staticEntities.begin(); itS != staticEntities.end(); ++itS) {
+            if (*itS) {
+                if ((*itS)->getID() == ID::portal) (*itS)->execute();
+            }
+        }
     }
 
     void Level::saveLevel(const char* filePath) {

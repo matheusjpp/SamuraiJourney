@@ -3,36 +3,36 @@
     "Player1": {
         "attackCooldown": 0.20000000298023224,
         "attackTimer": 0.0,
-        "cooldownTimer": 3.6937224864959717,
+        "cooldownTimer": 11.193634986877441,
         "deathTimer": 0.0,
-        "healTimer": 2.2560598850250244,
-        "hp": 80.0116195678711,
+        "healTimer": 0.0,
+        "hp": 34.6298828125,
         "hurtingTimer": 0.0,
-        "impactTimer": 0.5761220455169678,
+        "impactTimer": 0.19313101470470428,
         "isActive": true,
         "isAttacking": false,
         "isDefending": false,
         "isDying": false,
-        "isFacingLeft": true,
+        "isFacingLeft": false,
         "isHealing": false,
         "isHurting": false,
         "isMoving": false,
         "isPlayer1": true,
         "points": 0,
         "position": {
-            "x": 3303.22509765625,
-            "y": 802.3275756835938
+            "x": 3229.20068359375,
+            "y": 747.7386474609375
         }
     },
     "enemies": [
         {
-            "arrowDelayTimer": 0.5907820463180542,
+            "arrowDelayTimer": 0.435479998588562,
             "attackCooldown": 2.0,
-            "attackTimer": 1.7639548778533936,
+            "attackTimer": 1.5533480644226074,
             "cooldownTimer": 0.0,
             "counted": false,
             "deathTimer": 0.0,
-            "hp": 50.0,
+            "hp": 100.0,
             "hurtingTimer": 0.0,
             "impactTimer": 0.0,
             "isActive": true,
@@ -41,9 +41,9 @@
             "isFacingLeft": true,
             "isHurting": false,
             "isMoving": false,
-            "movingDelayTimer": 1.2561612129211426,
+            "movingDelayTimer": 1.1764068603515625,
             "position": {
-                "x": 2617.82958984375,
+                "x": 2617.825439453125,
                 "y": 512.0
             },
             "type": 3
@@ -52,7 +52,7 @@
             "FirstAttackTimer": 0.0,
             "attackCooldown": 1.0,
             "attackTimer": 0.0,
-            "cooldownTimer": 26.787229537963867,
+            "cooldownTimer": 52.89010238647461,
             "counted": false,
             "deathTimer": 0.0,
             "hp": 100.0,
@@ -61,21 +61,21 @@
             "isActive": true,
             "isAttacking": false,
             "isDying": false,
-            "isFacingLeft": false,
+            "isFacingLeft": true,
             "isFirstAttack": true,
             "isHurting": false,
-            "isMoving": false,
+            "isMoving": true,
             "position": {
-                "x": 4217.0,
-                "y": 552.0
+                "x": 3230.404296875,
+                "y": 37740.45703125
             },
             "type": 2
         },
         {
-            "arrowDelayTimer": 0.46147990226745605,
+            "arrowDelayTimer": 0.0,
             "attackCooldown": 2.0,
             "attackTimer": 0.0,
-            "cooldownTimer": 2.619877576828003,
+            "cooldownTimer": 32.68012619018555,
             "counted": false,
             "deathTimer": 0.0,
             "hp": 100.0,
@@ -87,30 +87,30 @@
             "isFacingLeft": true,
             "isHurting": false,
             "isMoving": false,
-            "movingDelayTimer": 2.126046895980835,
+            "movingDelayTimer": 1.6265106201171875,
             "position": {
-                "x": 1777.902099609375,
+                "x": 1777.0,
                 "y": 642.0
             },
             "type": 3
         },
         {
-            "arrowDelayTimer": 1.4225270748138428,
+            "arrowDelayTimer": 0.0,
             "attackCooldown": 2.0,
-            "attackTimer": 1.4142169952392578,
-            "cooldownTimer": 0.0,
+            "attackTimer": 0.0,
+            "cooldownTimer": 0.9052838683128357,
             "counted": false,
             "deathTimer": 0.0,
             "hp": 100.0,
             "hurtingTimer": 0.0,
             "impactTimer": 0.0,
             "isActive": true,
-            "isAttacking": true,
+            "isAttacking": false,
             "isDying": false,
             "isFacingLeft": false,
             "isHurting": false,
             "isMoving": false,
-            "movingDelayTimer": 1.4142169952392578,
+            "movingDelayTimer": 1.361342191696167,
             "position": {
                 "x": 3547.0,
                 "y": 682.0
@@ -121,7 +121,7 @@
             "arrowDelayTimer": 0.0,
             "attackCooldown": 2.0,
             "attackTimer": 0.0,
-            "cooldownTimer": 26.787229537963867,
+            "cooldownTimer": 52.89010238647461,
             "counted": false,
             "deathTimer": 0.0,
             "hp": 100.0,
@@ -144,7 +144,7 @@
             "FirstAttackTimer": 0.0,
             "attackCooldown": 1.0,
             "attackTimer": 0.0,
-            "cooldownTimer": 26.787229537963867,
+            "cooldownTimer": 52.89010238647461,
             "counted": false,
             "deathTimer": 0.0,
             "hp": 100.0,
@@ -167,53 +167,7 @@
             "FirstAttackTimer": 0.0,
             "attackCooldown": 1.0,
             "attackTimer": 0.0,
-            "cooldownTimer": 26.787229537963867,
-            "counted": false,
-            "deathTimer": 0.0,
-            "hp": 100.0,
-            "hurtingTimer": 0.0,
-            "impactTimer": 0.0,
-            "isActive": true,
-            "isAttacking": false,
-            "isDying": false,
-            "isFacingLeft": true,
-            "isFirstAttack": true,
-            "isHurting": false,
-            "isMoving": true,
-            "position": {
-                "x": 3159.85205078125,
-                "y": 5010.4609375
-            },
-            "type": 2
-        },
-        {
-            "FirstAttackTimer": 0.0,
-            "attackCooldown": 1.0,
-            "attackTimer": 0.0,
-            "cooldownTimer": 26.787229537963867,
-            "counted": false,
-            "deathTimer": 0.0,
-            "hp": 100.0,
-            "hurtingTimer": 0.0,
-            "impactTimer": 0.0,
-            "isActive": true,
-            "isAttacking": false,
-            "isDying": false,
-            "isFacingLeft": true,
-            "isFirstAttack": true,
-            "isHurting": false,
-            "isMoving": true,
-            "position": {
-                "x": 3164.159912109375,
-                "y": 5962.244140625
-            },
-            "type": 2
-        },
-        {
-            "FirstAttackTimer": 0.0,
-            "attackCooldown": 1.0,
-            "attackTimer": 0.0,
-            "cooldownTimer": 26.787229537963867,
+            "cooldownTimer": 52.89010238647461,
             "counted": false,
             "deathTimer": 0.0,
             "hp": 100.0,
@@ -227,16 +181,62 @@
             "isHurting": false,
             "isMoving": false,
             "position": {
-                "x": 623.8200073242188,
+                "x": 983.0,
+                "y": 902.0
+            },
+            "type": 2
+        },
+        {
+            "FirstAttackTimer": 0.0,
+            "attackCooldown": 1.0,
+            "attackTimer": 0.0,
+            "cooldownTimer": 42.688331604003906,
+            "counted": false,
+            "deathTimer": 1.2018170356750488,
+            "hp": 0.0,
+            "hurtingTimer": 0.0,
+            "impactTimer": 0.0,
+            "isActive": false,
+            "isAttacking": false,
+            "isDying": true,
+            "isFacingLeft": false,
+            "isFirstAttack": true,
+            "isHurting": true,
+            "isMoving": true,
+            "position": {
+                "x": 3442.5263671875,
+                "y": 140084.765625
+            },
+            "type": 2
+        },
+        {
+            "FirstAttackTimer": 0.0,
+            "attackCooldown": 1.0,
+            "attackTimer": 0.0,
+            "cooldownTimer": 52.89010238647461,
+            "counted": false,
+            "deathTimer": 0.0,
+            "hp": 100.0,
+            "hurtingTimer": 0.0,
+            "impactTimer": 0.0,
+            "isActive": true,
+            "isAttacking": false,
+            "isDying": false,
+            "isFacingLeft": true,
+            "isFirstAttack": true,
+            "isHurting": false,
+            "isMoving": false,
+            "position": {
+                "x": 617.0,
                 "y": 942.0
             },
             "type": 2
         },
         {
-            "arrowDelayTimer": 0.8520579934120178,
+            "arrowDelayTimer": 0.0,
             "attackCooldown": 2.0,
             "attackTimer": 0.0,
-            "cooldownTimer": 12.029792785644531,
+            "cooldownTimer": 40.79853057861328,
             "counted": false,
             "deathTimer": 0.0,
             "hp": 100.0,
@@ -248,9 +248,9 @@
             "isFacingLeft": true,
             "isHurting": false,
             "isMoving": false,
-            "movingDelayTimer": 2.1290395259857178,
+            "movingDelayTimer": 1.48692786693573,
             "position": {
-                "x": 687.8200073242188,
+                "x": 687.0,
                 "y": 942.0
             },
             "type": 3
@@ -97334,23 +97334,43 @@
     ],
     "projectiles": [
         {
-            "distanceTraveled": 6025.72021484375,
+            "distanceTraveled": 10279.791015625,
             "initialX": 1680.0,
             "isActive": true,
             "isFacingLeft": true,
             "position": {
-                "x": -4345.72021484375,
-                "y": 737.5139770507813
+                "x": -8599.791015625,
+                "y": 4539.39794921875
             }
         },
         {
-            "distanceTraveled": 1072.3162841796875,
-            "initialX": 2520.0,
+            "distanceTraveled": 8207.626953125,
+            "initialX": 1679.1529541015625,
             "isActive": true,
             "isFacingLeft": true,
             "position": {
-                "x": 1447.6837158203125,
-                "y": 508.4463806152344
+                "x": -6528.4736328125,
+                "y": 3086.257568359375
+            }
+        },
+        {
+            "distanceTraveled": 782.57470703125,
+            "initialX": 2680.0,
+            "isActive": true,
+            "isFacingLeft": false,
+            "position": {
+                "x": 3462.57470703125,
+                "y": 501.5591125488281
+            }
+        },
+        {
+            "distanceTraveled": 201.74658203125,
+            "initialX": 3450.0,
+            "isActive": true,
+            "isFacingLeft": true,
+            "position": {
+                "x": 3248.25341796875,
+                "y": 659.5742797851563
             }
         }
     ]
