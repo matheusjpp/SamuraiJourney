@@ -51,6 +51,8 @@ namespace Entities {
 		virtual void setTextures() = 0;
 
 		virtual void updateSprite(float dt) = 0;
+
+		void setIsMoving(bool isM);
 	};
 
 }

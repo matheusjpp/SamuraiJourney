@@ -2,7 +2,7 @@
 
 namespace Levels {
 
-	ArcherLevel::ArcherLevel(bool isMultiplayer, Managers::States::State_ID id) : pPortal(nullptr),
+	ArcherLevel::ArcherLevel(bool isMultiplayer, Managers::States::State_ID id, bool isLoaded) : pPortal(nullptr),
 		Level(isMultiplayer, id)
 	{
 		mapImage->setSize(sf::Vector2f(5480.0f, 1080.0f));
@@ -15,7 +15,13 @@ namespace Levels {
 
 		pCollision->setLists(staticEntities, movingEntities);
 
-		createLevel("level1.tmj");
+		if (!isLoaded) {
+			createLevel("level1.tmj");
+		}
+
+		else {
+			loadLevel("save.json");
+		}
 	}
 
 	ArcherLevel::~ArcherLevel() {

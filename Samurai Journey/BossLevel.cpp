@@ -2,7 +2,7 @@
 
 namespace Levels {
 
-	BossLevel::BossLevel(bool isMultiplayer, Managers::States::State_ID id, int playerPoints) :
+	BossLevel::BossLevel(bool isMultiplayer, Managers::States::State_ID id, int playerPoints, bool isLoaded) :
 		Level(isMultiplayer, id) 
 	{
 		mapImage->setSize(sf::Vector2f(4320.0f, 1080.0f));
@@ -15,10 +15,15 @@ namespace Levels {
 
 		pCollision->setLists(staticEntities, movingEntities);
 
-		createLevel("level2.tmj");
+		if (!isLoaded) {
+			createLevel("level2.tmj");
+			if (playerPoints > 0) {
+				pPlayer1->setPoints(playerPoints);
+			}
+		}
 
-		if (playerPoints > 0) {
-			pPlayer1->setPoints(playerPoints);
+		else {
+			loadLevel("save.json");
 		}
 	}
 

@@ -64,4 +64,8 @@ namespace Entities {
 		return damagePoints;
 	}
 
+	void MovingEntity::setIsMoving(bool isM) {
+		isMoving = isM;
+	}
+
 }

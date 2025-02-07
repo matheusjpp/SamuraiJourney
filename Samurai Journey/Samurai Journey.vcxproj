@@ -174,7 +174,6 @@
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="Portal.h" />
-    <ClInclude Include="ProjectilesFactory.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="Subject.h" />
@@ -222,7 +221,6 @@
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="Portal.cpp" />
-    <ClCompile Include="ProjectilesFactory.cpp" />
     <ClCompile Include="Samurai Journey.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="State.cpp" />
@@ -236,6 +234,7 @@
     <None Include="cpp.hint" />
     <None Include="level1.tmj" />
     <None Include="level2.tmj" />
+    <None Include="save.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\portal.png" />

@@ -46,7 +46,7 @@ namespace Levels {
 
 		void render();
 
-		virtual void saveLevel(const char* filePath);
+		void saveLevel(const char* filePath);
 
 		void loadLevel(const char* filePath);
 

@@ -1,4 +1,6 @@
 #include "MenuController.h"
+#include "ArcherLevel.h"
+#include "BossLevel.h"
 
 namespace Managers {
 
@@ -31,6 +33,43 @@ namespace Managers {
 							pStateM->popState();
 							break;
 						}
+						case Menu::Buttons::Button_ID::loadgame: {
+							cout << "load sendo chamado" << endl;
+							std::ifstream file("save.json");
+							if (!file.is_open()) {
+								std::cerr << "Erro ao abrir o salvamento" << std::endl;
+								return;
+							}
+
+							json j;
+							try {
+								file >> j;
+							}
+							catch (const std::exception& e) {
+								std::cerr << "Erro ao processar JSON: " << e.what() << std::endl;
+								return;
+							}
+
+							cout << j["GAME"] << endl;
+
+							if (j["GAME"] == Managers::States::State_ID::archerlevel_singleplayer) {
+								new Levels::ArcherLevel(false, States::State_ID::archerlevel_singleplayer, true);
+							}
+
+							else if (j["GAME"] == Managers::States::State_ID::archerlevel_multiplayer) {
+								new Levels::ArcherLevel(true, States::State_ID::archerlevel_multiplayer, true);
+							}
+
+							else if (j["GAME"] == Managers::States::State_ID::bosslevel_singleplayer) {
+								new Levels::BossLevel(false, States::State_ID::bosslevel_singleplayer, 0, true);
+							}
+							else if (j["GAME"] == Managers::States::State_ID::bosslevel_multiplayer) {
+								new Levels::BossLevel(true, States::State_ID::bosslevel_multiplayer, 0, true);
+							}
+
+							break;
+						}
+
 						// case load e leaderboard
 					}
 				}
@@ -80,7 +119,7 @@ namespace Managers {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
 						case Menu::Buttons::Button_ID::archersingle: {
-							new Levels::ArcherLevel(false, States::State_ID::bosslevel_singleplayer);
+							new Levels::ArcherLevel(false, States::State_ID::archerlevel_singleplayer);
 							break;
 						}
 						case Menu::Buttons::Button_ID::bosssingle: {
@@ -109,7 +148,7 @@ namespace Managers {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
 						case Menu::Buttons::Button_ID::archermulti: {
-							new Levels::ArcherLevel(true, States::State_ID::bosslevel_multiplayer);
+							new Levels::ArcherLevel(true, States::State_ID::archerlevel_multiplayer);
 							break;
 						}
 						case Menu::Buttons::Button_ID::bossmulti: {
@@ -134,6 +173,7 @@ namespace Managers {
 
 			/* Pause Menu Commands */
 			else if (pStateM->getCurrentState()->getID() == States::State_ID::pause_menu) {
+				cout << pStateM->getPreviousState()->getID() << endl;
 				if (key == select) {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
@@ -146,7 +186,17 @@ namespace Managers {
 								pStateM->popState();
 							break;
 						}
-						// case load
+						case Menu::Buttons::Button_ID::saveprogress: {
+							
+							if (auto* level = dynamic_cast<Levels::ArcherLevel*>(pStateM->getPreviousState())) {
+								level->saveLevel("save.json");
+							}
+							else if (auto* level = dynamic_cast<Levels::BossLevel*>(pStateM->getPreviousState())) {
+								level->saveLevel("save.json");
+							}
+							break;
+						}
+						
 					}
 				}
 

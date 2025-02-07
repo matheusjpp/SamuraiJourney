@@ -105,6 +105,7 @@ namespace Managers {
 						if (arrow) {
 							if (auto* player = dynamic_cast<Entities::Characters::Character*>(sender)) {
 								player->receiveDamage(arrow->getDamagePoints());
+								arrow->setIsActive(false);
 							}
 						}
 					 }
@@ -136,8 +137,8 @@ namespace Managers {
 			}
 
 			else if (sender->getID() == ID::arrow) {
-				if (otherEntity->getID() == ID::player || otherEntity->getID() == ID::platform)
-				sender->setIsActive(false);
+				if (otherEntity->getID() == ID::platform)
+					sender->setIsActive(false);
 			}
 		}
 

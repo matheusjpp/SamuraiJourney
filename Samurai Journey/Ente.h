@@ -3,15 +3,15 @@
 
 enum ID {
 	empty = 0,
-	player,
-	wolf,
-	archer,
-	demonsamurai,
-	arrow,
-	platform,
-	bush,
-	fire,
-	portal
+	player = 1,
+	wolf = 2,
+	archer = 3,
+	demonsamurai = 4,
+	arrow = 5,
+	platform = 6,
+	bush = 7,
+	fire = 8,
+	portal = 9
 };
 
 class Ente {

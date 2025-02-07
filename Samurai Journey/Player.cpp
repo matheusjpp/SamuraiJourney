@@ -121,14 +121,14 @@ namespace Entities {
 					sprite->update(GraphicalElements::Animation_ID::attack, !isFacingLeft, position, dt);
 			}
 
+			else if (isDefending) {
+				sprite->update(GraphicalElements::Animation_ID::defend, !isFacingLeft, position, dt);
+			}
+
 			else if (isHurting) {
 				hurtingTimer += dt;
 				sprite->update(GraphicalElements::Animation_ID::hurt, !isFacingLeft, position, dt);
 				if (hurtingTimer >= PLAYER_HURT_TIME) { isHurting = false; hurtingTimer = 0; }
-			}
-
-			else if (isDefending) {
-				sprite->update(GraphicalElements::Animation_ID::defend, !isFacingLeft, position, dt);
 			}
 
 			else if (isHealing) {

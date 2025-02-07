@@ -1,6 +1,11 @@
 #pragma once
 #include "ArcherLevel.h"
 
+namespace Levels {
+	class ArcherLevel;
+	class BossLevel;
+}
+
 namespace Managers {
 
 	namespace KeyManagement {
