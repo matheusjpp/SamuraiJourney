@@ -51,7 +51,7 @@ namespace Entities {
 
 			void setImpactTimer(float iTimer);
 
-			void receiveDamage(float damage);
+			virtual void receiveDamage(float damage);
 
 			void jump();
 

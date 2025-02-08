@@ -3,7 +3,7 @@
 
 namespace Menu {
 
-	ConcreteMenu::ConcreteMenu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Managers::States::State_ID id) :
+	ConcreteMenu::ConcreteMenu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Managers::States::State_ID id, Levels::Level* pLevel) : pLevel(pLevel),
 		Menu(buttonSize, info, fontSize, id) {
 
 		body->setSize(sf::Vector2f(1920.0f, 1080.0f));
@@ -74,7 +74,9 @@ namespace Menu {
 			addButton("Exit", Math::CoordF(centerX - buttonSize.x / 2.0f, startY + spacing + 90.0f), sf::Color(255, 255, 255), Buttons::Button_ID::pauseexit);
 		}
 
-		initializeIterator();
+		if (stateID != Managers::States::State_ID::leaderboard_menu) {
+			initializeIterator();
+		}
 	}
 
 	void ConcreteMenu::setAnimation() {
@@ -84,6 +86,7 @@ namespace Menu {
 		menuAnimation->addNewAnimation(GraphicalElements::Animation_ID::pausebg, "pausebg.png", 4);
 		menuAnimation->addNewAnimation(GraphicalElements::Animation_ID::gameoverbg, "gameoverbg.png", 4);
 		menuAnimation->addNewAnimation(GraphicalElements::Animation_ID::winbg, "winbg.png", 4);
+		menuAnimation->addNewAnimation(GraphicalElements::Animation_ID::leaderboardbg, "leaderboardbg.png", 4);
 
 		body->setOrigin(0, 0);
 	}
@@ -112,6 +115,11 @@ namespace Menu {
 			menuAnimation->update(GraphicalElements::Animation_ID::winbg, false, (0, 0), dt);
 		}
 
+		else if (stateID == Managers::States::State_ID::leaderboard_menu) {
+			body->setSize(sf::Vector2f(1920.0f, 1080.0f));
+			menuAnimation->update(GraphicalElements::Animation_ID::leaderboardbg, false, (0, 0), dt);
+		}
+
 		else {
 			body->setSize(sf::Vector2f(1920.0f, 1080.0f));
 			menuAnimation->update(GraphicalElements::Animation_ID::menubg, false, (0,0), dt);
@@ -126,5 +134,10 @@ namespace Menu {
 			button->render();
 			button = nullptr;
 		}
+	}
+
+	const int ConcreteMenu::getScore() const {
+		cout << "get score menu" << endl;
+		return pLevel->getScorePoints();
 	}
 }

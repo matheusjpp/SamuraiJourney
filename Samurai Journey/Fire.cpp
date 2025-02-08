@@ -4,7 +4,7 @@ namespace Entities {
 
 	namespace Obstacles {
 
-		Fire::Fire(Math::CoordF pos, Math::CoordF size, ID id) : Obstacle(pos, size, id), damage(FIRE_DAMAGE) {
+		Fire::Fire(Math::CoordF pos, Math::CoordF size, ID id) : Obstacle(pos, size, id), fireDamage(FIRE_DAMAGE), cooldownTimer(0) {
 			setTextures();
 		}
 
@@ -30,6 +30,15 @@ namespace Entities {
 
 		void Fire::updateSprite(float dt) {
 			sprite->update(GraphicalElements::Animation_ID::bush, false, position, dt);
+		}
+
+		const int Fire::getFireDamage() {
+			cooldownTimer += pGraphic->getDeltaTime();
+			if (cooldownTimer >= FIRE_COOLDOWN) {
+				cooldownTimer = 0;
+				return fireDamage;
+			}
+			return 0;
 		}
 
 	}

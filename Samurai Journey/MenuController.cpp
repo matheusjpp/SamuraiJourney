@@ -67,7 +67,10 @@ namespace Managers {
 							break;
 						}
 
-						// case load e leaderboard
+						case Menu::Buttons::Button_ID::leaderboard: {
+							new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::leaderboard_menu);
+							break;
+						}
 					}
 				}
 
@@ -168,6 +171,13 @@ namespace Managers {
 				}
 			}
 
+			/* Leaderboard Menu Commands */
+			else if (pStateM->getCurrentState()->getID() == States::State_ID::leaderboard_menu) {
+				if (key == escape) {
+					pStateM->popState();
+				}
+			}
+
 			/* Pause Menu Commands */
 			else if (pStateM->getCurrentState()->getID() == States::State_ID::pause_menu) {
 				if (key == select) {
@@ -215,7 +225,8 @@ namespace Managers {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
 						case Menu::Buttons::Button_ID::savescore: {
-							// leaderboards
+							cout << "botao de save funciona" << endl;
+							pMenu->saveScore("teste", pMenu->getScore());
 							break;
 						}
 						case Menu::Buttons::Button_ID::pauseexit: {
@@ -241,7 +252,8 @@ namespace Managers {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
 						case Menu::Buttons::Button_ID::savescore: {
-							// leaderboards
+							cout << "botao de save funciona" << endl;
+							pMenu->saveScore("teste", pMenu->getScore());
 							break;
 						}
 						case Menu::Buttons::Button_ID::pauseexit: {
@@ -260,9 +272,6 @@ namespace Managers {
 					pMenu->selectBelow();
 				}
 			}
-
-			////
-
 		}
 
 		void MenuController::notifyKeyReleased(const sf::Keyboard::Key key) {

@@ -696,4 +696,8 @@ namespace Levels {
         }
     }
 
+    const int Level::getScorePoints() const {
+        return pPlayer1->getScorePoints();
+    }
+
 }

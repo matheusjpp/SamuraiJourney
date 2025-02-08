@@ -36,6 +36,10 @@ namespace Menu {
 
 		const Buttons::Button_ID getSelectedButtonID() const;
 
+		void saveScore(const char* playerName, int score);
+
+		virtual const int getScore() const = 0;
+
 		virtual void render() = 0;
 	};
 

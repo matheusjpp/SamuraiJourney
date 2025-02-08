@@ -311,6 +311,9 @@
     <None Include="save.json">
       <Filter>Arquivos de Recurso</Filter>
     </None>
+    <None Include="leaderboard.json">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="p1_idle.png">
@@ -470,6 +473,9 @@
       <Filter>Arquivos de Recurso</Filter>
     </Image>
     <Image Include="..\portal.png">
+      <Filter>Arquivos de Recurso</Filter>
+    </Image>
+    <Image Include="leaderboardbg.png">
       <Filter>Arquivos de Recurso</Filter>
     </Image>
   </ItemGroup>

@@ -90,4 +90,39 @@ namespace Menu {
 		return (*it)->getButtonID();
 	}
 
+	void Menu::saveScore(const char* playerName, int score) {
+		cout << "savescore sendo chamada com os pontos:" << score << endl;
+		json j;
+		
+		std::ifstream inFile("leaderboard.json");
+		if (inFile.is_open()) {
+			try {
+				inFile >> j;
+			}
+			catch (const std::exception& e) {
+				std::cerr << "Erro ao ler JSON: " << e.what() << std::endl;
+			}
+			inFile.close();
+		}
+
+		json newEntry;
+		
+		newEntry["name"] = playerName;
+		newEntry["score"] = score;
+
+		if (!j.is_array()) {
+			j = json::array();
+		}
+		j.push_back(newEntry);
+	
+		std::ofstream outFile("leaderboard.json");
+		if (outFile.is_open()) {
+			outFile << j.dump(4); // formata com indentação de 4 espaços
+			outFile.close();
+		}
+		else {
+			std::cerr << "Erro ao abrir o arquivo para escrita!" << std::endl;
+		}
+	}
+
 }

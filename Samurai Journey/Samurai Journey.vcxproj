@@ -232,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="leaderboard.json" />
     <None Include="level1.tmj" />
     <None Include="level2.tmj" />
     <None Include="save.json" />
@@ -259,6 +260,7 @@
     <Image Include="demon_run2.png" />
     <Image Include="demon_shout.png" />
     <Image Include="gameoverbg.png" />
+    <Image Include="leaderboardbg.png" />
     <Image Include="level1_map.png" />
     <Image Include="level2_map.png" />
     <Image Include="menubg.png" />

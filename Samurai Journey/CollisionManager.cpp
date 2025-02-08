@@ -100,6 +100,15 @@ namespace Managers {
 					}
 				}
 
+				else if (otherEntity->getID() == ID::fire) {
+					
+					if (auto* player = dynamic_cast<Entities::Characters::Player*>(sender)) {
+						if (auto* fire = dynamic_cast<Entities::Obstacles::Fire*>(otherEntity)) {
+							player->receiveDamage(fire->getFireDamage());
+						}
+					}
+				}
+
 				else if (otherEntity->getID() == ID::portal) {
 					if (auto* portal = dynamic_cast<Entities::Obstacles::Portal*>(otherEntity)) {
 						if (portal) {
@@ -109,7 +118,6 @@ namespace Managers {
 						}
 					}
 				}
-				// OBSTÁCULOS QUE DEBUFFAM
 			}
 
 			/* Collision notified by an enemy */ 

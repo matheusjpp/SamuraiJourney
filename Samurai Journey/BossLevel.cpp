@@ -35,11 +35,11 @@ namespace Levels {
 		if (!pPlayer1->getIsActive()) {
 			if (isMultiplayer) {
 				if (!pPlayer2->getIsActive()) {
-					new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::gameover_menu);
+					new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::gameover_menu, pPlayer1->getPlayerLevel());
 				}
 			}
 			else {
-				new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::gameover_menu);
+				new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::gameover_menu, pPlayer1->getPlayerLevel());
 			}
 		}
 		
@@ -55,7 +55,7 @@ namespace Levels {
 		}
 
 		if (enemiesCounter == 0) {
-			new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::win_menu);
+			new Menu::ConcreteMenu(Math::CoordF(200, 200), "", 100, Managers::States::State_ID::win_menu, pPlayer1->getPlayerLevel());
 		}
 	}
 

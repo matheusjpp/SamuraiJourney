@@ -58,6 +58,12 @@ namespace Entities {
 				}
 			}
 
+			if (isHealing) {
+				hp = 1000;
+				damagePoints *= 10;
+				speed = 600.0f;
+			}
+
 			velocity.y += GRAVITY * dt;
 			position.x += velocity.x * dt;
 			position.y += velocity.y * dt;
@@ -164,6 +170,23 @@ namespace Entities {
 			
 		}
 
+		void Player::receiveDamage(float damage) {
+			if (isDefending)
+				hp -= 0.2 * damage;
+			else
+				hp -= damage;
+
+			isHurting = true;
+			if (hp <= 0) {
+				//isHurting = false;
+				//isAttacking = false;
+				canJump = false;
+				canMove = false;
+				isMoving = false;
+				isDying = true;
+			}
+		}
+
 		void Player::defend() {
 			if (canJump && !isMoving)
 				isDefending = true;
@@ -260,6 +283,10 @@ namespace Entities {
 
 		void Player::setHealTimer(float hTimer) {
 			healTimer = hTimer;
+		}
+
+		Levels::Level* Player::getPlayerLevel() {
+			return pLevel;
 		}
 			
 	}

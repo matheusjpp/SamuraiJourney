@@ -19,7 +19,8 @@ namespace Managers {
 			bosslevel_multiplayer = 8,
 			pause_menu = 9,
 			gameover_menu = 10,
-			win_menu = 11
+			win_menu = 11,
+			leaderboard_menu = 12
 		};
 
 		class State {

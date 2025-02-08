@@ -29,7 +29,8 @@ namespace GraphicalElements {
 		portal = 21,
 		pausebg = 22,
 		gameoverbg = 23,
-		winbg = 24
+		winbg = 24,
+		leaderboardbg = 25
 	};
 
 	class Animation {

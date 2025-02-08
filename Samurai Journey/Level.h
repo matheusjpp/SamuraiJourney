@@ -52,6 +52,8 @@ namespace Levels {
 
 		void executePortal();
 
+		const int getScorePoints() const;
+
 		virtual void verifyLevelEnd() = 0;
 
 		virtual void execute(float dt) = 0;

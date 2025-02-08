@@ -12,9 +12,10 @@ namespace Menu {
 	class ConcreteMenu : public Menu {
 	private:
 		GraphicalElements::Animation* menuAnimation;
+		Levels::Level* pLevel;
 
 	public:
-		ConcreteMenu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Managers::States::State_ID id = Managers::States::State_ID::empty);
+		ConcreteMenu(Math::CoordF buttonSize, const std::string info, const unsigned int fontSize, Managers::States::State_ID id = Managers::States::State_ID::empty, Levels::Level* pLevel = nullptr);
 
 		~ConcreteMenu();
 
@@ -27,6 +28,8 @@ namespace Menu {
 		void updateAnimation(float dt);
 
 		void render();
+
+		const int getScore() const;
 	};
 
 }

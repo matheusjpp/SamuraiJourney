@@ -64,6 +64,8 @@ namespace Entities {
 
 			void attack();
 
+			void receiveDamage(float damage);
+
 			void defend();
 
 			void stopDefending();
@@ -97,6 +99,8 @@ namespace Entities {
 			void setIsSlowed(bool isSl);
 
 			const int getScorePoints() const;
+
+			Levels::Level* getPlayerLevel();
 		};
 
 	}
