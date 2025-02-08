@@ -81,8 +81,6 @@ namespace Entities {
 
 			const float getCooldownTimer() const;
 
-			float getAttackTimer();
-
 			const float getDeathTimer() const;
 
 			const float getHurtingTimer() const;

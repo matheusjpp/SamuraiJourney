@@ -83,10 +83,6 @@ namespace Entities {
 			return isHurting;
 		}
 
-		float Character::getAttackTimer() {
-			return attackTimer;
-		}
-
 		const float Character::getCooldownTimer() const {
 			return cooldownTimer;
 		}

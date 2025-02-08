@@ -91,7 +91,6 @@ namespace Menu {
 	}
 
 	void Menu::saveScore(const char* playerName, int score) {
-		cout << "savescore sendo chamada com os pontos:" << score << endl;
 		json j;
 		
 		std::ifstream inFile("leaderboard.json");
@@ -125,4 +124,33 @@ namespace Menu {
 		}
 	}
 
+	void Menu::setPlayerName(const std::string& name) {
+		playerName = name;
+	}
+
+	const char* Menu::getPlayerName() const {
+		return playerName.c_str();
+	}
+
+	void Menu::appendCharacter(char c) {
+		if (playerName.size() < 12) // Limite de caracteres
+			playerName += c;
+	}
+
+	void Menu::removeLastCharacter() {
+		if (!playerName.empty())
+			playerName.pop_back();
+	}
+
+	void Menu::resetLeaderboard() {
+		std::ofstream outFile("leaderboard.json", std::ios::trunc);
+		if (outFile.is_open()) {
+			outFile << "[]";
+			outFile.close();
+			std::cout << "Leaderboard resetado com sucesso!" << std::endl;
+		}
+		else {
+			std::cerr << "Erro ao resetar o leaderboard." << std::endl;
+		}
+	}
 }

@@ -9,7 +9,7 @@ namespace Menu {
 		body->setSize(sf::Vector2f(1920.0f, 1080.0f));
 
 		setAnimation();
-		createButtons();
+		buildMenu();
 	}
 
 	ConcreteMenu::~ConcreteMenu() {
@@ -24,7 +24,7 @@ namespace Menu {
 		}
 	}
 
-	void ConcreteMenu::createButtons() {
+	void ConcreteMenu::buildMenu() {
 		float centerX = windowSize.x / 2.0f;  
 		float startY = windowSize.y / 2.0f - ((textButtonList.size() * buttonSize.y) / 2.0f) - 180.0f; 
 		float spacing = 100.0f;
@@ -97,6 +97,10 @@ namespace Menu {
 		dt = pGraphic->getDeltaTime();
 		updateAnimation(dt);
 		render();
+
+		if (stateID == Managers::States::State_ID::leaderboard_menu) {
+			buildLeaderboard();
+		}
 	}
 
 	void ConcreteMenu::updateAnimation(float dt) {
@@ -134,10 +138,136 @@ namespace Menu {
 			button->render();
 			button = nullptr;
 		}
+
+		if (stateID == Managers::States::State_ID::win_menu || stateID == Managers::States::State_ID::gameover_menu) {
+			sf::Font font;
+			if (!font.loadFromFile("alagard.ttf")) {
+				std::cerr << "Erro ao carregar a fonte." << std::endl;
+				return;
+			}
+			/*
+			sf::Text nameText;
+			nameText.setString("Nome: " + playerName + "_"); // O "_" indica onde o cursor está*/
+
+			float centerX = windowSize.x / 2.0f;
+			float startY = 340.0f;
+
+			std::string nameText = playerName + "|";
+			Text playerText(nameText, font, 50);
+
+			playerText.setTextPos(Math::CoordF(centerX - playerText.getTextSize().x / 2.0f, startY));
+			playerText.setTextColor(sf::Color::White);
+
+			sf::Text shadow = playerText.getText();
+			shadow.setFillColor(sf::Color(255, 255, 255, 100));
+			shadow.move(3.f, 3.f);
+			pGraphic->render(shadow);
+
+			pGraphic->render(playerText.getText());
+		}
 	}
 
 	const int ConcreteMenu::getScore() const {
-		cout << "get score menu" << endl;
 		return pLevel->getScorePoints();
 	}
+
+	void ConcreteMenu::buildLeaderboard() {
+		std::ifstream file("leaderboard.json");
+		if (!file.is_open()) {
+			std::cerr << "Erro ao abrir o arquivo de leaderboard: " << std::endl;
+			return;
+		}
+
+		json tmjData;
+
+		try {
+			file >> tmjData;
+		}
+		catch (const std::exception& e) {
+			std::cerr << "Erro ao processar JSON: " << e.what() << std::endl;
+			return;
+		}
+		file.close();
+
+		std::vector<std::pair<std::string, int>> scores;
+		if (tmjData.is_array()) {
+			for (const auto& item : tmjData) {
+				std::string name = item.value("name", "");
+				int score = item.value("score", 0);
+				scores.push_back(std::make_pair(name, score));
+			}
+		}
+
+		std::sort(scores.begin(), scores.end(), [](const auto& a, const auto& b) {
+			return a.second > b.second;
+		});
+
+		if (scores.size() > 7) {
+			scores.resize(7);
+		}
+
+		// Atualiza o JSON apenas se for necessário
+		json newJson = json::array();
+		for (const auto& s : scores) {
+			newJson.push_back({ {"name", s.first}, {"score", s.second} });
+		}
+
+		std::ofstream outFile("leaderboard.json");
+		if (outFile.is_open()) {
+			outFile << newJson.dump(4); // Salva o JSON formatado
+			outFile.close();
+		}
+
+		renderLeaderboardText(scores);
+	}
+
+	void ConcreteMenu::renderLeaderboardText(const std::vector<std::pair<std::string, int>>& scores) {
+		sf::Font font;
+		if (!font.loadFromFile("alagard.ttf")) {
+			std::cerr << "Erro ao carregar a fonte." << std::endl;
+			return;
+		}
+
+		float centerX = windowSize.x / 2.0f;
+		float startY = 535.0f;
+		float lineSpacing = 50.0f;
+		float maxWidth = 600.0f; // Largura máxima da linha
+
+		for (size_t i = 0; i < scores.size(); i++) {
+			std::string name = scores[i].first;
+			std::string scoreStr = std::to_string(scores[i].second);
+
+			// Criar textos separados
+			Text nameText(name, font, 37);
+			Text scoreText(scoreStr, font, 37);
+
+			// Obter tamanhos reais dos textos
+			Math::CoordF nameSize = nameText.getTextSize();
+			Math::CoordF scoreSize = scoreText.getTextSize();
+
+			// Calcular espaço restante para os pontos
+			float dotsWidth = maxWidth - (nameSize.x + scoreSize.x);
+			int numDots = dotsWidth / 10.0f; // Aproximando 10px por ponto
+
+			std::string dots(numDots, '.');
+
+			// Criar string final
+			std::string formattedText = name + dots + scoreStr;
+
+			// Criar o texto para renderização
+			Text leaderboardText(formattedText, font, 37);
+
+			Math::CoordF textSize = leaderboardText.getTextSize();
+			leaderboardText.setTextPos(Math::CoordF(centerX - textSize.x / 2.0f, startY + i * lineSpacing));
+			leaderboardText.setTextColor(sf::Color(45, 37, 17));
+
+			sf::Text shadow = leaderboardText.getText();
+			shadow.setFillColor(sf::Color(171, 143, 73, 220));
+			shadow.move(2.f, 2.f);
+			pGraphic->render(shadow);
+
+			pGraphic->render(leaderboardText.getText());
+		}
+	}
+
 }

@@ -58,12 +58,6 @@ namespace Entities {
 				}
 			}
 
-			if (isHealing) {
-				hp = 1000;
-				damagePoints *= 10;
-				speed = 600.0f;
-			}
-
 			velocity.y += GRAVITY * dt;
 			position.x += velocity.x * dt;
 			position.y += velocity.y * dt;
@@ -209,6 +203,8 @@ namespace Entities {
 		}
 
 		void Player::usePotion() {
+			hp = 1000;
+			damagePoints *= 10;
 			isHealing = true;
 		}
 

@@ -19,9 +19,8 @@ void Game::execute() {
 	while (pGraphic->isWindowOpen()) {
 		pGraphic->clear();
 		pGraphic->updateDeltaTime();
-		pStateM->executeState();
 		pEvent->pollEvents();
-		if (pStateM->getCurrentState() != NULL) pStateM->renderState();
+		if (pStateM->getCurrentState() != NULL) { pStateM->renderState(); pStateM->executeState(); }
 		else pGraphic->closeWindow();
 		pGraphic->display();
 	}

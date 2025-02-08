@@ -19,7 +19,7 @@ namespace Menu {
 
 		~ConcreteMenu();
 
-		void createButtons();
+		void buildMenu();
 
 		void setAnimation();
 
@@ -30,6 +30,10 @@ namespace Menu {
 		void render();
 
 		const int getScore() const;
+
+		void buildLeaderboard();
+
+		void renderLeaderboardText(const std::vector<std::pair<std::string, int>>& scores);
 	};
 
 }

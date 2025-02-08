@@ -19,8 +19,9 @@ namespace Menu {
 		sf::Vector2f windowSize;
 
 		Text title;
+		std::string playerName;
 
-		virtual void createButtons() = 0;
+		//virtual void buildMenu() = 0;
 		void initializeIterator();
 
 	public:
@@ -33,10 +34,20 @@ namespace Menu {
 		void selectAbove();
 
 		void selectBelow();
-
+		
 		const Buttons::Button_ID getSelectedButtonID() const;
 
 		void saveScore(const char* playerName, int score);
+
+		void setPlayerName(const std::string& name);
+
+		const char* getPlayerName() const;
+
+		void appendCharacter(char c);
+
+		void removeLastCharacter();
+
+		void resetLeaderboard();
 
 		virtual const int getScore() const = 0;
 

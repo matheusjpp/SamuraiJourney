@@ -13,6 +13,7 @@ namespace Managers {
 			down = sf::Keyboard::Down;
 			right = sf::Keyboard::Right;
 			left = sf::Keyboard::Left;
+			reset = sf::Keyboard::R;
 		}
 
 		MenuController::~MenuController() {
@@ -176,6 +177,10 @@ namespace Managers {
 				if (key == escape) {
 					pStateM->popState();
 				}
+
+				else if (key == reset) {
+					pMenu->resetLeaderboard();
+				}
 			}
 
 			/* Pause Menu Commands */
@@ -225,8 +230,7 @@ namespace Managers {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
 						case Menu::Buttons::Button_ID::savescore: {
-							cout << "botao de save funciona" << endl;
-							pMenu->saveScore("teste", pMenu->getScore());
+							pMenu->saveScore(pMenu->getPlayerName(), pMenu->getScore());
 							break;
 						}
 						case Menu::Buttons::Button_ID::pauseexit: {
@@ -244,6 +248,15 @@ namespace Managers {
 				else if (key == down) {
 					pMenu->selectBelow();
 				}
+
+				else if ((key >= sf::Keyboard::A && key <= sf::Keyboard::Z) ||
+						(key >= sf::Keyboard::Num0 && key <= sf::Keyboard::Num9)) {
+						pMenu->appendCharacter(static_cast<char>(key) + 97); // Converte para minúscula
+				}
+
+				else if (key == sf::Keyboard::Backspace) {
+					pMenu->removeLastCharacter();
+				}
 			}
 
 			/* Win Menu Commands */
@@ -252,7 +265,6 @@ namespace Managers {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
 						case Menu::Buttons::Button_ID::savescore: {
-							cout << "botao de save funciona" << endl;
 							pMenu->saveScore("teste", pMenu->getScore());
 							break;
 						}
