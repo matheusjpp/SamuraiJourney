@@ -14,6 +14,7 @@ namespace Entities {
 			setHP(DEMON_HP);
 			attackCooldown = DEMON_ATTACK_CD;
 			attackingTime = DEMON_ATTACK_TIME;
+			damagePoints = DEMON_ATTACK_DAMAGE;
 
 			setTextures();
 		}
@@ -39,15 +40,11 @@ namespace Entities {
 		}
 
 		void DemonSamurai::shout() {
-			//setDmg(dobro tbm)
-				//dobra tudo aqui em cima confia 
+			damagePoints = DEMON_ATTACK_DAMAGE * 2;
 			setHP(DEMON_HP * 2);
 			isShouting = true;
-			isLastBuffed = true;
 			attackCooldown = DEMON_ATTACK2_CD;
 			attackingTime = DEMON_ATTACK2_TIME;
-			setTextures();
-			
 		}
 
 		void DemonSamurai::setCont(int c) {
@@ -56,7 +53,7 @@ namespace Entities {
 
 		void DemonSamurai::setIsLastBuffed(bool isLb) {
 			isLastBuffed = isLb;
-		}
+		}	
 
 		void DemonSamurai::setIsShouting(bool iSs) {
 			isShouting = iSs;
@@ -67,12 +64,8 @@ namespace Entities {
 		}
 
 		void DemonSamurai::update(float dt) {
+			cout << cont << endl;
 			updateSprite(dt);
-
-			if (hp <= 0) {
-				cont--;
-			}
-
 			if (cont == 1 && !isLastBuffed) {
 				shout();
 			}
@@ -80,26 +73,47 @@ namespace Entities {
 			incrementAttackTime(dt);
 			isMoving = false;
 
-			float playerDistance = fabs(position.x - pPlayer1->getPosition().x);
+			Player* nearestPlayer = getNearestPlayer();
+			float playerDistance = fabs(position.x - nearestPlayer->getPosition().x);
 
 			if (!isShouting) {
-				if (playerDistance <= DEMON_VISION) {
-					if (position.x > pPlayer1->getPosition().x) {
+				if (playerDistance <= DEMON_VISION && !isDying) {
+					if (position.x > nearestPlayer->getPosition().x) {
 						position.x -= PLAYER_SPEED * dt / 3.0f;
 						isFacingLeft = false;
 						isMoving = true;
 					}
 
-					if (position.x < pPlayer1->getPosition().x) {
+					if (position.x < nearestPlayer->getPosition().x) {
 						position.x += PLAYER_SPEED * dt / 3.0f;
 						isFacingLeft = true;
 						isMoving = true;
 					}
 				}
 
-				if (playerDistance <= DEMON_ATTACK_DISTANCE) {
+				if (playerDistance <= DEMON_ATTACK_DISTANCE && !isDying) {
 					isMoving = false;
 					attack();
+				}
+			}
+
+			if (isAttacking) {
+				impactTimer += dt;
+				if (impactTimer >= DEMON_IMPACT_TIME) {
+					if (pPlayer1) {
+						if (pPlayer1->getIsActive()) {
+							if (fabs(pPlayer1->getPosition().x - position.x) <= DEMON_ATTACK_RANGE && fabs(pPlayer1->getPosition().y - position.y) <= DEMON_ATTACK_RANGEHEIGHT)
+								pPlayer1->receiveDamage(getDamagePoints());
+						}
+					}
+
+					if (pPlayer2) {
+						if (pPlayer2->getIsActive()) {
+							if (fabs(pPlayer2->getPosition().x - position.x) <= DEMON_ATTACK_RANGE && fabs(pPlayer2->getPosition().y - position.y) <= DEMON_ATTACK_RANGEHEIGHT)
+								pPlayer2->receiveDamage(getDamagePoints());
+						}
+					}
+					impactTimer = 0;
 				}
 			}
 
@@ -132,11 +146,8 @@ namespace Entities {
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::run, "demon_run.png", 8);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::attack, "demon_attack.png", 5);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::hurt, "demon_hurt.png", 4);
-				sprite->addNewAnimation(GraphicalElements::Animation_ID::hurt, "demon_death.png", 26);
+				sprite->addNewAnimation(GraphicalElements::Animation_ID::death, "demon_death.png", 26);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::shout, "demon_shout.png", 17);
-			}
-
-			else {
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::idle2, "demon_idle2.png", 6);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::run2, "demon_run2.png", 8);
 				sprite->addNewAnimation(GraphicalElements::Animation_ID::attack2, "demon_attack2.png", 7);
@@ -148,18 +159,16 @@ namespace Entities {
 
 		void DemonSamurai::updateSprite(float dt) {
 			if (!isLastBuffed) {
-				if (isDying) {
-					deathTimer += dt;
-					sprite->update(GraphicalElements::Animation_ID::death, !isFacingLeft, position, dt);
-					if (deathTimer >= DEMON_DEATH_TIME) isActive = false;
-				}
-
-				else if (isShouting) {
-					float auxHP = hp;
-					hp = 1000;
+				if (isShouting) {
 					shoutTimer += dt;
 					sprite->update(GraphicalElements::Animation_ID::shout, !isFacingLeft, position, dt);
-					if (shoutTimer >= DEMON_SHOUT_TIME) { isShouting = false; hp = auxHP; }
+					if (shoutTimer >= DEMON_SHOUT_TIME) { isShouting = false; isLastBuffed = true; }
+				}
+
+				else if (isDying) {
+					deathTimer += dt;
+					sprite->update(GraphicalElements::Animation_ID::death, !isFacingLeft, position, dt);
+					if (deathTimer >= DEMON_DEATH_TIME) { cont--; isActive = false; }
 				}
 
 				else if (isAttacking) {

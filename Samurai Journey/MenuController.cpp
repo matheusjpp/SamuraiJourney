@@ -6,7 +6,7 @@ namespace Managers {
 
 	namespace KeyManagement {
 
-		MenuController::MenuController(Menu::Menu* menu) : Observer(), pMenu(menu) {
+		MenuController::MenuController(Menu::Menu* menu) : Observer(), pMenu(menu), alreadySaved(false) {
 			select = sf::Keyboard::Enter;
 			escape = sf::Keyboard::Escape;
 			up = sf::Keyboard::Up;
@@ -230,7 +230,10 @@ namespace Managers {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
 						case Menu::Buttons::Button_ID::savescore: {
-							pMenu->saveScore(pMenu->getPlayerName(), pMenu->getScore());
+							if (!alreadySaved) {
+								pMenu->saveScore(pMenu->getPlayerName(), pMenu->getScore());
+								alreadySaved = true;
+							}
 							break;
 						}
 						case Menu::Buttons::Button_ID::pauseexit: {
@@ -265,9 +268,12 @@ namespace Managers {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
 						case Menu::Buttons::Button_ID::savescore: {
-							pMenu->saveScore("teste", pMenu->getScore());
-							break;
-						}
+							if (!alreadySaved) {
+								pMenu->saveScore(pMenu->getPlayerName(), pMenu->getScore());
+								alreadySaved = true;
+							}
+						break;
+					}
 						case Menu::Buttons::Button_ID::pauseexit: {
 							while (pStateM->getCurrentState()->getID() != States::State_ID::main_menu)
 								pStateM->popState();

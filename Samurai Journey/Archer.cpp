@@ -27,22 +27,23 @@ namespace Entities {
 			incrementAttackTime(dt);
 			isMoving = false;
 
-			float playerDistance = fabs(position.x - pPlayer1->getPosition().x);
+			Player* nearestPlayer = getNearestPlayer();
+			float playerDistance = fabs(position.x - nearestPlayer->getPosition().x);
 
-			if (position.x > pPlayer1->getPosition().x) isFacingLeft = false;
+			if (position.x > nearestPlayer->getPosition().x) isFacingLeft = false;
 			else isFacingLeft = true;
 
 			if (isAttacking) {
 				movingDelayTimer += dt;
-				if (movingDelayTimer >= MOVING_DELAY_TIME) {
+				if (movingDelayTimer >= MOVING_DELAY_TIME && !isDying) {
 					if (playerDistance <= ARCHER_VISION) {
-						if (position.x > pPlayer1->getPosition().x) {
+						if (position.x > nearestPlayer->getPosition().x) {
 							position.x -= PLAYER_SPEED * dt / 3.0f;
 							isFacingLeft = false;
 							isMoving = true;
 						}
 
-						if (position.x < pPlayer1->getPosition().x) {
+						if (position.x < nearestPlayer->getPosition().x) {
 							position.x += PLAYER_SPEED * dt / 3.0f;
 							isFacingLeft = true;
 							isMoving = true;
@@ -52,7 +53,7 @@ namespace Entities {
 				}
 			}
 
-			if (playerDistance <= ARCHER_ATTACK_DISTANCE) {
+			if (playerDistance <= ARCHER_ATTACK_DISTANCE && !isDying) {
 				isMoving = false;
 				attack();
 			}
@@ -123,7 +124,7 @@ namespace Entities {
 			sprite->addNewAnimation(GraphicalElements::Animation_ID::walk, "archer_walk.png", 10);
 			sprite->addNewAnimation(GraphicalElements::Animation_ID::attack, "archer_attack.png", 21);
 			sprite->addNewAnimation(GraphicalElements::Animation_ID::hurt, "archer_hurt.png", 4);
-			sprite->addNewAnimation(GraphicalElements::Animation_ID::attack, "archer_death.png", 11);
+			sprite->addNewAnimation(GraphicalElements::Animation_ID::death, "archer_death.png", 11);
 
 			body->setOrigin(size.x / 2 + 33, size.y / 2 + 65);
 		}

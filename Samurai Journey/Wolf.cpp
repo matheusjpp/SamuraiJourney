@@ -27,7 +27,8 @@ namespace Entities {
 
 			if (nearestPlayer) {
 				float playerDistance = fabs(position.x - nearestPlayer->getPosition().x);
-				if (playerDistance <= WOLF_VISION) {
+				float heightDiff = fabs(position.y - nearestPlayer->getPosition().y);
+				if (playerDistance <= WOLF_VISION && heightDiff <= WOLF_VISION / 1.25 && !isDying) {
 					if (isFirstAttack) {
 						if (position.x > nearestPlayer->getPosition().x) {
 							position.x -= WOLF_SPEED * dt / 2.0f;
@@ -56,14 +57,38 @@ namespace Entities {
 					}
 				}
 
-				if (isFirstAttack && playerDistance <= WOLF_ATTACK2_DISTANCE && fabs(pPlayer1->getPosition().y - position.y) <= fabs(pPlayer1->getSize().y - size.y)) {
+				if (isFirstAttack && playerDistance <= WOLF_ATTACK2_DISTANCE && fabs(nearestPlayer->getPosition().y - position.y) <= fabs(nearestPlayer->getSize().y - size.y) && !isDying) {
 					isMoving = false;
 					attack();
 				} 
 
-				else if (playerDistance <= WOLF_ATTACK_DISTANCE && fabs(pPlayer1->getPosition().y - position.y) <= fabs(pPlayer1->getSize().y - size.y)) {
+				else if (playerDistance <= WOLF_ATTACK_DISTANCE && fabs(nearestPlayer->getPosition().y - position.y) <= fabs(nearestPlayer->getSize().y - size.y) && !isDying) {
 					isMoving = false;
 					attack();
+				}
+			}
+
+			if (isAttacking) {
+				float impTime;
+				if (isFirstAttack) impTime = WOLF_IMPACT2_TIME;
+				else impTime = WOLF_IMPACT_TIME;
+
+				impactTimer += dt;
+				if (impactTimer >= impTime) {
+					if (pPlayer1) {
+						if (pPlayer1->getIsActive()) {
+							if (fabs(pPlayer1->getPosition().x - position.x) <= WOLF_ATTACK_RANGE && fabs(pPlayer1->getPosition().y - position.y) <= WOLF_ATTACK_RANGEHEIGHT)
+								pPlayer1->receiveDamage(getDamagePoints());
+						}
+					}
+
+					if (pPlayer2) {
+						if (pPlayer2->getIsActive()) {
+							if (fabs(pPlayer2->getPosition().x - position.x) <= WOLF_ATTACK_RANGE && fabs(pPlayer2->getPosition().y - position.y) <= WOLF_ATTACK_RANGEHEIGHT)
+								pPlayer2->receiveDamage(getDamagePoints());
+						}
+					}
+					impactTimer = 0;
 				}
 			}
 
@@ -156,7 +181,7 @@ namespace Entities {
 					if (isFirstAttack) {
 						firstAttackTimer += dt;
 						sprite->update(GraphicalElements::Animation_ID::attack2, isFacingLeft, position, dt);
-						if (firstAttackTimer >= WOLF_ATTACK2_TIME) {
+						if (firstAttackTimer >= WOLF_ATTACK2_TIME - 1.0) {
 							isFirstAttack = false;
 						}
 					}

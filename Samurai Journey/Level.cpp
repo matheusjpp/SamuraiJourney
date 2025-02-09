@@ -335,7 +335,7 @@ namespace Levels {
 
         j["GAME"] = pStateM->getPreviousState()->getID();
 
-        if (pPlayer1) {
+        if (pPlayer1->getIsActive()) {
             j["Player1"]["position"]["x"] = pPlayer1->getPosition().x;
             j["Player1"]["position"]["y"] = pPlayer1->getPosition().y;
             j["Player1"]["isActive"] = pPlayer1->getIsActive();
@@ -358,7 +358,7 @@ namespace Levels {
             j["Player1"]["isMoving"] = pPlayer1->getIsMoving();
         }
         if (isMultiplayer) {
-            if (pPlayer2) {
+            if (pPlayer2->getIsActive()) {
                 j["Player2"]["position"]["x"] = pPlayer2->getPosition().x;
                 j["Player2"]["position"]["y"] = pPlayer2->getPosition().y;
                 j["Player2"]["isActive"] = pPlayer2->getIsActive();
@@ -385,7 +385,7 @@ namespace Levels {
         for (auto itS = staticEntities.begin(); itS != staticEntities.end(); itS++) {
             
             auto& sE = *itS;
-
+ 
             json entity;
 
             entity["type"] = sE->getID();
@@ -400,7 +400,7 @@ namespace Levels {
         for (auto itM = movingEntities.begin(); itM != movingEntities.end(); itM++) {
             auto& sM = *itM;
         
-            if (sM->getID() == ID::wolf || sM->getID()== ID::archer || sM->getID()== ID::demonsamurai) {
+            if ((sM->getID() == ID::wolf || sM->getID()== ID::archer || sM->getID()== ID::demonsamurai) && sM->getIsActive()) {
                 json enemy;
 
                 enemy["type"] = sM->getID();

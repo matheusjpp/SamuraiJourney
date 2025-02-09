@@ -4,7 +4,7 @@ namespace Entities {
 
 	namespace Characters {
 		Enemy::Enemy(Math::CoordF pos, Math::CoordF size, ID id) : counted(false),
-			Character(pos, size, id), pPlayer1(nullptr) {
+			Character(pos, size, id), pPlayer1(nullptr), pPlayer2(nullptr) {
 			
 		}
 

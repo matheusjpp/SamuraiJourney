@@ -147,7 +147,6 @@ namespace Menu {
 		if (outFile.is_open()) {
 			outFile << "[]";
 			outFile.close();
-			std::cout << "Leaderboard resetado com sucesso!" << std::endl;
 		}
 		else {
 			std::cerr << "Erro ao resetar o leaderboard." << std::endl;

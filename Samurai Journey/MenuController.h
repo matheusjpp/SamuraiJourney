@@ -20,6 +20,7 @@ namespace Managers {
 			sf::Keyboard::Key right;
 			sf::Keyboard::Key left;
 			sf::Keyboard::Key reset;
+			bool alreadySaved;
 		
 		public:
 			MenuController(Menu::Menu* menu);
