@@ -58,6 +58,17 @@ namespace Entities {
 			right = r;
 		}
 
+		const bool Portal::getDirection() const {
+			return right;
+		}
+
+		const bool Portal::getRendered() const {
+			return rendered;
+		}
+
+		void Portal::setRendered(bool r) {
+			rendered = r;
+		}
 	}
 
 }

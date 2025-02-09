@@ -36,6 +36,12 @@ namespace Entities {
 			void updateSprite(float dt);
 
 			void setDirection(bool r);
+
+			const bool getDirection() const;
+
+			const bool getRendered() const;
+
+			void setRendered(bool r);
 		};
 
 	}

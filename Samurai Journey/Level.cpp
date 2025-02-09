@@ -393,6 +393,10 @@ namespace Levels {
             entity["position"]["y"] = sE->getPosition().y;
             entity["isActive"] = sE->getIsActive();
             entity["isFake"] = static_cast<Entities::Obstacles::Platform*>(sE)->getIsFake();
+            entity["canTeleport"] = static_cast<Entities::Obstacles::Portal*>(sE)->getCanTeleport();
+            entity["isRequesting"] = static_cast<Entities::Obstacles::Portal*>(sE)->getIsRequesting();
+            entity["right"] = static_cast<Entities::Obstacles::Portal*>(sE)->getDirection();
+            entity["rendered"] = static_cast<Entities::Obstacles::Portal*>(sE)->getRendered();
 
             j["obstacles"].push_back(entity);
         }
@@ -485,7 +489,7 @@ namespace Levels {
         if (j.contains("Player1")) {
             pPlayer1 = static_cast<Entities::Characters::Player*>(playerFactory.FactoryMethod(Math::CoordF(0, 0), true, false, nullptr, this, ID::player));
             if (pPlayer1) {
-                pPlayer1->setPosition(Math::CoordF(j["Player1"]["position"]["x"], j["Player1"]["position"]["y"]));
+                pPlayer1->setPosition(Math::CoordF(j["Player1"]["position"]["x"], j["Player1"]["position"]["y"] - 50));
                 pPlayer1->setIsActive(j["Player1"]["isActive"]);
                 pPlayer1->setPoints(j["Player1"]["points"]);
                 pPlayer1->setIsDefending(j["Player1"]["isDefending"]);
@@ -512,7 +516,7 @@ namespace Levels {
             if (j.contains("Player2")) {
                 pPlayer2 = static_cast<Entities::Characters::Player*>(playerFactory.FactoryMethod(Math::CoordF(0, 0), false, false, nullptr, this, ID::player));
                 if (pPlayer2) {
-                    pPlayer2->setPosition(Math::CoordF(j["Player2"]["position"]["x"], j["Player2"]["position"]["y"]));
+                    pPlayer2->setPosition(Math::CoordF(j["Player2"]["position"]["x"], j["Player2"]["position"]["y"] - 50));
                     pPlayer2->setIsActive(j["Player2"]["isActive"]);
                     pPlayer2->setPoints(j["Player2"]["points"]);
                     pPlayer2->setIsDefending(j["Player2"]["isDefending"]);
@@ -573,7 +577,20 @@ namespace Levels {
                     }
                 }
 
-                // PORTAL
+                if (obstacleid == portal) {
+                    Entities::Obstacles::Portal* portal = static_cast<Entities::Obstacles::Portal*>(obstacleFactory.FactoryMethod(Math::CoordF(0, 0), false, false, nullptr, nullptr, ID::portal));
+                 
+                    if (portal) {
+                        portal->setPosition(Math::CoordF(obstacleData["position"]["x"], obstacleData["position"]["y"]));
+                        portal->setIsActive(obstacleData["isActive"]);
+                        portal->setCanTeleport(obstacleData["canTeleport"]);
+                        portal->setTeleportRequest(obstacleData["isRequesting"]);
+                        portal->setDirection(obstacleData["right"]);
+                        portal->setRendered(obstacleData["rendered"]);
+
+                        staticEntities.addEntity(portal);
+                    }
+                }
             }
         }
 
@@ -582,9 +599,9 @@ namespace Levels {
                 int enemyid = enemyData["type"];
 
                 if (enemyid == ID::wolf) {
-                    Entities::Characters::Wolf* wolf = static_cast<Entities::Characters::Wolf*>(enemyFactory.FactoryMethod(Math::CoordF(0, 0), false, false, nullptr, nullptr, ID::wolf));     
+                    Entities::Characters::Wolf* wolf = static_cast<Entities::Characters::Wolf*>(enemyFactory.FactoryMethod(Math::CoordF(enemyData["position"]["x"], enemyData["position"]["y"] - 100), false, false, nullptr, nullptr, ID::wolf));
                     if (wolf) {
-                        wolf->setPosition(Math::CoordF(enemyData["position"]["x"], enemyData["position"]["y"]));
+                        //wolf->setPosition(Math::CoordF(enemyData["position"]["x"], enemyData["position"]["y"]) - 300);
                         wolf->setIsActive(enemyData["isActive"]);
                         wolf->setIsFacingLeft(enemyData["isFacingLeft"]);
                         wolf->setIsMoving(enemyData["isMoving"]);
@@ -608,9 +625,9 @@ namespace Levels {
                 }
 
                 if (enemyid == ID::archer) {
-                    Entities::Characters::Archer* archer = static_cast<Entities::Characters::Archer*>(enemyFactory.FactoryMethod(Math::CoordF(0, 0), false, false, &movingEntities, nullptr, ID::archer));
+                    Entities::Characters::Archer* archer = static_cast<Entities::Characters::Archer*>(enemyFactory.FactoryMethod(Math::CoordF(enemyData["position"]["x"], enemyData["position"]["y"] - 100), false, false, &movingEntities, nullptr, ID::archer));
                     if (archer) {
-                        archer->setPosition(Math::CoordF(enemyData["position"]["x"], enemyData["position"]["y"]));
+                        //archer->setPosition(Math::CoordF(enemyData["position"]["x"], enemyData["position"]["y"] - 300);
                         archer->setIsActive(enemyData["isActive"]);
                         archer->setIsFacingLeft(enemyData["isFacingLeft"]);
                         archer->setIsMoving(enemyData["isMoving"]);
@@ -634,9 +651,9 @@ namespace Levels {
                 }
 
                 if (enemyid == ID::demonsamurai) {
-                    Entities::Characters::DemonSamurai* demonsamurai = static_cast<Entities::Characters::DemonSamurai*>(enemyFactory.FactoryMethod(Math::CoordF(0, 0), false, false, nullptr, nullptr, ID::demonsamurai));
+                    Entities::Characters::DemonSamurai* demonsamurai = static_cast<Entities::Characters::DemonSamurai*>(enemyFactory.FactoryMethod(Math::CoordF(enemyData["position"]["x"], enemyData["position"]["y"] - 250), false, false, nullptr, nullptr, ID::demonsamurai));
                     if (demonsamurai) {
-                        demonsamurai->setPosition(Math::CoordF(enemyData["position"]["x"], enemyData["position"]["y"]));
+                        //demonsamurai->setPosition(Math::CoordF(, );
                         demonsamurai->setIsActive(enemyData["isActive"]);
                         demonsamurai->setIsFacingLeft(enemyData["isFacingLeft"]);
                         demonsamurai->setIsMoving(enemyData["isMoving"]);

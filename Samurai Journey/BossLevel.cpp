@@ -71,7 +71,7 @@ namespace Levels {
 			pPlayer1->changeObserverState(false);
 		}
 		else if (pPlayer1->getIsActive()) {
-			if (pPlayer1->getPosition().y > 1000) pPlayer1->receiveDamage(pPlayer1->getHP());
+			if (pPlayer1->getPosition().y > 1080) pPlayer1->receiveDamage(pPlayer1->getHP());
 			pPlayer1->changeObserverState(true);
 		}
 
@@ -79,7 +79,7 @@ namespace Levels {
 			if (pPlayer2->getIsDying())
 				pPlayer2->changeObserverState(false);
 			else if (pPlayer2->getIsActive()) {
-				if (pPlayer2->getPosition().y > 1000) pPlayer2->receiveDamage(pPlayer2->getHP());
+				if (pPlayer2->getPosition().y > 1080) pPlayer2->receiveDamage(pPlayer2->getHP());
 				pPlayer2->changeObserverState(true);
 			}
 		}
