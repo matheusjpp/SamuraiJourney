@@ -1,6 +1,12 @@
 #pragma once
 #include "Ente.h"
-//Codigo Adaptado do codigo de Matheus Augusto Burda
+
+// Código baseado no repositório "Desert" de Matheus Burda
+// Repositório: https://github.com/MatheusBurda/Desert
+// Licença: MIT
+// 
+// Conforme a licença MIT, este código pode ser usado, modificado e distribuído,
+// desde que a atribuição ao autor original seja mantida.
 
 namespace GraphicalElements {
 

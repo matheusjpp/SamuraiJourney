@@ -1,6 +1,12 @@
 #pragma once
 #include "TextButton.h"
 
+// Código baseado no repositório "JogoPlataforma2D-Jungle" de Giovani Limas Salvi
+// Repositório: https://github.com/Giovanenero/JogoPlataforma2D-Jungle
+// 
+// Este repositório não possui licença explícita. O uso, modificação e distribuição
+// deste código podem exigir permissão do autor original.
+
 namespace Managers {
 	namespace KeyManagement {
 		class MenuController;

@@ -267,18 +267,18 @@ namespace Managers {
 				if (key == select) {
 					isActive = false;
 					switch (pMenu->getSelectedButtonID()) {
-						case Menu::Buttons::Button_ID::savescore: {
-							if (!alreadySaved) {
-								pMenu->saveScore(pMenu->getPlayerName(), pMenu->getScore());
-								alreadySaved = true;
-							}
+					case Menu::Buttons::Button_ID::savescore: {
+						if (!alreadySaved) {
+							pMenu->saveScore(pMenu->getPlayerName(), pMenu->getScore());
+							alreadySaved = true;
+						}
 						break;
 					}
-						case Menu::Buttons::Button_ID::pauseexit: {
-							while (pStateM->getCurrentState()->getID() != States::State_ID::main_menu)
-								pStateM->popState();
-							break;
-						}
+					case Menu::Buttons::Button_ID::pauseexit: {
+						while (pStateM->getCurrentState()->getID() != States::State_ID::main_menu)
+							pStateM->popState();
+						break;
+					}
 					}
 				}
 
@@ -289,7 +289,16 @@ namespace Managers {
 				else if (key == down) {
 					pMenu->selectBelow();
 				}
-			}
+
+				else if ((key >= sf::Keyboard::A && key <= sf::Keyboard::Z) ||
+					(key >= sf::Keyboard::Num0 && key <= sf::Keyboard::Num9)) {
+					pMenu->appendCharacter(static_cast<char>(key) + 97); // Converte para minúscula
+				}
+
+				else if (key == sf::Keyboard::Backspace) {
+					pMenu->removeLastCharacter();
+				}
+				}
 		}
 
 		void MenuController::notifyKeyReleased(const sf::Keyboard::Key key) {

@@ -1,6 +1,13 @@
 #pragma once
 #include "Coord.h"
 
+// Código baseado no repositório "NightZ" de Pedro Ribeiro de Almeida e Matheus José Pereira
+// Repositório: https://github.com/pedroribe1r0/NightZ
+// Licença: MIT
+// 
+// Conforme a licença MIT, este código pode ser usado, modificado e distribuído,
+// desde que a atribuição aos autores originais seja mantida.
+
 namespace Managers {
 
 	#define SCREEN_WIDTH 1920.0f

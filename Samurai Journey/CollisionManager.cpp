@@ -30,6 +30,10 @@ namespace Managers {
 			movingEntities = &movEnt;
 		}
 
+		// Trecho adaptado do repositório "Desert" de Matheus Burda
+		// Fonte: https://github.com/MatheusBurda/Desert
+		// Licença: MIT
+
 		void CollisionManager::notifyCollision(Entities::MovingEntity* sender, float dt) {
 			Entities::Entity* otherEntity = nullptr;
 			Math::CoordF intersect;

@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "name": "anotherpl",
+        "score": 1400
+    },
+    {
+        "name": "samurai",
+        "score": 600
+    },
+    {
+        "name": "jogador|",
+        "score": 0
+    }
+]
