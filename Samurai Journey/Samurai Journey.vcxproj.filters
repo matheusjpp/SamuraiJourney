@@ -135,9 +135,6 @@
     <ClInclude Include="ArcherLevel.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="EndGameMenu.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Portal.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
@@ -276,9 +273,6 @@
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="ArcherLevel.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="EndGameMenu.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Portal.cpp">

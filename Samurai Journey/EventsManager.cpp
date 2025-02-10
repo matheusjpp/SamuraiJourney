@@ -5,10 +5,11 @@ namespace Managers {
     namespace KeyManagement {
 
         EventsManager* EventsManager::pEvent = nullptr;
+        GraphicManager* EventsManager::pGraphic = GraphicManager::getInstance();
+        InputManager* EventsManager::pInput = InputManager::getInstance();
 
         EventsManager::EventsManager() {
-            pGraphic = GraphicManager::getInstance();
-            pInput = InputManager::getInstance();
+           
         }
 
         EventsManager::~EventsManager() {

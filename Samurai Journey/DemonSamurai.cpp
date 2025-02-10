@@ -64,7 +64,6 @@ namespace Entities {
 		}
 
 		void DemonSamurai::update(float dt) {
-			cout << cont << endl;
 			updateSprite(dt);
 			if (cont == 1 && !isLastBuffed) {
 				shout();

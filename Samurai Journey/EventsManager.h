@@ -7,8 +7,8 @@ namespace Managers {
 
         class EventsManager {
         private:
-            GraphicManager* pGraphic;
-            InputManager* pInput;
+            static GraphicManager* pGraphic;
+            static InputManager* pInput;
             static EventsManager* pEvent;
             EventsManager();
 

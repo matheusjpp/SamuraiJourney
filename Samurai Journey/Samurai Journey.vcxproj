@@ -146,7 +146,6 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Coord.h" />
     <ClInclude Include="DemonSamurai.h" />
-    <ClInclude Include="EndGameMenu.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="Ente.h" />
@@ -195,7 +194,6 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Coord.cpp" />
     <ClCompile Include="DemonSamurai.cpp" />
-    <ClCompile Include="EndGameMenu.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="Ente.cpp" />

@@ -5,8 +5,6 @@ namespace Managers {
 
     namespace KeyManagement {
 
-        States::StateManager* pStateM = States::StateManager::getInstance();
-
         // Inicializa o ponteiro estático
         InputManager* InputManager::pInput = nullptr;
 

@@ -12,7 +12,6 @@ namespace Managers {
         class InputManager : public Subject { // ConcreteSubject
         private:
             static InputManager* pInput;
-            static States::StateManager* pStateM;
             InputManager();
 
         public:
