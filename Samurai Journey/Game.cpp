@@ -16,6 +16,11 @@ Game::~Game() {
 }
 
 void Game::execute() {
+	/* Otimiza o jogo de alguma maneira desconhecida */
+	new Levels::ArcherLevel(false, Managers::States::State_ID::archerlevel_singleplayer);
+	pStateM->popState();
+	/* */
+
 	while (pGraphic->isWindowOpen()) {
 		pGraphic->clear();
 		pGraphic->updateDeltaTime();
